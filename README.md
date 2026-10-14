@@ -2,7 +2,7 @@
 
 Sitio web del salón de eventos **Luxury Eventos** (El Colmenar, Tucumán). La idea es que los clientes lleguen desde las redes del salón, lo conozcan y armen su evento online con un cotizador interactivo. Al final, el pedido completo se envía por WhatsApp para cerrar la reserva.
 
-> 🚧 **En desarrollo.** La página de Inicio está terminada. Galería, Servicios (cotizador) y Contacto están en construcción.
+> 🚧 **En desarrollo.** Inicio y Galería están terminadas. Servicios (cotizador) y Contacto están en construcción.
 
 ---
 
@@ -21,7 +21,6 @@ Sitio web del salón de eventos **Luxury Eventos** (El Colmenar, Tucumán). La i
 ### Próximamente
 
 - **Cotizador interactivo:** elegir tipo de fiesta, temática y extras (mozos, DJ, candy bar, luces, decoración), ver el total en tiempo real y enviar el resumen por WhatsApp
-- **Galería** por tipo de evento y sección de candy bar
 - **Contacto** con mapa, datos del salón y formulario
 
 ---
@@ -72,7 +71,9 @@ El sitio queda disponible en `http://localhost:5173`.
     ├── config/
     │   └── site.js          # Datos del salón: contacto, redes, turnos, estadísticas
     ├── data/
+    │   ├── candybar.js      # Tipos de candy bar y pasos de armado
     │   ├── events.js        # Tipos de evento
+    │   ├── gallery.js       # Secciones, textos y fotos de la Galería
     │   ├── highlights.js    # Comodidades del salón (incluidas / obligatorias / opcionales)
     │   ├── images.js        # Rutas, textos alternativos y encuadre de cada imagen
     │   └── reviews.js       # Reseñas de clientes
@@ -80,6 +81,7 @@ El sitio queda disponible en `http://localhost:5173`.
     │   ├── layout/          # Navbar, Footer, Layout, botón de WhatsApp, ScrollToTop
     │   ├── ui/              # Piezas reutilizables: Button, Photo, Reveal, SectionTitle, PageHeader
     │   ├── home/            # Secciones del Inicio
+    │   ├── gallery/         # Secciones de la Galería, mosaico de fotos y visor
     │   └── icons/           # Íconos de redes sociales
     ├── pages/               # Home, Gallery, Services, Contact, NotFound
     ├── utils/               # Formato de precios (ARS) y armado de links de WhatsApp
@@ -159,7 +161,8 @@ Como es una SPA con rutas del lado del cliente, el hosting tiene que redirigir t
 - [ ] Reemplazar las reseñas de ejemplo de `src/data/reviews.js` por reseñas reales, con permiso de los clientes
 - [ ] Confirmar si la decoración temática se ofrece como servicio extra
 - [ ] Completar el email del salón si lo hay
-- [ ] Desarrollar Galería, Servicios y Contacto
+- [ ] Reemplazar las fotos y los tipos de candy bar de ejemplo de `src/data/gallery.js` y `src/data/candybar.js` por los reales
+- [ ] Desarrollar Servicios y Contacto
 - [ ] Configurar dominio y redirecciones en el hosting
 
 ---

@@ -75,6 +75,15 @@
     var(--texture-lattice);
 }
 
+/* Secciones oscuras (noches de gala): tinta con halos dorados y enrejado art déco */
+@utility bg-luxe-dark {
+  background-color: var(--color-ink);
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgb(197 160 89 / 0.16), transparent 70%),
+    radial-gradient(ellipse 45% 50% at 0% 100%, rgb(197 160 89 / 0.1), transparent 70%),
+    var(--texture-lattice);
+}
+
 /* ===== Utilidades propias ===== */
 @utility text-gold-gradient {
   background: linear-gradient(120deg, var(--color-gold-dark), var(--color-gold), var(--color-gold-light), var(--color-gold));
