@@ -9,14 +9,17 @@ export const site = {
 
   owner: 'Fernanda Rechi',
   // Formato internacional sin "+", espacios ni guiones: 54 (país) + 9 (celular) + área + número
-  whatsapp: '5493816348201',
-  phoneDisplay: '381 634-8201',
-  email: '', // TODO: completar si el salón tiene email (vacío = no se muestra)
+  whatsapp: '5493815265630',
+  phoneDisplay: '381 526-5630',
+  email: 'alejandro.rodriguez1374@gmail.com',
 
   address: {
     street: 'Av. William Cross 2935',
     city: 'El Colmenar, Tucumán',
     mapsUrl: 'https://maps.app.goo.gl/YGHGrgzisUFv5ufp8',
+    // Mapa embebido de Contacto (Google Maps → Compartir → Insertar un mapa → solo el valor de `src`)
+    mapsEmbedUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35723.69828003514!2d-65.1674485698776!3d-26.800455481756792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225f51c8cfaa2d%3A0xcdeca787c8923d3d!2sLuxury%20Eventos!5e1!3m2!1sen!2sar!4v1792002205732!5m2!1sen!2sar',
   },
 
   // Turnos en los que se realizan los eventos
@@ -34,8 +37,8 @@ export const site = {
   capacity: 100,
   stats: [
     { value: '100', label: 'Invitados' },
-    { value: '+130', label: 'Eventos realizados' },
-    { value: '10', label: 'Años de trayectoria' },
+    { value: '+250', label: 'Eventos realizados' },
+    { value: '5', label: 'Años de trayectoria' },
     { value: '100%', label: 'Climatizado' },
   ],
 }

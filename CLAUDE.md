@@ -7,7 +7,7 @@ El proyecto se trabaja desde **dos computadoras** con la misma cuenta de git. Es
 ## Reglas de trabajo
 
 - **Al empezar:** recordar hacer `git pull` si el repo puede estar desactualizado.
-- **Al terminar una tarea o sesión:** actualizar "Estado actual" y agregar una línea a "Bitácora" (fecha, qué se hizo, qué quedó pendiente). Después sugerir commit + push para que la otra compu lo reciba.
+- **Al terminar una tarea o sesión:** actualizar "Estado actual" y agregar una línea a "Bitácora" (fecha, qué se hizo, qué quedó pendiente). **No hacer commit ni push ni ofrecerlo:** los commits y el push los hace el usuario cuando lo cree necesario.
 - Textos del sitio en español rioplatense con voseo ("armá", "elegí", "vos").
 - El contenido (textos, precios, imágenes, contacto) va en `src/config/` y `src/data/`, nunca hardcodeado en componentes.
 - Reutilizar las piezas de `src/components/ui/` y los tokens de color de `src/index.css` (`bg-ivory`, `text-gold`, `font-display`, etc.).
@@ -19,7 +19,7 @@ El proyecto se trabaja desde **dos computadoras** con la misma cuenta de git. Es
 - ✅ Inicio completo (Hero, About, Highlights, ServicesPreview, GalleryPreview, Testimonials, CtaBanner), layout, botón de WhatsApp.
 - ⏳ **Servicios / cotizador** (`src/pages/Services.jsx`): solo PageHeader. Falta elegir tipo de fiesta, temática y extras (mozos, DJ, candy bar, luces, decoración), total en tiempo real y envío del resumen por WhatsApp.
 - ✅ **Galería** (`src/pages/Gallery.jsx`): barra de secciones fija, "En familia" (infantiles, bautismos, comuniones, baby shower, revelación) y "Noches de gala" (15, 18, casamientos, despedidas) con pestañas que filtran, sección Candy bar con tarjetas y visor de fotos (`src/components/gallery/`). Datos en `src/data/gallery.js` y `src/data/candybar.js`. **Fotos y tipos de candy bar son placeholders (TODO)**: falta que el usuario pase fotos reales por tipo de evento y los tipos/diseños reales de candy bar.
-- ⏳ **Contacto** (`src/pages/Contact.jsx`): solo PageHeader. Falta mapa, datos del salón y formulario.
+- ✅ **Contacto** (`src/pages/Contact.jsx`, piezas en `src/components/contact/`): Nosotros breve con cifras animadas, Escribinos (tarjetas de WhatsApp/redes/email + formulario breve: nombre, fecha y mensaje, que abre WhatsApp sin backend; el detalle del evento queda para el cotizador) y Cómo llegar (mapa embebido de `site.address.mapsEmbedUrl`, pasos y 3 fotos de la fachada con visor). Textos en `src/data/contact.js`.
 
 ### Pendientes antes de producción
 
@@ -27,6 +27,8 @@ El proyecto se trabaja desde **dos computadoras** con la misma cuenta de git. Es
 - Confirmar si la decoración temática se ofrece como extra.
 - Email del salón en `src/config/site.js` (si existe).
 - Dominio y redirecciones SPA en el hosting (ver README).
+- Fotos de la fachada (`public/images/fachada*.png`): son capturas de Google Street View (con marca de agua). Reemplazarlas por fotos propias antes de publicar y, de paso, pasarlas a JPG (hoy pesan ~1 MB cada una).
+- Confirmar con el salón los textos de Contacto (`src/data/contact.js`).
 
 ## Bitácora
 
@@ -34,3 +36,4 @@ El proyecto se trabaja desde **dos computadoras** con la misma cuenta de git. Es
 - **2026-10-14** — Galería armada (secciones, pestañas, candy bar, visor). `ScrollToTop` ahora respeta anclas (`/galeria#candy-bar`). Nuevo fondo `bg-luxe-dark`. Pendiente: fotos reales y tipos reales de candy bar. Próximo paso: cotizador (Servicios).
 - **2026-10-14** — Galería v2 (pedido del usuario: más texto y fotos menos en cuadrícula). Panel de info fijo al costado que cambia por pestaña (`galleryEventDetails` en `data/gallery.js`), mosaico con parallax y revelado tipo cortina (`PhotoMosaic.jsx`), candy bar en zigzag con collage y pasos (`candyBarSteps`). Los textos de eventos y pasos son propuestas: confirmar con el salón.
 - **2026-10-14** — Pulido responsive de la Galería (verificado con capturas a 360, 390 y 1280 px): barra de secciones en 3 columnas sin scroll y activa correcta arriba de todo, pestañas con degradé y auto-centrado, mosaico con textos más chicos y parallax suave en celular, visor con flechas abajo y safe-area, pasos del candy bar en lista vertical, botones a lo ancho. `SectionNav` publica `--scroll-offset` (Navbar + barra) para el `scroll-margin` de las secciones.
+- **2026-10-14** — Página de Contacto terminada (Nosotros → Escribinos → Cómo llegar), verificada con capturas a 360, 390 y 1280 px. Nuevo `ui/CountUp.jsx` y `contactMessage()` en `utils/whatsapp.js`. Ojo: en `useInView`/`viewport` usar margen solo abajo (`'0px 0px -40px 0px'`); un margen negativo en los costados deja sin animar lo que está pegado al borde en celular. Pendiente: fotos propias de la fachada y ver el mapa en un navegador real. Próximo paso: cotizador (Servicios).

@@ -41,4 +41,21 @@ export const images = {
     alt: 'Salón de día con mesas vestidas de blanco durante un evento',
     position: 'center 40%',
   },
+
+  // Fachada (página de Contacto, para que los invitados reconozcan el salón)
+  facadeStreet: {
+    src: '/images/fachada1.png',
+    alt: 'Vista de la cuadra: casa blanca de dos pisos con balcón de rejas negras, junto a un portón gris',
+    position: 'center 55%',
+  },
+  facade: {
+    src: '/images/fachada2.png',
+    alt: 'Fachada blanca del salón con balcón de rejas y el cartel de Luxury Eventos sobre la puerta',
+    position: 'center 60%',
+  },
+  entrance: {
+    src: '/images/fachada3.png',
+    alt: 'Entrada del salón: puerta con rejas negras debajo del cartel de Luxury Eventos',
+    position: 'center 70%',
+  },
 }
