@@ -2,7 +2,7 @@
 
 Sitio web del salón de eventos **Luxury Eventos** (El Colmenar, Tucumán). La idea es que los clientes lleguen desde las redes del salón, lo conozcan y armen su evento online con un cotizador interactivo. Al final, el pedido completo se envía por WhatsApp para cerrar la reserva.
 
-> 🚧 **En desarrollo.** Inicio y Galería están terminadas. Servicios (cotizador) y Contacto están en construcción.
+> 🚧 **En desarrollo.** Las cuatro páginas están armadas; faltan fotos y algunos datos reales (ver CLAUDE.md).
 
 ---
 
@@ -17,11 +17,8 @@ Sitio web del salón de eventos **Luxury Eventos** (El Colmenar, Tucumán). La i
 - **Responsive:** pensado primero para celular, porque la mayoría de las visitas llega desde redes
 - **Accesible:** HTML semántico, etiquetas ARIA y respeto por `prefers-reduced-motion`
 - **Datos centralizados:** textos, precios, imágenes y contacto viven en archivos de datos, separados de los componentes
-
-### Próximamente
-
-- **Cotizador interactivo:** elegir tipo de fiesta, temática y extras (mozos, DJ, candy bar, luces, decoración), ver el total en tiempo real y enviar el resumen por WhatsApp
-- **Contacto** con mapa, datos del salón y formulario
+- **Cotizador interactivo:** tipo de evento y plan, fecha, turno, invitados, temática y extras, con el total en tiempo real y el resumen enviado por WhatsApp. Precios en `src/data/pricing.js`
+- **Contacto** con mapa embebido, fotos de la fachada y formulario que abre WhatsApp
 
 ---
 
@@ -74,6 +71,7 @@ El sitio queda disponible en `http://localhost:5173`.
     │   ├── candybar.js      # Tipos de candy bar y pasos de armado
     │   ├── events.js        # Tipos de evento
     │   ├── gallery.js       # Secciones, textos y fotos de la Galería
+    │   ├── pricing.js       # Precios del cotizador: planes, qué incluye, extras y mozos
     │   ├── highlights.js    # Comodidades del salón (incluidas / obligatorias / opcionales)
     │   ├── images.js        # Rutas, textos alternativos y encuadre de cada imagen
     │   └── reviews.js       # Reseñas de clientes

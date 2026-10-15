@@ -1,10 +1,9 @@
 import { site } from '../config/site'
-import { images } from './images'
+import { photos } from './photos'
 
 // "Turno tarde (12 a 17 h) o turno noche (17 a 22 h)"
-const shifts = site.eventShifts
-  .map(({ label, time }, i) => `${i ? label.toLowerCase() : label} (${time})`)
-  .join(' o ')
+const shiftsText = ({ shifts }) =>
+  shifts.map(({ label, time }, i) => `${i ? label.toLowerCase() : label} (${time})`).join(' o ')
 
 // Secciones de la Galería. `events` son ids de data/events.js: definen qué
 // pestañas aparecen y en qué orden. `intro` es el texto que se muestra en la
@@ -23,10 +22,10 @@ export const gallerySections = [
       title: 'Festejos para compartir en familia',
       text: 'Un salón luminoso y cómodo para que los chicos jueguen y los grandes disfruten. Adaptamos la ambientación a cada ocasión: colores, temática y cada pequeño detalle.',
       points: [
-        `Salón climatizado para hasta ${site.capacity} invitados`,
-        shifts,
-        'Ambientación según la temática que elijas',
-        'Candy bar, decoración y extras a tu medida',
+        `Salón para hasta ${site.capacity} invitados, con pelotero y metegol en los infantiles`,
+        shiftsText(site.shiftSchedules.standard),
+        'Decoración según la temática que elijas',
+        'Candy bar, DJ y aire acondicionado como extras',
       ],
     },
   },
@@ -44,9 +43,10 @@ export const gallerySections = [
       text: 'Para las fiestas más esperadas transformamos el salón: luces, pista, mesas vestidas de gala y una puesta pensada para que cada momento salga perfecto en las fotos.',
       points: [
         `Hasta ${site.capacity} invitados en un ambiente íntimo`,
-        'Pista con luces y sonido',
-        'Mesas de gala y ambientación elegante',
-        'DJ, luces y mesa dulce como extras',
+        `15, 18 y casamientos: ${shiftsText(site.shiftSchedules.premium).toLowerCase()}`,
+        `Despedidas: ${shiftsText(site.shiftSchedules.standard).toLowerCase()}`,
+        'Mozos, sonido, luces y aire incluidos en los eventos premium',
+        'Paquete Luxury con DJ del salón',
       ],
     },
   },
@@ -88,37 +88,60 @@ export const galleryEventDetails = {
     points: [`Hasta ${site.capacity} invitados`, 'Mesas de gala y centros de mesa', 'Pista para el vals y la fiesta'],
   },
   despedidas: {
-    text: 'La última gran fiesta antes del “sí”. DJ, luces, brindis y un ambiente relajado para festejar a lo grande con amigos.',
-    points: ['DJ y luces', 'Brindis y música', 'Ambiente distendido'],
+    text: 'La última gran fiesta antes del “sí”. Música, brindis y un ambiente relajado para festejar a lo grande con amigos.',
+    points: ['DJ como extra', 'Brindis y música', 'Ambiente distendido'],
   },
 }
 
-// Fotos de la Galería. `event` es el id del tipo de evento (data/events.js).
-// Para sumar una foto: copiarla en /public/images, registrarla en data/images.js
-// y agregar una línea acá.
-//
-// TODO: reemplazar por fotos reales de cada tipo de evento (por ahora se repiten
-// las fotos generales del salón como placeholder).
+// Fotos de la Galería. `event` es el id del tipo de evento (data/events.js) y el
+// orden es el del mosaico. Para sumar una foto: copiarla en /public/images,
+// registrarla en data/photos.js y agregar una línea acá.
 export const galleryPhotos = [
   // En familia
-  { image: images.about, event: 'infantiles', caption: 'Backdrop con arcos y flores' },
-  { image: images.party, event: 'infantiles', caption: 'Centros de mesa con luces' },
-  { image: images.toast, event: 'bautismos', caption: 'Salón de día vestido de blanco' },
-  { image: images.party, event: 'bautismos', caption: 'Detalles florales' },
-  { image: images.hero, event: 'comuniones', caption: 'Mesas redondas con telas rosadas' },
-  { image: images.toast, event: 'comuniones', caption: 'Almuerzo en familia' },
-  { image: images.about, event: 'baby-shower', caption: 'Rincón para las fotos' },
-  { image: images.hero, event: 'baby-shower', caption: 'Ambientación en tonos suaves' },
-  { image: images.party, event: 'revelacion', caption: 'Mesa principal' },
+  { image: photos.infantilMonsters, event: 'infantiles', caption: 'Monsters Inc.' },
+  { image: photos.babySafari, event: 'baby-shower', caption: 'Safari' },
+  { image: photos.comunionCaliz, event: 'comuniones', caption: 'Dorado y blanco' },
+  { image: photos.bautismoBeige, event: 'bautismos', caption: 'Beige y dorado' },
+  { image: photos.infantilPocoyo, event: 'infantiles', caption: 'Pocoyó' },
+  { image: photos.revelacionMesa, event: 'revelacion', caption: 'Mesa dulce en azul' },
+  { image: photos.comunionAmarilla, event: 'comuniones', caption: 'Amarillo y blanco' },
+  { image: photos.babyBosque, event: 'baby-shower', caption: 'Animalitos del bosque' },
+  { image: photos.infantilPooh, event: 'infantiles', caption: 'Winnie Pooh' },
+  { image: photos.bautismoElefante, event: 'bautismos', caption: 'Elefantito en rosa' },
+  { image: photos.comunionAngel, event: 'comuniones', caption: 'Angelito en celeste' },
+  { image: photos.infantilFrutillita, event: 'infantiles', caption: 'Frutillitas' },
+  { image: photos.babyPanda, event: 'baby-shower', caption: 'Osito panda' },
+  { image: photos.bautismoCeleste, event: 'bautismos', caption: 'Celeste y dorado' },
+  { image: photos.comunionRosa, event: 'comuniones', caption: 'Rosa y dorado' },
+  { image: photos.infantilVampirina, event: 'infantiles', caption: 'Vampirina' },
+  { image: photos.muestraInfantiles, event: 'infantiles', caption: 'Rincón de juegos' },
+  { image: photos.comunionArco, event: 'comuniones', caption: 'Arco de globos' },
+  { image: photos.infantilLol, event: 'infantiles', caption: 'Muñecas LOL' },
+  { image: photos.babyVelita, event: 'baby-shower', caption: 'Souvenir de velita' },
+  { image: photos.comunionDorada, event: 'comuniones', caption: 'Columnas doradas' },
+
+  { image: photos.infantilMariposa, event: 'infantiles', caption: 'Detalles personalizados' },
+  { image: photos.comunionSouvenir, event: 'comuniones', caption: 'Souvenirs de angelitos' },
+  { image: photos.muestraComuniones, event: 'comuniones', caption: 'El salón ambientado' },
+  { image: photos.infantilCentro, event: 'infantiles', caption: 'Centro de mesa' },
 
   // Noches de gala
-  { image: images.ballroom, event: 'quince', caption: 'Mesa de gala con sitiales dorados' },
-  { image: images.balloons, event: 'quince', caption: 'Pista con luces' },
-  { image: images.table, event: 'quince', caption: 'Noche con centros iluminados' },
-  { image: images.balloons, event: 'dieciocho', caption: 'Luces de colores y sonido' },
-  { image: images.table, event: 'dieciocho', caption: 'El salón de noche' },
-  { image: images.ballroom, event: 'casamientos', caption: 'Mesa de los novios' },
-  { image: images.hero, event: 'casamientos', caption: 'Salón ambientado para la cena' },
-  { image: images.table, event: 'casamientos', caption: 'Centros de mesa iluminados' },
-  { image: images.balloons, event: 'despedidas', caption: 'Fiesta con DJ y luces' },
+  { image: photos.bodaNovios, event: 'casamientos', caption: 'El corte de la torta' },
+  { image: photos.quinceMesa, event: 'quince', caption: 'Lila y plateado' },
+  { image: photos.muestraQuince1, event: 'quince', caption: 'Mesa principal' },
+  { image: photos.dieciochoMesa, event: 'dieciocho', caption: 'Negro y dorado' },
+  { image: photos.bodaMesaDulce, event: 'casamientos', caption: 'Mesa dulce dorada' },
+  { image: photos.despedidaLiving, event: 'despedidas', caption: 'Living con luces' },
+  { image: photos.muestraDespedidas1, event: 'despedidas', caption: 'La pista' },
+  { image: photos.dieciochoFiesta, event: 'dieciocho', caption: 'La fiesta' },
+  { image: photos.quinceSalon, event: 'quince', caption: 'El salón para la cena' },
+  { image: photos.muestraQuince2, event: 'quince', caption: 'El vals' },
+  { image: photos.bodaAbrazo, event: 'casamientos', caption: 'Los novios' },
+  { image: photos.muestraDespedidas2, event: 'despedidas', caption: 'El brindis' },
+  { image: photos.dieciochoTorta, event: 'dieciocho', caption: 'La torta' },
+  { image: photos.bodaMesa, event: 'casamientos', caption: 'Columnas doradas' },
+  { image: photos.dieciochoSalon, event: 'dieciocho', caption: 'La recepción' },
+  { image: photos.bodaRamo, event: 'casamientos', caption: 'El ramo' },
+  { image: photos.muestraDespedidas3, event: 'despedidas', caption: 'Living y luces' },
+  { image: photos.dieciochoLunch, event: 'dieciocho', caption: 'Mesa de lunch' },
 ]

@@ -71,9 +71,10 @@ export default function ContactChannels() {
             <Clock className="mt-0.5 size-5 shrink-0 text-gold" />
             <div className="text-sm">
               <p className="font-semibold text-ink">Turnos de eventos</p>
-              {site.eventShifts.map(({ label, time }) => (
-                <p key={label} className="mt-1 text-muted">
-                  {label}: {time}
+              {Object.values(site.shiftSchedules).map(({ label, shifts }) => (
+                <p key={label} className="mt-2 text-muted">
+                  <span className="block text-xs text-gold-dark">{label}</span>
+                  {shifts.map((s) => s.time).join(' · ')}
                 </p>
               ))}
             </div>

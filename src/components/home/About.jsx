@@ -28,8 +28,9 @@ export default function About() {
               que todo salga tal como lo imaginaste.
             </p>
             <p>
-              Contamos con sonido JBL, luces de colores y aire acondicionado incluidos, y podés sumar DJ, candy bar
-              y decoración temática para armar una fiesta a tu medida, en turno tarde o noche.
+              Tenemos sonido JBL, cocina completa con asador, patio para fumadores y, para los más chicos, pelotero y
+              metegol. Podés sumar DJ, candy bar y la decoración temática que imagines para armar una fiesta a tu
+              medida, en turno tarde o noche.
             </p>
           </Reveal>
 

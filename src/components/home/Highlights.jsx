@@ -1,4 +1,4 @@
-import { badgeLabels, highlights } from '../../data/highlights'
+import { badgeLabels, highlights, highlightsIntro, highlightsNote } from '../../data/highlights'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
 
@@ -6,6 +6,7 @@ const badgeStyles = {
   included: 'bg-gold/15 text-gold-dark',
   required: 'bg-ink text-gold-light',
   optional: 'border border-gold/50 text-gold-dark',
+  kids: 'bg-cream text-gold-dark',
 }
 
 export default function Highlights() {
@@ -15,7 +16,7 @@ export default function Highlights() {
         <SectionTitle
           eyebrow="El salón"
           title="Todo lo que tu evento necesita"
-          subtitle="El salón ya viene equipado con sonido, luces y climatización. A eso le sumás el servicio de mozos y, si querés, DJ y candy bar para armar la fiesta a tu medida."
+          subtitle={highlightsIntro}
         />
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -39,8 +40,7 @@ export default function Highlights() {
 
         <Reveal delay={0.2}>
           <p className="mt-10 text-center text-xs text-muted">
-            <span className="font-semibold text-ink">Obligatorio:</span> el servicio de mozos (uno cada 30 invitados) y
-            el ayudante de cocina se cotizan aparte y se incluyen en todos los eventos.
+            <span className="font-semibold text-ink">Obligatorio:</span> {highlightsNote}
           </p>
         </Reveal>
       </div>

@@ -145,7 +145,7 @@ function InfoPanel({ event, intro, photoCount, dark }) {
         ))}
       </ul>
 
-      <Button to="/servicios" className="mt-8 w-full sm:mt-9 sm:w-auto">
+      <Button to={event ? `/servicios?tipo=${event.id}` : '/servicios'} className="mt-8 w-full sm:mt-9 sm:w-auto">
         {event ? 'Cotizá este evento' : 'Armá tu presupuesto'} <ArrowRight className="size-4" />
       </Button>
     </>

@@ -51,7 +51,7 @@ function MosaicItem({ photo, ratio, delay, reduce, onOpen }) {
     <motion.li
       initial={reduce ? { opacity: 0 } : { opacity: 0, clipPath: 'inset(100% 0% 0% 0%)' }}
       whileInView={reduce ? { opacity: 1 } : { opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={{ once: true, margin: '0px 0px -40px 0px' }}
       transition={{ duration: 1.1, delay, ease }}
       className={ratio}
     >

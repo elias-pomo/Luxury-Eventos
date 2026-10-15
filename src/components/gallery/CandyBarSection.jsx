@@ -96,7 +96,7 @@ function CandyBarRow({ candyBar, index, onOpen }) {
         </ul>
 
         <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap">
-          <Button to="/servicios">
+          <Button to={`/servicios?candy=${candyBar.id}`}>
             Sumalo a tu evento <ArrowRight className="size-4" />
           </Button>
           <Button variant="outline" onClick={() => onOpen(0)}>

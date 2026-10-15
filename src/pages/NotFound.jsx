@@ -1,6 +1,9 @@
 import Button from '../components/ui/Button'
+import { usePageTitle } from '../utils/usePageTitle'
+import { pageTitles } from '../config/site'
 
 export default function NotFound() {
+  usePageTitle(pageTitles.notFound)
   return (
     <section className="flex min-h-dvh flex-col items-center justify-center px-4 text-center">
       <p className="font-display text-8xl text-gold-gradient">404</p>

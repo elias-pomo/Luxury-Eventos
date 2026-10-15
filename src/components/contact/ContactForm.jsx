@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Send } from 'lucide-react'
 import { contactForm } from '../../data/contact'
+import { todayISO } from '../../utils/format'
 import { contactMessage, whatsappLink } from '../../utils/whatsapp'
 import Button from '../ui/Button'
 
@@ -9,12 +10,6 @@ const empty = { name: '', date: '', message: '' }
 
 const field =
   'w-full rounded-sm border border-sand bg-white px-4 py-3 text-base text-ink transition-colors outline-none placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold'
-
-// Fecha local de hoy en formato AAAA-MM-DD (mínimo del selector de fecha).
-const today = () => {
-  const d = new Date()
-  return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10)
-}
 
 // Formulario de consulta breve: no envía nada a un servidor, arma el mensaje y
 // abre WhatsApp. El detalle del evento (tipo, extras, invitados) va en el cotizador de Servicios.
@@ -57,7 +52,7 @@ export default function ContactForm() {
         </Field>
 
         <Field id="date" label="Fecha que buscás">
-          <input id="contact-date" type="date" min={today()} value={form.date} onChange={set('date')} className={field} />
+          <input id="contact-date" type="date" min={todayISO()} value={form.date} onChange={set('date')} className={field} />
         </Field>
 
         <Field id="message" label="Mensaje">

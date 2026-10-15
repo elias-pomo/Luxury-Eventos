@@ -69,8 +69,11 @@ export default function Footer() {
               <Clock className="size-4 shrink-0 text-gold" />
               <div className="space-y-1">
                 <p className="text-white">Turnos de eventos</p>
-                {site.eventShifts.map(({ label, time }) => (
-                  <p key={label}>{label}: {time}</p>
+                {Object.values(site.shiftSchedules).map(({ label, shifts }) => (
+                  <div key={label} className="pt-1">
+                    <p className="text-xs text-gold-light">{label}</p>
+                    <p>{shifts.map((s) => s.time).join(' · ')}</p>
+                  </div>
                 ))}
                 <p className="pt-1 text-white/50">{site.attention}</p>
               </div>

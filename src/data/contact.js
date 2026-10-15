@@ -19,13 +19,12 @@ export const contactForm = {
 }
 
 export const contactLocation = {
-  subtitle: 'Estamos sobre la avenida William Cross 2935. Buscá la casa blanca de dos pisos con balcón de rejas negras y el cartel dorado de Luxury Eventos sobre la puerta.',
+  subtitle: 'Estamos sobre la avenida William Cross 2935. Buscá la fachada blanca con el cartel luminoso de Luxury Eventos y la puerta de rejas negras.',
 }
 
-// Fotos de la fachada, de lejos a cerca, para orientarse al llegar.
+// Fotos de la fachada para reconocer el salón al llegar.
 // Formato compatible con el visor de fotos: { image, label, caption }.
 export const facadePhotos = [
-  { image: images.facadeStreet, label: 'La cuadra', caption: 'Casa blanca con balcón de rejas' },
-  { image: images.facade, label: 'La fachada', caption: 'El cartel sobre la puerta' },
-  { image: images.entrance, label: 'La entrada', caption: 'Puerta de rejas negras' },
+  { image: images.facade, label: 'La fachada', caption: 'El cartel luminoso de Luxury Eventos' },
+  { image: images.entrance, label: 'La entrada', caption: 'Puerta con rejas negras' },
 ]

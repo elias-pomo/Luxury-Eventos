@@ -1,9 +1,15 @@
+import { useLocation } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { WhatsAppIcon } from '../icons/SocialIcons'
 import { whatsappLink } from '../../utils/whatsapp'
 import { site } from '../../config/site'
 
+// En Servicios se oculta: el presupuesto ya tiene su propio envío por WhatsApp
+// y el botón taparía la barra del total (celular) o el resumen fijo (escritorio).
 export default function WhatsAppButton() {
+  const { pathname } = useLocation()
+  if (pathname.startsWith('/servicios')) return null
+
   return (
     <motion.a
       href={whatsappLink(`¡Hola ${site.name}! Quisiera hacer una consulta.`)}

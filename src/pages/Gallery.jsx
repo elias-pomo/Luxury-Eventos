@@ -5,6 +5,8 @@ import CandyBarSection from '../components/gallery/CandyBarSection'
 import CtaBanner from '../components/home/CtaBanner'
 import { gallerySections } from '../data/gallery'
 import { images } from '../data/images'
+import { usePageTitle } from '../utils/usePageTitle'
+import { pageTitles } from '../config/site'
 
 const CANDY_BAR_ID = 'candy-bar'
 
@@ -14,6 +16,7 @@ const navSections = [
 ]
 
 export default function Gallery() {
+  usePageTitle(pageTitles.galeria)
   return (
     <>
       <PageHeader

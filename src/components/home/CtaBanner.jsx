@@ -21,11 +21,12 @@ export default function CtaBanner() {
           Armá tu presupuesto online en pocos minutos o escribinos para consultar disponibilidad y coordinar una
           visita al salón. Te respondemos todos los días.
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 text-xs tracking-[0.2em] text-gold-light uppercase">
-          {site.eventShifts.map(({ label, time }) => (
-            <span key={label}>
-              {label} · {time}
-            </span>
+        <div className="mt-8 flex flex-col gap-3 text-xs tracking-[0.2em] text-gold-light uppercase sm:flex-row sm:gap-10">
+          {Object.values(site.shiftSchedules).map(({ label, shifts }) => (
+            <p key={label}>
+              <span className="block text-[10px] tracking-[0.25em] text-white/60">{label}</span>
+              <span className="mt-1 block">{shifts.map((s) => s.time).join(' · ')}</span>
+            </p>
           ))}
         </div>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">

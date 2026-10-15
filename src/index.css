@@ -99,6 +99,37 @@
   }
 }
 
+/* Barra deslizable dorada. El tramo lleno se controla con --fill (ej: style={{ '--fill': '60%' }}) */
+@utility range-gold {
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, var(--color-gold) var(--fill, 50%), var(--color-sand) var(--fill, 50%));
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 9999px;
+    background: white;
+    border: 2px solid var(--color-gold);
+    box-shadow: var(--shadow-gold);
+  }
+  &::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    background: white;
+    border: 2px solid var(--color-gold);
+    box-shadow: var(--shadow-gold);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 6px;
+  }
+}
+
 @utility container-page {
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }

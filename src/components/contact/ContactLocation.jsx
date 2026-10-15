@@ -81,9 +81,9 @@ export default function ContactLocation() {
         </Reveal>
 
         {/* En celular: carrusel deslizable; en escritorio: tres columnas. */}
-        <ul className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0">
+        <ul className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0">
           {facadePhotos.map((photo, i) => (
-            <motion.li key={photo.label} {...curtain(i * 0.12)} className="w-[80%] shrink-0 snap-center sm:w-auto">
+            <motion.li key={photo.label} {...curtain(i * 0.12)} className="w-[85%] shrink-0 snap-center sm:w-auto">
               <button
                 onClick={() => setOpen(i)}
                 aria-label={`Ampliar foto: ${photo.label}, ${photo.caption}`}

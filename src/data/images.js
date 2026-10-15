@@ -43,19 +43,14 @@ export const images = {
   },
 
   // Fachada (página de Contacto, para que los invitados reconozcan el salón)
-  facadeStreet: {
-    src: '/images/fachada1.png',
-    alt: 'Vista de la cuadra: casa blanca de dos pisos con balcón de rejas negras, junto a un portón gris',
-    position: 'center 55%',
-  },
   facade: {
-    src: '/images/fachada2.png',
-    alt: 'Fachada blanca del salón con balcón de rejas y el cartel de Luxury Eventos sobre la puerta',
-    position: 'center 60%',
+    src: '/images/fachada2.jpg',
+    alt: 'Fachada blanca del salón con el cartel luminoso de Luxury Eventos y rejas negras',
+    position: 'center 40%',
   },
   entrance: {
-    src: '/images/fachada3.png',
-    alt: 'Entrada del salón: puerta con rejas negras debajo del cartel de Luxury Eventos',
-    position: 'center 70%',
+    src: '/images/fachada3.jpg',
+    alt: 'Entrada del salón con la puerta de rejas abierta bajo el cartel luminoso',
+    position: 'center 40%',
   },
 }

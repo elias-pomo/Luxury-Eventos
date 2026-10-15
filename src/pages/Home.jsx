@@ -5,8 +5,10 @@ import GalleryPreview from '../components/home/GalleryPreview'
 import ServicesPreview from '../components/home/ServicesPreview'
 import Testimonials from '../components/home/Testimonials'
 import CtaBanner from '../components/home/CtaBanner'
+import { usePageTitle } from '../utils/usePageTitle'
 
 export default function Home() {
+  usePageTitle()
   return (
     <>
       <Hero />

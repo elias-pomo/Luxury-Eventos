@@ -3,8 +3,11 @@ import ContactChannels from '../components/contact/ContactChannels'
 import ContactLocation from '../components/contact/ContactLocation'
 import PageHeader from '../components/ui/PageHeader'
 import { images } from '../data/images'
+import { usePageTitle } from '../utils/usePageTitle'
+import { pageTitles } from '../config/site'
 
 export default function Contact() {
+  usePageTitle(pageTitles.contacto)
   return (
     <>
       <PageHeader
