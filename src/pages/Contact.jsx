@@ -1,5 +1,6 @@
 import ContactAbout from '../components/contact/ContactAbout'
 import ContactChannels from '../components/contact/ContactChannels'
+import ContactFaq from '../components/contact/ContactFaq'
 import ContactLocation from '../components/contact/ContactLocation'
 import PageHeader from '../components/ui/PageHeader'
 import { images } from '../data/images'
@@ -19,6 +20,7 @@ export default function Contact() {
       <ContactAbout />
       <ContactChannels />
       <ContactLocation />
+      <ContactFaq />
     </>
   )
 }

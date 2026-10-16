@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { WhatsAppIcon } from '../icons/SocialIcons'
 import { whatsappLink } from '../../utils/whatsapp'
 import { site } from '../../config/site'
+import { track } from '../../utils/analytics'
 
 // En Servicios se oculta: el presupuesto ya tiene su propio envío por WhatsApp
 // y el botón taparía la barra del total (celular) o el resumen fijo (escritorio).
@@ -16,6 +17,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escribinos por WhatsApp"
+      onClick={() => track('whatsapp_click', { origen: 'boton_flotante' })}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 1.2, type: 'spring', stiffness: 200 }}

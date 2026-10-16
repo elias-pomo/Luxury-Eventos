@@ -11,7 +11,7 @@ export default function About() {
         <Reveal className="relative mx-auto w-[calc(100%-2rem)] max-w-md sm:w-full lg:max-w-none">
           {/* Marco concéntrico: misma separación en todos los lados para que los arcos queden paralelos */}
           <div className="absolute -inset-3 rounded-t-full border border-gold sm:-inset-4" />
-          <Photo image={images.about} className="relative aspect-4/5 w-full rounded-t-full shadow-soft" />
+          <Photo image={images.owner} className="relative aspect-4/5 w-full rounded-t-full shadow-soft" />
           <div className="absolute -right-2 -bottom-6 rounded-sm bg-white px-6 py-5 shadow-soft sm:-right-8">
             <p className="text-[11px] tracking-[0.2em] text-muted uppercase">Atención personalizada</p>
             <p className="mt-1 font-display text-2xl text-gold-dark italic">{site.owner}</p>
@@ -30,7 +30,7 @@ export default function About() {
             <p>
               Tenemos sonido JBL, cocina completa con asador, patio para fumadores y, para los más chicos, pelotero y
               metegol. Podés sumar DJ, candy bar y la decoración temática que imagines para armar una fiesta a tu
-              medida, en turno tarde o noche.
+              medida, en turno mediodía o tarde.
             </p>
           </Reveal>
 

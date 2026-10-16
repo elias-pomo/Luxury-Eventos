@@ -9,31 +9,34 @@ import Step from '../components/services/Step'
 import PageHeader from '../components/ui/PageHeader'
 import { pageTitles, site } from '../config/site'
 import { usePageTitle } from '../utils/usePageTitle'
-import { candyBars } from '../data/candybar'
 import { images } from '../data/images'
+import { track } from '../utils/analytics'
+import { isDayFull, isShiftBooked } from '../utils/availability'
+import { formatPrice } from '../utils/format'
 import { buildQuote, findCategory } from '../utils/quote'
+import { clearSaved, emptySelection, loadSaved, paramsToSelection, save, selectionToParams } from '../utils/quoteState'
 import { quoteMessage, whatsappLink } from '../utils/whatsapp'
 
-// Lo elegido al entrar puede venir en la URL: ?tipo=<evento> (Inicio, Galería) y
-// ?candy=<candy bar> (botón "Sumalo a tu evento" de la Galería).
-const initialSelection = (eventId, candyId) => ({
-  eventId: findCategory(eventId) ? eventId : '',
-  planId: '',
-  date: '',
-  shift: null, // índice dentro del régimen de turnos del evento
-  guests: 50,
-  theme: '',
-  aire: false,
-  dj: false,
-  candyId: candyBars.some((c) => c.id === candyId) ? candyId : '',
-})
+// Al entrar: si la URL trae algo (?tipo= del Inicio y la Galería, ?candy= de "Sumalo a
+// tu evento", o un presupuesto compartido completo) manda la URL; si no, se retoma lo
+// que la persona había armado en este navegador.
+const initialState = (params) => {
+  const saved = loadSaved()
+  const selection = { ...emptySelection, ...(params.size > 0 ? paramsToSelection(params) : saved?.selection) }
+  // Un turno que se reservó después de guardar o compartir el link ya no vale.
+  const count = site.shiftSchedules[findCategory(selection.eventId)?.schedule ?? 'standard'].shifts.length
+  if (isShiftBooked(selection.date, selection.shift, count)) selection.shift = null
+  return { selection, name: saved?.name ?? '' }
+}
 
 export default function Services() {
   usePageTitle(pageTitles.servicios)
   const [params] = useSearchParams()
-  const [selection, setSelection] = useState(() => initialSelection(params.get('tipo'), params.get('candy')))
-  const [name, setName] = useState('')
+  const [initial] = useState(() => initialState(params))
+  const [selection, setSelection] = useState(initial.selection)
+  const [name, setName] = useState(initial.name)
   const [error, setError] = useState('')
+  const [shareStatus, setShareStatus] = useState('')
   const summaryRef = useRef(null)
   const showBar = useSummaryBelow(summaryRef)
 
@@ -43,6 +46,11 @@ export default function Services() {
   const category = quote?.category
   const schedule = site.shiftSchedules[category?.schedule ?? 'standard']
   const shift = selection.shift === null ? null : schedule.shifts[selection.shift]
+
+  // Guarda lo armado para retomarlo si cierra la pestaña o vuelve desde WhatsApp.
+  useEffect(() => {
+    if (selection.eventId) save(selection, name)
+  }, [selection, name])
 
   // Guía el recorrido: al elegir el evento baja al paso 2 (o primero al plan, si
   // el evento tiene Premium/Luxury) y al elegir el candy bar baja al presupuesto.
@@ -67,12 +75,44 @@ export default function Services() {
 
   const onSend = () => {
     if (!quote) return setError('Elegí el tipo de evento para armar tu presupuesto.')
+    if (isDayFull(selection.date, schedule.shifts.length) || isShiftBooked(selection.date, selection.shift, schedule.shifts.length)) {
+      return setError('Esa fecha y turno ya están reservados. Elegí otra opción o consultanos por WhatsApp.')
+    }
     if (!name.trim()) {
       document.getElementById('quote-name')?.focus()
       return setError('Contanos tu nombre para enviar el presupuesto.')
     }
     const message = quoteMessage({ quote, name, date: selection.date, shift, guests: selection.guests, theme: selection.theme })
+    track('quote_sent', { evento: quote.event.name, total: quote.total })
     window.open(whatsappLink(message), '_blank', 'noopener,noreferrer')
+  }
+
+  // Comparte el presupuesto como link (hoja de compartir del celular o, si no hay, lo copia).
+  const onShare = async () => {
+    const url = `${window.location.origin}/servicios?${selectionToParams(selection)}`
+    const text = `Mirá el presupuesto que armé en ${site.name}: ${formatPrice(quote.total)} estimado.`
+    track('quote_shared', { evento: quote.event.name })
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: site.name, text, url })
+        return
+      }
+      await navigator.clipboard.writeText(url)
+      setShareStatus('Link copiado')
+    } catch (e) {
+      if (e?.name === 'AbortError') return
+      setShareStatus('No se pudo copiar')
+    }
+    setTimeout(() => setShareStatus(''), 2500)
+  }
+
+  // Borra lo guardado y vuelve al principio.
+  const onReset = () => {
+    clearSaved()
+    setSelection(emptySelection)
+    setName('')
+    setError('')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const scrollToSummary = () => scrollToStep('presupuesto', 0)
@@ -148,6 +188,9 @@ export default function Services() {
                 setError('')
               }}
               onSend={onSend}
+              onShare={onShare}
+              shareStatus={shareStatus}
+              onReset={onReset}
             />
           </div>
         </div>

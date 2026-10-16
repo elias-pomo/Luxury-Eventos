@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { navLinks, site } from '../../config/site'
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from '../icons/SocialIcons'
+import { track } from '../../utils/analytics'
 import { whatsappLink } from '../../utils/whatsapp'
 
 export default function Footer() {
@@ -55,7 +56,7 @@ export default function Footer() {
             </li>
             <li className="flex gap-3">
               <Phone className="size-4 shrink-0 text-gold" />
-              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+              <a href={site.phoneHref} onClick={() => track('call_click', { origen: 'footer' })} className="hover:text-gold">
                 {site.phoneDisplay}
               </a>
             </li>

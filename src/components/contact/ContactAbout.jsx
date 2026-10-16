@@ -12,7 +12,7 @@ export default function ContactAbout() {
       <div className="container-page grid items-center gap-14 lg:grid-cols-[2fr_3fr] lg:gap-20">
         <Reveal className="relative mx-auto w-[calc(100%-4rem)] max-w-xs sm:max-w-sm">
           <div className="absolute -inset-3 rounded-t-full border border-gold" />
-          <Photo image={images.hero} className="relative aspect-4/5 w-full rounded-t-full shadow-soft" />
+          <Photo image={images.owner} className="relative aspect-4/5 w-full rounded-t-full shadow-soft" />
           <div className="absolute -bottom-5 -left-6 rounded-sm bg-white px-5 py-4 shadow-soft">
             <p className="text-[10px] tracking-[0.2em] text-muted uppercase">Te atiende</p>
             <p className="mt-0.5 font-display text-xl text-gold-dark italic">{site.owner}</p>

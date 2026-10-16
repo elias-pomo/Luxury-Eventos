@@ -15,11 +15,22 @@ export const site = {
   // Formato internacional sin "+", espacios ni guiones: 54 (país) + 9 (celular) + área + número
   whatsapp: '5493815265630',
   phoneDisplay: '381 526-5630',
+  // Link de llamada (mismo número que el WhatsApp)
+  phoneHref: 'tel:+5493815265630',
   email: 'alejandro.rodriguez1374@gmail.com',
+
+  // Analítica (opcional). Dejar vacío para no cargar nada. Con el dominio de Plausible
+  // (ej: 'luxuryeventos.com.ar') o el ID de medición de Google Analytics 4 (ej: 'G-XXXXXXXXXX').
+  // Los eventos propios (quote_sent, contact_sent, call_click, whatsapp_click, quote_shared)
+  // se dan de alta como objetivos en Plausible. TODO: completar con el dominio.
+  analytics: { plausibleDomain: '', ga4Id: '' },
 
   address: {
     street: 'Av. William Cross 2935',
     city: 'El Colmenar, Tucumán',
+    // Para los datos estructurados de Google (SEO local)
+    locality: 'El Colmenar',
+    region: 'Tucumán',
     mapsUrl: 'https://maps.app.goo.gl/YGHGrgzisUFv5ufp8',
     // Mapa embebido de Contacto (Google Maps → Compartir → Insertar un mapa → solo el valor de `src`)
     mapsEmbedUrl:
@@ -32,15 +43,15 @@ export const site = {
     standard: {
       label: 'Infantiles, familiares y despedidas',
       shifts: [
-        { label: 'Turno tarde', time: '12 a 17 h' },
-        { label: 'Turno noche', time: '17 a 22 h' },
+        { label: 'Turno mediodía', time: '12 a 17 h' },
+        { label: 'Turno tarde', time: '17 a 22 h' },
       ],
     },
     premium: {
       label: '15, 18, casamientos y corporativos',
       shifts: [
-        { label: 'Turno tarde', time: '12 a 19 h' },
-        { label: 'Turno noche', time: '17 a 23 h' },
+        { label: 'Turno mediodía', time: '12 a 19 h' },
+        { label: 'Turno tarde', time: '17 a 23 h' },
       ],
     },
   },

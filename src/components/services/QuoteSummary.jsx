@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { CalendarDays, Clock, Sparkles, Users } from 'lucide-react'
+import { CalendarDays, Clock, RotateCcw, Share2, Sparkles, Users } from 'lucide-react'
 import { pricesUpdatedAt, quoteNotes } from '../../data/pricing'
 import { formatDate, formatPrice } from '../../utils/format'
 import { WhatsAppIcon } from '../icons/SocialIcons'
@@ -9,7 +9,10 @@ import { fieldClass } from './DetailsStep'
 // Paso 5: el presupuesto armado, con el total y el envío por WhatsApp.
 // Tarjeta marfil con doble marco dorado (como el arco de "Nosotros") y el total
 // sobre una franja crema con el enrejado art déco del sitio.
-export default function QuoteSummary({ ref, quote, date, shift, guests, name, error, onNameChange, onSend }) {
+const secondaryButton =
+  'inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-gold/60 px-2 py-1.5 text-[10px] font-semibold tracking-[0.12em] text-gold-dark uppercase transition-colors hover:bg-gold hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold'
+
+export default function QuoteSummary({ ref, quote, date, shift, guests, name, error, onNameChange, onSend, onShare, shareStatus, onReset }) {
   return (
     <div ref={ref} className="bg-luxe-center relative rounded-sm border border-gold/50 bg-ivory p-6 shadow-soft sm:p-8">
       <span aria-hidden="true" className="pointer-events-none absolute inset-2 rounded-[1px] border border-gold/25" />
@@ -152,6 +155,17 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
           <WhatsAppIcon className="size-4" /> Enviar por WhatsApp
         </motion.button>
       </form>
+
+      {quote && (
+        <div className="relative mt-3 grid grid-cols-2 gap-3">
+          <button type="button" onClick={onShare} className={secondaryButton}>
+            <Share2 className="size-4" /> {shareStatus || 'Compartir'}
+          </button>
+          <button type="button" onClick={onReset} className={secondaryButton}>
+            <RotateCcw className="size-4" /> Empezar de nuevo
+          </button>
+        </div>
+      )}
 
       <ul className="relative mt-6 space-y-1.5 text-[11px] leading-relaxed text-muted/80">
         <li>Total estimado. Precios actualizados a {pricesUpdatedAt}; la reserva se confirma por WhatsApp.</li>

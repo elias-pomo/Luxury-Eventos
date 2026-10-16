@@ -1,7 +1,8 @@
 import { motion } from 'motion/react'
-import { ConciergeBell, Minus, Plus } from 'lucide-react'
+import { CalendarX, ConciergeBell, Minus, Plus } from 'lucide-react'
 import { site } from '../../config/site'
 import { staff } from '../../data/pricing'
+import { bookedShifts, isDayFull, isShiftBooked } from '../../utils/availability'
 import { formatPrice, todayISO } from '../../utils/format'
 
 export const fieldClass =
@@ -13,6 +14,15 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
   const clamp = (n) => Math.min(site.capacity, Math.max(1, Number(n) || 1))
   const setGuests = (n) => onChange({ guests: clamp(n) })
   const stepGuests = (delta) => onChange((s) => ({ guests: clamp(s.guests + delta) }))
+
+  // Fechas reservadas (data/availability.js): se tachan los turnos y se avisa debajo de la fecha.
+  const count = schedule.shifts.length
+  const taken = bookedShifts(date, count)
+  const notice = isDayFull(date, count)
+    ? 'Esa fecha ya está reservada. Probá con otro día o consultanos por WhatsApp por si hay un cambio.'
+    : taken.size > 0
+      ? `El ${schedule.shifts[[...taken][0]].label.toLowerCase()} de ese día ya está reservado. Elegí el otro turno.`
+      : ''
 
   return (
     <div className="space-y-7">
@@ -26,9 +36,20 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
             type="date"
             min={todayISO()}
             value={date}
-            onChange={(e) => onChange({ date: e.target.value })}
+            onChange={(e) => {
+              const date = e.target.value
+              // Si el turno que tenía elegido está reservado en la nueva fecha, se limpia.
+              onChange((s) => ({ date, shift: isShiftBooked(date, s.shift, count) ? null : s.shift }))
+            }}
+            aria-describedby={notice ? 'quote-date-notice' : undefined}
             className={fieldClass}
           />
+          {notice && (
+            <p id="quote-date-notice" role="status" className="mt-2 flex gap-2 text-xs leading-relaxed text-red-800">
+              <CalendarX className="mt-0.5 size-4 shrink-0" />
+              <span>{notice}</span>
+            </p>
+          )}
         </div>
 
         <fieldset>
@@ -36,15 +57,21 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
           <div className="grid grid-cols-2 gap-3">
             {schedule.shifts.map(({ label, time }, i) => {
               const active = shift === i
+              const booked = taken.has(i)
               return (
                 <motion.button
                   key={label}
                   type="button"
                   aria-pressed={active}
+                  disabled={booked}
                   onClick={() => onChange({ shift: active ? null : i })}
-                  whileTap={{ scale: 0.97 }}
+                  whileTap={{ scale: booked ? 1 : 0.97 }}
                   className={`relative min-h-12 rounded-sm border px-3 py-2 text-center transition-colors duration-300 ${
-                    active ? 'border-gold text-white' : 'border-sand bg-white text-ink hover:border-gold'
+                    booked
+                      ? 'border-sand bg-sand/40 text-muted'
+                      : active
+                        ? 'border-gold text-white'
+                        : 'border-sand bg-white text-ink hover:border-gold'
                   }`}
                 >
                   {active && (
@@ -54,8 +81,10 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
                       className="absolute inset-0 rounded-[1px] bg-gold shadow-gold"
                     />
                   )}
-                  <span className="relative block text-sm font-medium">{label}</span>
-                  <span className={`relative block text-xs ${active ? 'text-white/85' : 'text-muted'}`}>{time}</span>
+                  <span className={`relative block text-sm font-medium ${booked ? 'line-through' : ''}`}>{label}</span>
+                  <span className={`relative block text-xs ${active ? 'text-white/85' : 'text-muted'}`}>
+                    {booked ? 'Reservado' : time}
+                  </span>
                 </motion.button>
               )
             })}

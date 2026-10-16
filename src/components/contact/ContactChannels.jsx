@@ -1,5 +1,6 @@
-import { ArrowUpRight, Clock, Mail } from 'lucide-react'
+import { ArrowUpRight, Clock, Mail, Phone } from 'lucide-react'
 import { site } from '../../config/site'
+import { track } from '../../utils/analytics'
 import { whatsappLink } from '../../utils/whatsapp'
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from '../icons/SocialIcons'
 import Reveal from '../ui/Reveal'
@@ -16,6 +17,7 @@ const channels = [
     detail: site.phoneDisplay,
     featured: true,
   },
+  { href: site.phoneHref, Icon: Phone, label: 'Llamanos', detail: site.phoneDisplay, call: true },
   { href: site.social.instagram, Icon: InstagramIcon, label: 'Instagram', detail: instagramHandle },
   { href: site.social.facebook, Icon: FacebookIcon, label: 'Facebook', detail: site.name },
   site.email && { href: `mailto:${site.email}`, Icon: Mail, label: 'Email', detail: site.email },
@@ -34,12 +36,11 @@ export default function ContactChannels() {
           />
 
           <ul className="mt-10 space-y-3">
-            {channels.map(({ href, Icon, label, detail, featured }, i) => (
+            {channels.map(({ href, Icon, label, detail, featured, call }, i) => (
               <Reveal as="li" key={label} delay={0.08 * i} y={20}>
                 <a
                   href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(call ? { onClick: () => track('call_click', { origen: 'contacto' }) } : { target: '_blank', rel: 'noopener noreferrer' })}
                   className={`group flex min-h-16 items-center gap-4 rounded-sm border px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-soft active:scale-[0.99] sm:px-5 ${
                     featured ? 'border-ink bg-ink text-white' : 'border-sand bg-ivory hover:border-gold'
                   }`}

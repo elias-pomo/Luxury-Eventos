@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Send } from 'lucide-react'
 import { contactForm } from '../../data/contact'
+import { track } from '../../utils/analytics'
 import { todayISO } from '../../utils/format'
 import { contactMessage, whatsappLink } from '../../utils/whatsapp'
 import Button from '../ui/Button'
@@ -29,6 +30,7 @@ export default function ContactForm() {
       document.getElementById('contact-name')?.focus()
       return
     }
+    track('contact_sent')
     window.open(whatsappLink(contactMessage(form)), '_blank', 'noopener,noreferrer')
   }
 

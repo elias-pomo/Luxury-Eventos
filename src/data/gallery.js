@@ -1,7 +1,7 @@
 import { site } from '../config/site'
 import { photos } from './photos'
 
-// "Turno tarde (12 a 17 h) o turno noche (17 a 22 h)"
+// "Turno mediodía (12 a 17 h) o turno tarde (17 a 22 h)"
 const shiftsText = ({ shifts }) =>
   shifts.map(({ label, time }, i) => `${i ? label.toLowerCase() : label} (${time})`).join(' o ')
 
@@ -61,7 +61,7 @@ export const galleryEventDetails = {
   },
   bautismos: {
     text: 'Una celebración serena y luminosa para después de la ceremonia. Tonos claros, flores y mesas vestidas de blanco para compartir un almuerzo o una merienda en familia.',
-    points: ['Ideal para el turno tarde', 'Ambientación en tonos suaves', 'Mesa dulce y torta'],
+    points: ['Ideal para el turno mediodía', 'Ambientación en tonos suaves', 'Mesa dulce y torta'],
   },
   comuniones: {
     text: 'Un festejo cálido para un día muy especial. Ambientamos con delicadeza, con detalles en blanco y dorado y una mesa principal para las fotos del recuerdo.',

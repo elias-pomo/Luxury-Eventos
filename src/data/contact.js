@@ -14,7 +14,7 @@ export const contactAbout = {
 export const contactForm = {
   title: 'Consultá tu fecha',
   subtitle: 'Dejanos tu nombre y la fecha que buscás, y te respondemos por WhatsApp con la disponibilidad.',
-  messagePlaceholder: 'Contanos brevemente qué evento querés hacer. Ej: cumple de 15 para unos 80 invitados, turno noche.',
+  messagePlaceholder: 'Contanos brevemente qué evento querés hacer. Ej: cumple de 15 para unos 80 invitados, turno tarde.',
   submit: 'Enviar por WhatsApp',
 }
 

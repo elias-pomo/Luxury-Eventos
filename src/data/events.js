@@ -43,7 +43,7 @@ export const eventTypes = [
     icon: Baby,
     short: 'Un encuentro tierno y delicado para recibir al bebé con la familia y amigos.',
     tagline: 'Tierno y delicado',
-    perks: ['Decoración a medida', 'Tarde o noche'],
+    perks: ['Decoración a medida', 'Mediodía o tarde'],
   },
   {
     id: 'revelacion',
@@ -51,7 +51,7 @@ export const eventTypes = [
     icon: Gift,
     short: 'El momento más esperado, ambientado para que la sorpresa sea inolvidable.',
     tagline: 'La gran sorpresa',
-    perks: ['Decoración a medida', 'Tarde o noche'],
+    perks: ['Decoración a medida', 'Mediodía o tarde'],
   },
   {
     id: 'bautismos',
