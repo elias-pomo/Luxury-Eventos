@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { ArrowRight, Check, Sparkles } from 'lucide-react'
+import Glitter from '../ui/Sparkles'
 import { eventTypes } from '../../data/events'
 import { galleryEventDetails, galleryPhotos } from '../../data/gallery'
 import Button from '../ui/Button'
@@ -38,9 +39,10 @@ export default function GallerySection({ section }) {
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className={`scroll-mt-(--scroll-offset,7rem) overflow-clip py-24 sm:py-32 ${dark ? 'bg-luxe-dark text-white' : 'bg-luxe'}`}
+      className={`relative scroll-mt-(--scroll-offset,7rem) overflow-clip py-24 sm:py-32 ${dark ? 'bg-luxe-dark text-white' : 'bg-luxe'}`}
     >
-      <div className="container-page">
+      {dark && <Glitter count={7} />}
+      <div className="container-page relative">
         <SectionTitle eyebrow={eyebrow} title={title} subtitle={subtitle} light={dark} titleId={`${id}-title`} />
 
         <Reveal delay={0.1} className="mt-12">
@@ -86,6 +88,7 @@ export default function GallerySection({ section }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.4, ease }}
+                  className={`card-luxe relative overflow-hidden p-6 sm:p-8 ${dark ? 'card-luxe-dark' : ''}`}
                 >
                   <InfoPanel
                     event={filter === ALL ? null : eventsById[filter]}
@@ -121,8 +124,17 @@ function InfoPanel({ event, intro, photoCount, dark }) {
 
   return (
     <>
-      <div className="flex items-center gap-4">
-        <span className="flex size-12 items-center justify-center rounded-full border border-gold/50 text-gold">
+      <motion.span
+        aria-hidden="true"
+        initial={{ opacity: 0, rotate: -25, scale: 0.8 }}
+        animate={{ opacity: 1, rotate: -12, scale: 1 }}
+        transition={{ duration: 0.8, ease }}
+        className={`pointer-events-none absolute -top-6 -right-8 ${dark ? 'text-gold/15' : 'text-gold/10'}`}
+      >
+        <Icon className="size-44" strokeWidth={0.8} />
+      </motion.span>
+      <div className="relative flex items-center gap-4">
+        <span className={`flex size-12 items-center justify-center rounded-full border border-gold/50 ${dark ? 'text-gold' : 'text-gold-dark'}`}>
           <Icon className="size-5" strokeWidth={1.5} />
         </span>
         <span className={`text-[11px] tracking-[0.3em] uppercase ${dark ? 'text-gold-light' : 'text-gold-dark'}`}>
@@ -139,7 +151,7 @@ function InfoPanel({ event, intro, photoCount, dark }) {
       <ul className="mt-7 space-y-3">
         {details.points.map((point) => (
           <li key={point} className={`flex items-start gap-3 text-sm ${dark ? 'text-white/90' : 'text-ink'}`}>
-            <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+            <Check className={`mt-0.5 size-4 shrink-0 ${dark ? 'text-gold' : 'text-gold-dark'}`} />
             {point}
           </li>
         ))}

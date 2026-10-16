@@ -58,7 +58,7 @@ export default function SectionNav({ sections }) {
       ref={navRef}
       aria-label="Secciones de la galería"
       style={{ top }}
-      className="sticky z-30 border-b border-sand bg-ivory/95 backdrop-blur-md"
+      className="sticky z-30 border-b border-gold/25 bg-ivory/95 backdrop-blur-md"
     >
       {/* Celular: tres columnas iguales, sin scroll horizontal. Desde sm: centrado. */}
       <ul className="container-page grid grid-cols-3 sm:flex sm:justify-center sm:gap-12">

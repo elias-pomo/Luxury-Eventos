@@ -36,9 +36,14 @@ export default function EventStep({ eventId, plan, onEventChange, onPlanChange }
               variants={staggerItem}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.97 }}
-              className="group relative flex flex-col items-start overflow-hidden rounded-sm border border-sand bg-ivory p-4 text-left transition-shadow duration-300 hover:shadow-soft sm:p-5"
+              className="group relative flex flex-col items-start overflow-hidden card-luxe card-luxe-sm p-4 text-left sm:p-5"
             >
               {active && <ActiveFrame layoutId="event-frame" />}
+              <Icon
+                aria-hidden="true"
+                strokeWidth={1}
+                className={`pointer-events-none absolute -right-4 -bottom-4 size-24 rotate-12 transition-all duration-700 group-hover:rotate-0 group-hover:text-gold/20 ${active ? 'text-gold/25' : 'text-gold/10'}`}
+              />
               {/* Línea dorada superior que crece al pasar el mouse o al elegirla */}
               <span
                 className={`absolute inset-x-0 top-0 h-0.5 origin-left bg-linear-to-r from-gold-dark via-gold to-gold-light transition-transform duration-500 ${
@@ -48,7 +53,7 @@ export default function EventStep({ eventId, plan, onEventChange, onPlanChange }
               <motion.span
                 animate={active ? pop : { scale: 1, rotate: 0 }}
                 className={`relative flex size-10 items-center justify-center rounded-full border transition-colors duration-300 ${
-                  active ? 'border-gold bg-gold text-white' : 'border-gold/40 text-gold group-hover:bg-gold/10'
+                  active ? 'border-gold bg-gold text-white' : 'border-gold/40 text-gold-dark group-hover:bg-gold/10'
                 }`}
               >
                 <Icon className="size-5" strokeWidth={1.5} />
@@ -60,13 +65,13 @@ export default function EventStep({ eventId, plan, onEventChange, onPlanChange }
               <ul className="relative mt-3 mb-4 space-y-1.5 text-[11px] leading-snug text-muted sm:text-xs">
                 {perks.map((perk) => (
                   <li key={perk} className="flex gap-1.5">
-                    <Check className="mt-px size-3 shrink-0 text-gold" strokeWidth={2.5} />
+                    <Check className="mt-px size-3 shrink-0 text-gold-dark" strokeWidth={2.5} />
                     {perk}
                   </li>
                 ))}
               </ul>
 
-              <span className="relative mt-auto flex w-full items-baseline justify-between gap-2 border-t border-sand pt-3">
+              <span className="relative mt-auto flex w-full items-baseline justify-between gap-2 border-t border-gold/25 pt-3">
                 <span className="text-[10px] tracking-[0.2em] text-muted uppercase">Desde</span>
                 <span className={`font-display text-lg leading-none transition-colors ${active ? 'text-gold-dark' : 'text-ink'}`}>
                   {formatPrice(startingPrice(id))}
@@ -136,7 +141,7 @@ function PlanPicker({ plans, selected, onChange }) {
               variants={staggerItem}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.98 }}
-              className="relative flex flex-col rounded-sm border border-sand bg-ivory p-5 text-left transition-shadow duration-300 hover:shadow-soft"
+              className="relative flex flex-col card-luxe p-5 text-left"
             >
               {active && <ActiveFrame layoutId="plan-frame" />}
               {plan.badge && (
@@ -164,7 +169,7 @@ function PlanPicker({ plans, selected, onChange }) {
                     transition={{ delay: 0.15 + i * 0.04 }}
                     className="flex gap-2"
                   >
-                    <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+                    <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" />
                     {item}
                   </motion.li>
                 ))}
@@ -190,7 +195,7 @@ function Includes({ items }) {
             transition={{ delay: 0.1 + i * 0.05 }}
             className="flex gap-2"
           >
-            <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+            <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" />
             {item}
           </motion.li>
         ))}
@@ -204,7 +209,7 @@ export function Radio({ active }) {
   return (
     <span
       className={`flex size-5 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
-        active ? 'border-gold bg-gold' : 'border-sand bg-white'
+        active ? 'border-gold bg-gold' : 'border-gold/25 bg-white'
       }`}
     >
       <AnimatePresence>

@@ -73,7 +73,7 @@ export const badgeLabels = {
 }
 
 export const highlightsIntro =
-  'Vajilla, mobiliario, sonido, cocina con asador y patio para fumadores vienen con el salón. A eso le sumás el servicio de mozos y, si querés, DJ, candy bar y aire acondicionado para armar la fiesta a tu medida.'
+  'Vajilla, sonido, cocina con asador y patio vienen con el salón. Tocá cada uno para ver el detalle.'
 
 export const highlightsNote =
   `Los mozos (1 hasta ${twoWaiters - 1} invitados, 2 desde ${twoWaiters} y 3 desde ${threeWaiters}) y el ayudante de cocina se cotizan aparte en todos los eventos, salvo en los premium, donde ya vienen incluidos.`

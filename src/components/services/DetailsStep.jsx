@@ -6,7 +6,7 @@ import { bookedShifts, isDayFull, isShiftBooked } from '../../utils/availability
 import { formatPrice, todayISO } from '../../utils/format'
 
 export const fieldClass =
-  'w-full rounded-sm border border-sand bg-white px-4 py-3 text-base text-ink transition-colors outline-none placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold'
+  'w-full rounded-sm border border-gold/25 bg-white px-4 py-3 text-base text-ink transition-colors outline-none placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold'
 const labelClass = 'mb-2 block text-[11px] font-semibold tracking-[0.2em] text-muted uppercase'
 
 // Paso 2: fecha, turno (según el régimen del evento) e invitados.
@@ -68,10 +68,10 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
                   whileTap={{ scale: booked ? 1 : 0.97 }}
                   className={`relative min-h-12 rounded-sm border px-3 py-2 text-center transition-colors duration-300 ${
                     booked
-                      ? 'border-sand bg-sand/40 text-muted'
+                      ? 'border-gold/25 bg-sand/40 text-muted'
                       : active
                         ? 'border-gold text-white'
-                        : 'border-sand bg-white text-ink hover:border-gold'
+                        : 'border-gold/25 bg-white text-ink hover:border-gold'
                   }`}
                 >
                   {active && (
@@ -137,7 +137,7 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
           transition={{ duration: 0.7 }}
           className="mt-0.5 shrink-0 origin-top"
         >
-          <ConciergeBell className="size-5 text-gold" />
+          <ConciergeBell className="size-5 text-gold-dark" />
         </motion.span>
         <p>
           {category?.staffIncluded ? (

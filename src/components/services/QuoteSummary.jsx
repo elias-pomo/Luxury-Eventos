@@ -28,7 +28,7 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
           <motion.span
             animate={{ rotate: [0, 12, -8, 0], scale: [1, 1.1, 1] }}
             transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.5 }}
-            className="flex size-12 items-center justify-center rounded-full border border-gold/40 text-gold"
+            className="flex size-12 items-center justify-center rounded-full border border-gold/40 text-gold-dark"
           >
             <Sparkles className="size-5" />
           </motion.span>
@@ -54,21 +54,21 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
 
           <ul className="mt-3 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-muted">
             <li className="flex items-center gap-1.5">
-              <Users className="size-3.5 text-gold" /> {guests} invitados
+              <Users className="size-3.5 text-gold-dark" /> {guests} invitados
             </li>
             {date && (
               <li className="flex items-center gap-1.5">
-                <CalendarDays className="size-3.5 text-gold" /> {formatDate(date)}
+                <CalendarDays className="size-3.5 text-gold-dark" /> {formatDate(date)}
               </li>
             )}
             {shift && (
               <li className="flex items-center gap-1.5">
-                <Clock className="size-3.5 text-gold" /> {shift.time}
+                <Clock className="size-3.5 text-gold-dark" /> {shift.time}
               </li>
             )}
           </ul>
 
-          <ul className="mt-6 space-y-3 border-t border-sand pt-5 text-sm">
+          <ul className="mt-6 space-y-3 border-t border-gold/25 pt-5 text-sm">
             <AnimatePresence initial={false}>
               {quote.lines.map(({ label, amount, included }) => (
                 <motion.li

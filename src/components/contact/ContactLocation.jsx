@@ -32,7 +32,7 @@ export default function ContactLocation() {
         <div className="mt-12 grid gap-6 lg:grid-cols-[3fr_2fr] lg:gap-8">
           <motion.div
             {...curtain()}
-            className="relative aspect-square overflow-hidden rounded-sm border border-sand bg-sand shadow-soft sm:aspect-video lg:aspect-auto lg:min-h-110"
+            className="card-luxe relative aspect-square overflow-hidden p-2 sm:aspect-video lg:aspect-auto lg:min-h-110"
           >
             <iframe
               src={site.address.mapsEmbedUrl}
@@ -40,11 +40,11 @@ export default function ContactLocation() {
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
-              className="absolute inset-0 size-full border-0"
+              className="absolute inset-2 h-[calc(100%-1rem)] w-[calc(100%-1rem)] border-0"
             />
           </motion.div>
 
-          <Reveal delay={0.15} className="flex flex-col rounded-sm border border-sand bg-ivory p-6 sm:p-8">
+          <Reveal delay={0.15} className="card-luxe relative flex flex-col p-6 sm:p-8">
             <div className="flex items-start gap-4">
               <span className="relative flex size-12 shrink-0 items-center justify-center rounded-full bg-gold text-white">
                 <span className="absolute inset-0 rounded-full bg-gold/50 motion-safe:animate-ping" />
@@ -57,7 +57,7 @@ export default function ContactLocation() {
               </div>
             </div>
 
-            <ol className="mt-6 space-y-3 border-t border-sand pt-6 text-sm text-muted">
+            <ol className="mt-6 space-y-3 border-t border-gold/25 pt-6 text-sm text-muted">
               {facadePhotos.map(({ label, caption }, i) => (
                 <li key={label} className="flex gap-3">
                   <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-gold/50 font-display text-sm text-gold-dark">
@@ -76,7 +76,7 @@ export default function ContactLocation() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-14 mb-5 flex items-center gap-3 text-xs tracking-[0.3em] text-gold uppercase">
+        <Reveal className="mt-14 mb-5 flex items-center gap-3 text-xs tracking-[0.3em] text-gold-dark uppercase">
           <span className="h-px w-8 bg-gold" /> Así se ve desde afuera
         </Reveal>
 

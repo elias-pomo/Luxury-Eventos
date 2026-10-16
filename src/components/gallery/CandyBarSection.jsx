@@ -37,7 +37,8 @@ export default function CandyBarSection({ id }) {
           <span aria-hidden className="absolute inset-y-6 left-6 w-px bg-gold/30 sm:inset-x-[16.6%] sm:inset-y-auto sm:top-6 sm:h-px sm:w-auto" />
           {candyBarSteps.map((step, i) => (
             <Reveal key={step.title} as="li" delay={i * 0.12} className="relative flex items-start gap-5 sm:block sm:text-center">
-              <span className="relative flex size-12 shrink-0 items-center justify-center rounded-full border border-gold bg-ivory font-display text-xl text-gold-dark sm:mx-auto">
+              <span className="relative flex size-12 shrink-0 items-center justify-center rounded-full border border-gold bg-white font-display text-xl text-gold-dark shadow-soft sm:mx-auto">
+                <span aria-hidden="true" className="animate-spin-slow absolute -inset-1.5 rounded-full border border-dashed border-gold/50" />
                 {pad(i + 1)}
               </span>
               <div className="pt-1 sm:pt-0">
@@ -75,7 +76,7 @@ function CandyBarRow({ candyBar, index, onOpen }) {
       </div>
 
       <Reveal delay={0.1}>
-        <span className="font-display text-5xl leading-none text-gold-gradient sm:text-7xl">{pad(index + 1)}</span>
+        <span className="font-display text-5xl leading-none text-gold-shimmer sm:text-7xl">{pad(index + 1)}</span>
         <span className="mt-4 block text-[11px] tracking-[0.35em] text-gold-dark uppercase">Candy bar</span>
         <h3 className="mt-2 text-4xl sm:text-5xl">{candyBar.name}</h3>
         <span className="mt-5 block h-px w-16 bg-gold" />
@@ -86,10 +87,10 @@ function CandyBarRow({ candyBar, index, onOpen }) {
           {candyBar.idealFor}
         </p>
 
-        <ul className="mt-6 space-y-3 border-t border-sand pt-6">
+        <ul className="mt-6 space-y-3 border-t border-gold/25 pt-6">
           {candyBar.includes.map((item) => (
             <li key={item} className="flex items-start gap-3 text-sm text-ink">
-              <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+              <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" />
               {item}
             </li>
           ))}

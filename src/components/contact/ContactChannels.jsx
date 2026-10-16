@@ -41,13 +41,13 @@ export default function ContactChannels() {
                 <a
                   href={href}
                   {...(call ? { onClick: () => track('call_click', { origen: 'contacto' }) } : { target: '_blank', rel: 'noopener noreferrer' })}
-                  className={`group flex min-h-16 items-center gap-4 rounded-sm border px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-soft active:scale-[0.99] sm:px-5 ${
-                    featured ? 'border-ink bg-ink text-white' : 'border-sand bg-ivory hover:border-gold'
+                  className={`group relative card-luxe card-luxe-sm flex min-h-16 items-center gap-4 px-4 py-3 hover:-translate-y-0.5 active:scale-[0.99] sm:px-5 ${
+                    featured ? 'card-luxe-dark text-white' : ''
                   }`}
                 >
                   <span
                     className={`flex size-11 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-                      featured ? 'bg-gold text-white' : 'border border-gold/40 text-gold group-hover:bg-gold group-hover:text-white'
+                      featured ? 'bg-gold text-white' : 'border border-gold/40 text-gold-dark group-hover:bg-gold group-hover:text-white'
                     }`}
                   >
                     <Icon className="size-5" />
@@ -60,7 +60,7 @@ export default function ContactChannels() {
                   </span>
                   <ArrowUpRight
                     className={`size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
-                      featured ? 'text-gold-light' : 'text-gold'
+                      featured ? 'text-gold-light' : 'text-gold-dark'
                     }`}
                   />
                 </a>
@@ -68,8 +68,8 @@ export default function ContactChannels() {
             ))}
           </ul>
 
-          <Reveal delay={0.3} className="mt-6 flex gap-4 rounded-sm border border-dashed border-gold/50 px-4 py-4 sm:px-5">
-            <Clock className="mt-0.5 size-5 shrink-0 text-gold" />
+          <Reveal delay={0.3} className="card-luxe card-luxe-sm relative mt-6 flex gap-4 px-4 py-4 sm:px-5">
+            <Clock className="mt-0.5 size-5 shrink-0 text-gold-dark" />
             <div className="text-sm">
               <p className="font-semibold text-ink">Turnos de eventos</p>
               {Object.values(site.shiftSchedules).map(({ label, shifts }) => (

@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react'
 import { reviews } from '../../data/reviews'
 import SectionTitle from '../ui/SectionTitle'
 import Reveal from '../ui/Reveal'
+import Sparkles from '../ui/Sparkles'
 
 const AUTOPLAY_MS = 6000
 
@@ -34,11 +35,22 @@ export default function Testimonials() {
 
         <Reveal delay={0.1}>
           <div
-            className="relative mx-auto mt-14 max-w-3xl"
+            className="card-luxe relative mx-auto mt-16 max-w-3xl px-6 pt-14 pb-10 sm:px-12"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-                        <Quote className="mx-auto mb-4 size-10 text-gold/40" strokeWidth={1} />
+                        {/* Sello con comillas montado sobre el borde superior de la tarjeta */}
+            <div className="absolute -top-8 left-1/2 z-10 -translate-x-1/2">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.6, rotate: -12 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="flex size-16 items-center justify-center rounded-full border-4 border-ivory bg-ink text-gold-light shadow-soft"
+              >
+                <Quote className="size-6" strokeWidth={1.5} />
+              </motion.div>
+            </div>
 
             <div className="relative min-h-64 sm:min-h-52">
               <AnimatePresence mode="wait" custom={direction}>
@@ -58,7 +70,7 @@ export default function Testimonials() {
                   }}
                   className="flex cursor-grab flex-col items-center text-center active:cursor-grabbing"
                 >
-                  <div className="flex gap-1 text-gold" aria-label={`${review.rating} de 5 estrellas`}>
+                  <div className="flex gap-1 text-gold-dark" aria-label={`${review.rating} de 5 estrellas`}>
                     {Array.from({ length: 5 }, (_, i) => (
                       <Star key={i} className="size-4" fill={i < review.rating ? 'currentColor' : 'none'} />
                     ))}

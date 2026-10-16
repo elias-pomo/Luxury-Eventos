@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/index.css"
+        ],
+        "createdAt": "2026-10-16T15:59:48.289Z",
+        "reason": "user chose to return to the gold gradient/shimmer brand design after rejecting the flat redesign (2026-10-16)"
+      }
+    ]
+  }
+}

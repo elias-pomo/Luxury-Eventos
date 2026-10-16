@@ -10,7 +10,7 @@ import Button from '../ui/Button'
 const empty = { name: '', date: '', message: '' }
 
 const field =
-  'w-full rounded-sm border border-sand bg-white px-4 py-3 text-base text-ink transition-colors outline-none placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold'
+  'w-full rounded-sm border border-gold/25 bg-white px-4 py-3 text-base text-ink transition-colors outline-none placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold'
 
 // Formulario de consulta breve: no envía nada a un servidor, arma el mensaje y
 // abre WhatsApp. El detalle del evento (tipo, extras, invitados) va en el cotizador de Servicios.
@@ -35,7 +35,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="rounded-sm border border-sand bg-ivory p-5 shadow-soft sm:p-8">
+    <form onSubmit={onSubmit} noValidate className="card-luxe relative p-5 sm:p-8">
       <h3 className="text-3xl">{contactForm.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted">{contactForm.subtitle}</p>
 

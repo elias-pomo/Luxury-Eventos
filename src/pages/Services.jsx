@@ -126,7 +126,7 @@ export default function Services() {
         image={images.party}
       />
 
-      <section className="bg-luxe py-14 sm:py-24">
+      <section className="bg-luxe-cream py-14 sm:py-24">
         <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-14">
           <div className="space-y-10">
             <Step number={1} title="¿Qué vas a festejar?" subtitle="Elegí el tipo de evento para ver qué incluye y su precio.">

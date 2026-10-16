@@ -4,6 +4,7 @@ import { useInView, useReducedMotion } from 'motion/react'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { eventTypes } from '../../data/events'
 import Button from '../ui/Button'
+import Photo from '../ui/Photo'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
 
@@ -85,27 +86,43 @@ export default function ServicesPreview() {
             aria-roledescription="carrusel"
             aria-label="Tipos de evento"
           >
-            {eventTypes.map(({ id, name, short, icon: Icon }, i) => (
+            {eventTypes.map(({ id, name, short, photo, icon: Icon }, i) => (
               <Link
                 key={id}
                 to={`/servicios?tipo=${id}`}
                 aria-label={`${name}: cotizar evento`}
-                className="group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-sm border border-sand bg-ivory p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold hover:shadow-soft sm:w-[calc((100%-1.5rem)/2)] sm:p-10 lg:w-[calc((100%-3rem)/3)]"
+                className="group card-luxe card-luxe-arch relative flex w-[85%] shrink-0 snap-start flex-col p-3 text-center hover:-translate-y-1 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
               >
-                <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
-                <span className="absolute top-6 right-8 font-display text-5xl text-gold/20 transition-colors duration-500 group-hover:text-gold/40">
-                  {pad(i + 1)}
-                </span>
+                {/* Foto en arco, como el motivo del salón */}
+                <div className="relative aspect-4/3 overflow-hidden rounded-t-full bg-sand">
+                  <Photo
+                    image={photo}
+                    className="size-full transition-transform duration-[1.4s] ease-out group-hover:scale-110"
+                  />
+                  <span className="absolute inset-0 bg-linear-to-t from-ink/55 via-transparent to-transparent" />
+                  <span className="absolute right-4 bottom-2 font-display text-4xl text-white/85 italic drop-shadow">
+                    {pad(i + 1)}
+                  </span>
+                </div>
 
-                <div className="flex size-16 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors duration-500 group-hover:bg-gold group-hover:text-white">
+                {/* Sello del ícono montado sobre la foto */}
+                <div className="relative z-10 mx-auto -mt-8 flex size-16 items-center justify-center rounded-full border-4 border-white bg-ink text-gold-light shadow-soft transition-transform duration-500 group-hover:-rotate-12">
                   <Icon className="size-7" strokeWidth={1.3} />
                 </div>
-                <h3 className="mt-8 text-3xl leading-tight">{name}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{short}</p>
-                <span className="mt-8 inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.2em] text-gold-dark uppercase">
-                  Cotizar
-                  <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
+
+                <div className="flex flex-1 flex-col px-4 pb-5 sm:px-6">
+                  <h3 className="mt-4 text-3xl leading-tight">{name}</h3>
+                  <span aria-hidden="true" className="mx-auto mt-3 flex items-center gap-2 text-gold">
+                    <span className="h-px w-6 bg-gold/60 transition-all duration-500 group-hover:w-10" />
+                    <span className="size-1.5 rotate-45 bg-gold" />
+                    <span className="h-px w-6 bg-gold/60 transition-all duration-500 group-hover:w-10" />
+                  </span>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{short}</p>
+                  <span className="mt-6 inline-flex items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.2em] text-gold-dark uppercase">
+                    Cotizar
+                    <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </div>
               </Link>
             ))}
           </div>

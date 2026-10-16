@@ -5,8 +5,8 @@ export const pricesUpdatedAt = 'octubre de 2026'
 
 // Personal del salón (se trabaja solo con personal propio).
 export const staff = {
-  // 1 mozo hasta 39 invitados, 2 desde 40 y 3 desde 80 (máximo 3).
-  waiter: { name: 'Mozo', price: 30000, thresholds: [40, 80] },
+  // 1 mozo hasta 30 invitados, 2 desde 31 y 3 desde 61 (máximo 3).
+  waiter: { name: 'Mozo', price: 30000, thresholds: [31, 61] },
   // Uno por evento, sin importar la cantidad de invitados.
   kitchenHelper: { name: 'Ayudante de cocina', price: 30000 },
 }

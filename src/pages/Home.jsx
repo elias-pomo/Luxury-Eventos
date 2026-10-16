@@ -1,4 +1,5 @@
 import Hero from '../components/home/Hero'
+import EventsMarquee from '../components/home/EventsMarquee'
 import About from '../components/home/About'
 import Highlights from '../components/home/Highlights'
 import GalleryPreview from '../components/home/GalleryPreview'
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <EventsMarquee />
       <About />
       <Highlights />
       <GalleryPreview />

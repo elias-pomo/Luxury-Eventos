@@ -42,13 +42,13 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
                   onClick={() => onChange({ [id]: !active })}
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`relative flex w-full items-center gap-4 overflow-hidden rounded-sm border px-4 py-4 text-left transition-[border-color,background-color,box-shadow] duration-500 sm:px-5 ${
-                    active ? 'border-gold bg-gold/[0.07] shadow-gold' : 'border-sand bg-ivory hover:shadow-soft'
+                  className={`relative flex w-full items-center gap-4 overflow-hidden card-luxe card-luxe-sm px-4 py-4 text-left sm:px-5 ${
+                    active ? 'border-gold! bg-gold/[0.08]! shadow-gold!' : ''
                   }`}
                 >
                   <span
                     className={`flex size-11 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 ${
-                      active ? 'border-gold bg-gold text-white' : 'border-gold/40 text-gold'
+                      active ? 'border-gold bg-gold text-white' : 'border-gold/40 text-gold-dark'
                     }`}
                   >
                     <motion.span animate={active ? activeMotion : { rotate: 0, y: 0 }} className="flex">
@@ -96,7 +96,7 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
             className="overflow-hidden"
           >
             <div className="bg-luxe-cream flex flex-col gap-3 rounded-sm border border-gold/50 px-5 py-4 text-sm text-muted sm:flex-row sm:items-center">
-              <Sparkles className="hidden size-5 shrink-0 text-gold sm:block" />
+              <Sparkles className="hidden size-5 shrink-0 text-gold-dark sm:block" />
               <p className="flex-1">
                 Por el mismo precio, el <span className="font-semibold text-gold-dark">{luxury.name}</span> incluye el DJ del
                 salón con equipamiento completo.
@@ -145,7 +145,7 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
                   variants={staggerItem}
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="relative flex items-start gap-3 rounded-sm border border-sand bg-ivory px-4 py-3.5 text-left transition-shadow duration-300 hover:shadow-soft"
+                  className="relative flex items-start gap-3 card-luxe card-luxe-sm px-4 py-3.5 text-left"
                 >
                   {active && <ActiveFrame layoutId="candy-frame" />}
                   <span className="relative mt-1">
