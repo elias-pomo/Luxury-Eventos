@@ -60,7 +60,7 @@ export const highlights = [
   {
     icon: Candy,
     title: 'Candy bar',
-    text: 'Una mesa dulce exclusiva del salón, ambientada a tono con tu temática, en tres estilos para elegir.',
+    text: 'Una mesa dulce exclusiva del salón, ambientada a tono con tu temática, en cuatro tamaños para elegir.',
     badge: 'optional',
   },
 ]

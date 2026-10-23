@@ -2,8 +2,9 @@ import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import Sparkles from './Sparkles'
 import SplitText from './SplitText'
+import Ornament from './Ornament'
+import { ease } from '../../utils/motion'
 
-const ease = [0.22, 1, 0.36, 1]
 
 // Encabezado de las páginas internas (Galería, Servicios, Contacto), con el mismo
 // lenguaje que la portada: foto con zoom lento y parallax, destellos, título que sube
@@ -44,7 +45,7 @@ export default function PageHeader({ eyebrow, title, subtitle, image }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease }}
-            className="flex items-center justify-center gap-4 text-xs font-semibold tracking-[0.4em] text-gold-light uppercase"
+            className="flex items-center justify-center gap-4 type-eyebrow text-gold-light"
           >
             <motion.span
               aria-hidden="true"
@@ -72,11 +73,9 @@ export default function PageHeader({ eyebrow, title, subtitle, image }) {
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.7, ease }}
-          className="mx-auto mt-5 flex w-max items-center gap-2"
+          className="mt-5 block"
         >
-          <span className="h-px w-8 bg-gold/70" />
-          <span className="size-1.5 rotate-45 bg-gold-light" />
-          <span className="h-px w-8 bg-gold/70" />
+          <Ornament light />
         </motion.span>
         {subtitle && (
           <motion.p

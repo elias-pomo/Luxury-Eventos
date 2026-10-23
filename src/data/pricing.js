@@ -97,9 +97,10 @@ export const extras = {
 }
 
 export const candyBarPrices = {
-  clasico: 75000,
-  tematico: 100000,
-  premium: 150000,
+  pequeno: 75000,
+  mediano: 125000,
+  grande: 150000,
+  completo: 200000,
 }
 
 // Aclaraciones que se muestran junto al total.

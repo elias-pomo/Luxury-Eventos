@@ -1,24 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useInView, useReducedMotion } from 'motion/react'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { eventTypes } from '../../data/events'
 import Button from '../ui/Button'
 import Photo from '../ui/Photo'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
+import Section from '../ui/Section'
+import Ornament from '../ui/Ornament'
 
-const AUTOPLAY_MS = 5000
 const pad = (n) => String(n).padStart(2, '0')
 
 export default function ServicesPreview() {
-  const sectionRef = useRef(null)
   const trackRef = useRef(null)
   const [active, setActive] = useState(0)
   const [maxIndex, setMaxIndex] = useState(eventTypes.length - 1)
-  const [paused, setPaused] = useState(false)
-  const reduceMotion = useReducedMotion()
-  const inView = useInView(sectionRef, { amount: 0.4 })
 
   // Distancia entre el inicio de una tarjeta y la siguiente (ancho + gap).
   const getStep = () => {
@@ -50,16 +46,10 @@ export default function ServicesPreview() {
     }
   }, [])
 
-  useEffect(() => {
-    if (paused || reduceMotion || !inView) return
-    const id = setInterval(() => scrollToIndex(active >= maxIndex ? 0 : active + 1), AUTOPLAY_MS)
-    return () => clearInterval(id)
-  }, [active, maxIndex, paused, reduceMotion, inView, scrollToIndex])
-
   const current = Math.min(active, maxIndex)
 
   return (
-    <section ref={sectionRef} className="bg-luxe-cream overflow-hidden py-24 sm:py-32">
+    <Section tone="cream" className="overflow-hidden">
       <div className="container-page">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionTitle
@@ -78,10 +68,6 @@ export default function ServicesPreview() {
         <Reveal delay={0.1}>
           <div
             ref={trackRef}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            onTouchStart={() => setPaused(true)}
-            onFocus={() => setPaused(true)}
             className="no-scrollbar relative mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto pt-2 pb-4"
             aria-roledescription="carrusel"
             aria-label="Tipos de evento"
@@ -112,13 +98,9 @@ export default function ServicesPreview() {
 
                 <div className="flex flex-1 flex-col px-4 pb-5 sm:px-6">
                   <h3 className="mt-4 text-3xl leading-tight">{name}</h3>
-                  <span aria-hidden="true" className="mx-auto mt-3 flex items-center gap-2 text-gold">
-                    <span className="h-px w-6 bg-gold/60 transition-all duration-500 group-hover:w-10" />
-                    <span className="size-1.5 rotate-45 bg-gold" />
-                    <span className="h-px w-6 bg-gold/60 transition-all duration-500 group-hover:w-10" />
-                  </span>
+                  <Ornament grow className="mt-3" />
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{short}</p>
-                  <span className="mt-6 inline-flex items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.2em] text-gold-dark uppercase">
+                  <span className="mt-6 inline-flex items-center justify-center gap-2 type-label text-gold-dark">
                     Cotizar
                     <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
@@ -156,7 +138,7 @@ export default function ServicesPreview() {
           <Button to="/servicios">Armá tu evento</Button>
         </Reveal>
       </div>
-    </section>
+    </Section>
   )
 }
 
@@ -165,7 +147,7 @@ function ArrowButton({ direction, ...props }) {
   return (
     <button
       aria-label={direction === 'prev' ? 'Anterior' : 'Siguiente'}
-      className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold-dark transition-colors hover:bg-gold hover:text-white disabled:pointer-events-none disabled:opacity-30"
+      className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold-dark transition-colors hover:bg-gold hover:text-ink disabled:pointer-events-none disabled:opacity-30"
       {...props}
     >
       <Icon className="size-5" />

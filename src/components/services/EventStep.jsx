@@ -4,8 +4,8 @@ import { eventTypes } from '../../data/events'
 import { formatPrice } from '../../utils/format'
 import { findCategory, startingPrice } from '../../utils/quote'
 import ActiveFrame, { inViewOnce, staggerGroup, staggerItem } from './ActiveFrame'
+import { ease } from '../../utils/motion'
 
-const ease = [0.22, 1, 0.36, 1]
 // Pequeño salto del ícono al elegir una opción.
 const pop = { scale: [1, 1.25, 1], rotate: [0, -10, 8, 0], transition: { duration: 0.5 } }
 
@@ -53,7 +53,7 @@ export default function EventStep({ eventId, plan, onEventChange, onPlanChange }
               <motion.span
                 animate={active ? pop : { scale: 1, rotate: 0 }}
                 className={`relative flex size-10 items-center justify-center rounded-full border transition-colors duration-300 ${
-                  active ? 'border-gold bg-gold text-white' : 'border-gold/40 text-gold-dark group-hover:bg-gold/10'
+                  active ? 'border-gold bg-gold text-ink' : 'border-gold/40 text-gold-dark group-hover:bg-gold/10'
                 }`}
               >
                 <Icon className="size-5" strokeWidth={1.5} />
@@ -62,7 +62,7 @@ export default function EventStep({ eventId, plan, onEventChange, onPlanChange }
               <span className="relative mt-3 font-display text-xl leading-tight">{name}</span>
               <span className="relative mt-0.5 font-display text-sm text-gold-dark italic">{tagline}</span>
 
-              <ul className="relative mt-3 mb-4 space-y-1.5 text-[11px] leading-snug text-muted sm:text-xs">
+              <ul className="relative mt-3 mb-4 space-y-1.5 text-xs leading-snug text-muted">
                 {perks.map((perk) => (
                   <li key={perk} className="flex gap-1.5">
                     <Check className="mt-px size-3 shrink-0 text-gold-dark" strokeWidth={2.5} />
@@ -72,7 +72,7 @@ export default function EventStep({ eventId, plan, onEventChange, onPlanChange }
               </ul>
 
               <span className="relative mt-auto flex w-full items-baseline justify-between gap-2 border-t border-gold/25 pt-3">
-                <span className="text-[10px] tracking-[0.2em] text-muted uppercase">Desde</span>
+                <span className="type-label text-muted">Desde</span>
                 <span className={`font-display text-lg leading-none transition-colors ${active ? 'text-gold-dark' : 'text-ink'}`}>
                   {formatPrice(startingPrice(id))}
                 </span>
@@ -84,7 +84,7 @@ export default function EventStep({ eventId, plan, onEventChange, onPlanChange }
                     animate={{ scale: 1, rotate: 0 }}
                     exit={{ scale: 0 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-                    className="absolute top-3 right-3 flex size-6 items-center justify-center rounded-full bg-gold text-white"
+                    className="absolute top-3 right-3 flex size-6 items-center justify-center rounded-full bg-gold text-ink"
                   >
                     <Check className="size-3.5" strokeWidth={3} />
                   </motion.span>
@@ -120,7 +120,7 @@ export default function EventStep({ eventId, plan, onEventChange, onPlanChange }
 function PlanPicker({ plans, selected, onChange }) {
   return (
     <div id="elegi-tu-plan" className="scroll-mt-28">
-      <p className="mb-4 text-[11px] font-semibold tracking-[0.2em] text-muted uppercase">Elegí tu plan</p>
+      <p className="mb-4 type-label text-muted">Elegí tu plan</p>
       <motion.div
         role="radiogroup"
         aria-label="Plan"
@@ -145,10 +145,10 @@ function PlanPicker({ plans, selected, onChange }) {
             >
               {active && <ActiveFrame layoutId="plan-frame" />}
               {plan.badge && (
-                <span className="absolute -top-3 right-4 flex items-center gap-1 overflow-hidden rounded-full bg-linear-to-r from-gold-dark via-gold to-gold-dark px-3 py-1 text-[10px] font-semibold tracking-[0.15em] text-white uppercase shadow-gold">
+                <span className="absolute -top-3 right-4 flex items-center gap-1 overflow-hidden rounded-full bg-ink px-3 py-1 type-label text-gold-light shadow-gold">
                   <motion.span
                     animate={{ rotate: [0, 15, -10, 0], scale: [1, 1.2, 1] }}
-                    transition={{ duration: 1.6, repeat: Infinity, repeatDelay: 2.5 }}
+                    transition={{ duration: 1.6, delay: 0.4 }}
                   >
                     <Sparkles className="size-3" />
                   </motion.span>
@@ -185,7 +185,7 @@ function PlanPicker({ plans, selected, onChange }) {
 function Includes({ items }) {
   return (
     <div className="rounded-sm border border-gold/30 bg-cream/50 p-5">
-      <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark uppercase">El salón incluye</p>
+      <p className="type-label text-gold-dark">El salón incluye</p>
       <ul className="mt-3 grid gap-2 text-sm text-ink sm:grid-cols-2">
         {items.map((item, i) => (
           <motion.li

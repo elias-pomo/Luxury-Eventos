@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { ease } from '../../utils/motion'
 
 // Visor de fotos a pantalla completa. `photos`: [{ image, caption, label }].
 // `index` null = cerrado. Se monta en <body> para que ningún ancestro con
@@ -57,7 +58,7 @@ export default function Lightbox({ photos, index, onClose, onChange }) {
           className="fixed inset-0 z-[60] flex flex-col bg-ink/95 backdrop-blur-sm"
         >
           <div className="flex items-center justify-between px-4 py-4 text-white/70 sm:px-8">
-            <span className="text-xs tracking-[0.3em] uppercase">
+            <span className="type-eyebrow">
               {index + 1} / {photos.length}
             </span>
             <button
@@ -79,7 +80,7 @@ export default function Lightbox({ photos, index, onClose, onChange }) {
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.3, ease: ease }}
                 drag={multiple ? 'x' : false}
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.3}
@@ -108,7 +109,7 @@ export default function Lightbox({ photos, index, onClose, onChange }) {
           >
             {multiple && <MobileNavButton onClick={() => go(-1)} label="Foto anterior" icon={ChevronLeft} />}
             <div className="min-w-0 flex-1 text-center sm:flex-none">
-              {photo.label && <p className="text-[11px] tracking-[0.3em] text-gold-light uppercase">{photo.label}</p>}
+              {photo.label && <p className="type-eyebrow text-gold-light">{photo.label}</p>}
               {photo.caption && <p className="mt-2 font-display text-xl text-white sm:text-2xl">{photo.caption}</p>}
             </div>
             {multiple && <MobileNavButton onClick={() => go(1)} label="Foto siguiente" icon={ChevronRight} />}
@@ -125,7 +126,7 @@ function MobileNavButton({ onClick, label, icon: Icon }) {
     <button
       onClick={onClick}
       aria-label={label}
-      className="flex size-12 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/80 active:bg-gold active:text-white sm:hidden"
+      className="flex size-12 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/80 active:bg-gold active:text-ink sm:hidden"
     >
       <Icon className="size-6" />
     </button>
@@ -141,7 +142,7 @@ function NavButton({ side, onClick, label }) {
         onClick()
       }}
       aria-label={label}
-      className={`absolute top-1/2 hidden size-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors hover:border-gold hover:bg-gold hover:text-white sm:flex ${
+      className={`absolute top-1/2 hidden size-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors hover:border-gold hover:bg-gold hover:text-ink sm:flex ${
         side === 'left' ? 'left-4' : 'right-4'
       }`}
     >

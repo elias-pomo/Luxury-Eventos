@@ -8,8 +8,9 @@ import Button from '../ui/Button'
 import Photo from '../ui/Photo'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
+import { ease } from '../../utils/motion'
+import Section from '../ui/Section'
 
-const ease = [0.22, 1, 0.36, 1]
 
 export default function ContactLocation() {
   const [open, setOpen] = useState(null)
@@ -25,7 +26,7 @@ export default function ContactLocation() {
   })
 
   return (
-    <section id="como-llegar" className="bg-luxe scroll-mt-20 py-20 sm:py-28">
+    <Section id="como-llegar" tone="light" className="scroll-mt-20">
       <div className="container-page">
         <SectionTitle eyebrow="Cómo llegar" title="Te esperamos en El Colmenar" subtitle={contactLocation.subtitle} />
 
@@ -46,12 +47,12 @@ export default function ContactLocation() {
 
           <Reveal delay={0.15} className="card-luxe relative flex flex-col p-6 sm:p-8">
             <div className="flex items-start gap-4">
-              <span className="relative flex size-12 shrink-0 items-center justify-center rounded-full bg-gold text-white">
+              <span className="relative flex size-12 shrink-0 items-center justify-center rounded-full bg-gold text-ink">
                 <span className="absolute inset-0 rounded-full bg-gold/50 motion-safe:animate-ping" />
                 <MapPin className="relative size-5" />
               </span>
               <div>
-                <p className="text-[11px] tracking-[0.2em] text-muted uppercase">Dirección</p>
+                <p className="type-label text-muted">Dirección</p>
                 <p className="mt-1 font-display text-2xl leading-tight">{site.address.street}</p>
                 <p className="text-sm text-muted">{site.address.city}</p>
               </div>
@@ -76,7 +77,7 @@ export default function ContactLocation() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-14 mb-5 flex items-center gap-3 text-xs tracking-[0.3em] text-gold-dark uppercase">
+        <Reveal className="mt-14 mb-5 flex items-center gap-3 type-eyebrow text-gold-dark">
           <span className="h-px w-8 bg-gold" /> Así se ve desde afuera
         </Reveal>
 
@@ -94,7 +95,7 @@ export default function ContactLocation() {
                   className="size-full transition-transform duration-[1.4s] ease-out group-hover:scale-110"
                 />
                 <span className="absolute inset-0 flex flex-col items-start justify-end bg-linear-to-t from-ink/80 via-ink/10 to-transparent p-4 text-left">
-                  <span className="text-[10px] tracking-[0.3em] text-gold-light uppercase">
+                  <span className="type-eyebrow text-gold-light">
                     {i + 1}. {photo.label}
                   </span>
                   <span className="mt-1 font-display text-lg text-white">{photo.caption}</span>
@@ -109,6 +110,6 @@ export default function ContactLocation() {
       </div>
 
       <Lightbox photos={facadePhotos} index={open} onClose={() => setOpen(null)} onChange={setOpen} />
-    </section>
+    </Section>
   )
 }

@@ -6,6 +6,7 @@ import GalleryPreview from '../components/home/GalleryPreview'
 import ServicesPreview from '../components/home/ServicesPreview'
 import Testimonials from '../components/home/Testimonials'
 import CtaBanner from '../components/home/CtaBanner'
+import { reviewsReady } from '../data/reviews'
 import { usePageTitle } from '../utils/usePageTitle'
 
 export default function Home() {
@@ -15,10 +16,10 @@ export default function Home() {
       <Hero />
       <EventsMarquee />
       <About />
-      <Highlights />
-      <GalleryPreview />
       <ServicesPreview />
-      <Testimonials />
+      <GalleryPreview />
+      <Highlights />
+      {reviewsReady && <Testimonials />}
       <CtaBanner />
     </>
   )

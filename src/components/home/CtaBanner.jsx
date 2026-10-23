@@ -28,7 +28,7 @@ export default function CtaBanner() {
       <Sparkles />
 
       <Reveal className="container-page relative z-10 flex flex-col items-center text-center text-white">
-        <span className="mb-5 text-xs tracking-[0.4em] text-gold-light uppercase">Reservá tu fecha</span>
+        <span className="mb-5 type-eyebrow text-gold-light">Reservá tu fecha</span>
         <h2 className="max-w-3xl text-4xl leading-tight sm:text-6xl">
           ¿Tenés una fecha en mente? <em className="text-gold-shimmer">Hagámosla realidad</em>
         </h2>
@@ -36,10 +36,10 @@ export default function CtaBanner() {
           Armá tu presupuesto online en pocos minutos o escribinos para consultar disponibilidad y coordinar una
           visita al salón. Te respondemos todos los días.
         </p>
-        <div className="mt-8 flex flex-col gap-3 text-xs tracking-[0.2em] text-gold-light uppercase sm:flex-row sm:gap-10">
+        <div className="mt-8 flex flex-col gap-3 type-label text-gold-light sm:flex-row sm:gap-10">
           {Object.values(site.shiftSchedules).map(({ label, shifts }) => (
             <p key={label}>
-              <span className="block text-[10px] tracking-[0.25em] text-white/60">{label}</span>
+              <span className="block text-xs tracking-[0.16em] text-white/60">{label}</span>
               <span className="mt-1 block">{shifts.map((s) => s.time).join(' · ')}</span>
             </p>
           ))}

@@ -23,7 +23,7 @@ export default function MobileTotalBar({ total, visible, onView }) {
             <button
               type="button"
               onClick={onView}
-              className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded-full bg-gold px-4 text-[11px] font-semibold tracking-[0.1em] whitespace-nowrap text-white uppercase shadow-gold"
+              className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded-full bg-gold px-4 text-[11px] font-semibold tracking-[0.1em] whitespace-nowrap text-ink uppercase shadow-gold"
             >
               Ver presupuesto <ChevronDown className="size-4" />
             </button>

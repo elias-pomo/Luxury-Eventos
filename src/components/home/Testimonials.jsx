@@ -1,31 +1,25 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react'
 import { reviews } from '../../data/reviews'
 import SectionTitle from '../ui/SectionTitle'
 import Reveal from '../ui/Reveal'
 import Sparkles from '../ui/Sparkles'
-
-const AUTOPLAY_MS = 6000
+import { ease } from '../../utils/motion'
+import Section from '../ui/Section'
+import Card from '../ui/Card'
 
 export default function Testimonials() {
   const [[index, direction], setSlide] = useState([0, 1])
-  const [paused, setPaused] = useState(false)
 
   const go = useCallback((step) => {
     setSlide(([i]) => [(i + step + reviews.length) % reviews.length, step])
   }, [])
 
-  useEffect(() => {
-    if (paused) return
-    const id = setInterval(() => go(1), AUTOPLAY_MS)
-    return () => clearInterval(id)
-  }, [paused, go, index])
-
   const review = reviews[index]
 
   return (
-    <section className="bg-luxe-center overflow-hidden py-24 sm:py-32">
+    <Section tone="light" className="overflow-hidden">
       <div className="container-page">
         <SectionTitle
           eyebrow="Reseñas"
@@ -34,18 +28,14 @@ export default function Testimonials() {
         />
 
         <Reveal delay={0.1}>
-          <div
-            className="card-luxe relative mx-auto mt-16 max-w-3xl px-6 pt-14 pb-10 sm:px-12"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
+          <Card className="mx-auto mt-16 max-w-3xl px-6 pt-14 pb-10 sm:px-12">
                         {/* Sello con comillas montado sobre el borde superior de la tarjeta */}
             <div className="absolute -top-8 left-1/2 z-10 -translate-x-1/2">
               <motion.div
                 initial={{ opacity: 0, scale: 0.6, rotate: -12 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.9, ease: ease }}
                 className="flex size-16 items-center justify-center rounded-full border-4 border-ivory bg-ink text-gold-light shadow-soft"
               >
                 <Quote className="size-6" strokeWidth={1.5} />
@@ -60,7 +50,7 @@ export default function Testimonials() {
                   initial={{ opacity: 0, x: direction * 40 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: direction * -40 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.5, ease: ease }}
                   drag="x"
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={0.2}
@@ -80,7 +70,7 @@ export default function Testimonials() {
                   </blockquote>
                   <figcaption className="mt-8">
                     <p className="text-sm font-semibold tracking-wide text-ink">{review.name}</p>
-                    <p className="mt-1 text-[11px] tracking-[0.25em] text-gold-dark uppercase">{review.event}</p>
+                    <p className="mt-1 type-label text-gold-dark">{review.event}</p>
                   </figcaption>
                 </motion.figure>
               </AnimatePresence>
@@ -90,7 +80,7 @@ export default function Testimonials() {
               <button
                 onClick={() => go(-1)}
                 aria-label="Reseña anterior"
-                className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold-dark transition-colors hover:bg-gold hover:text-white"
+                className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold-dark transition-colors hover:bg-gold hover:text-ink"
               >
                 <ChevronLeft className="size-5" />
               </button>
@@ -112,14 +102,14 @@ export default function Testimonials() {
               <button
                 onClick={() => go(1)}
                 aria-label="Reseña siguiente"
-                className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold-dark transition-colors hover:bg-gold hover:text-white"
+                className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold-dark transition-colors hover:bg-gold hover:text-ink"
               >
                 <ChevronRight className="size-5" />
               </button>
             </div>
-          </div>
+          </Card>
         </Reveal>
       </div>
-    </section>
+    </Section>
   )
 }

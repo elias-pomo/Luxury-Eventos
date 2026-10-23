@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react'
+import { Fragment, useState } from 'react'
+import { motion, useReducedMotion } from 'motion/react'
 import { ArrowRight, Check, Images } from 'lucide-react'
 import { candyBars, candyBarSteps } from '../../data/candybar'
 import { candyBarPrices } from '../../data/pricing'
@@ -8,49 +8,50 @@ import Button from '../ui/Button'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
 import Lightbox from './Lightbox'
+import { ease } from '../../utils/motion'
+import Section from '../ui/Section'
+import Ornament from '../ui/Ornament'
 
-const ease = [0.22, 1, 0.36, 1]
-
-// Candy bar compacto: los 3 pasos en una fila y los estilos en tarjetas en arco
-// (carrusel deslizable en celular, tres columnas en escritorio). Cada tarjeta alterna
-// sus fotos sola mientras está a la vista.
+// Candy bar: los pasos en una línea y cada estilo como un boleto de feria (talón con la
+// foto, perforación y el detalle). Todo sale de data/candybar.js y candyBarPrices.
 export default function CandyBarShowcase({ id }) {
   const [lightbox, setLightbox] = useState(null) // { photos, index }
 
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="bg-luxe-cream scroll-mt-20 overflow-hidden py-16 sm:py-24">
+    <Section id={id} aria-labelledby={`${id}-title`} tone="light" className="scroll-mt-20 overflow-x-clip">
       <div className="container-page">
         <SectionTitle
           eyebrow="Candy bar"
           title="Una mesa dulce para cada fiesta"
-          subtitle="Exclusivo del salón y armado a tono con tu temática. Elegí el estilo y sumalo en el cotizador."
+          subtitle="Exclusivo del salón y armado a tono con tu temática. Elegí el tamaño y sumalo en el cotizador."
           titleId={`${id}-title`}
         />
 
-        {/* Cómo se arma: tres pasos en una fila */}
-        <ol className="mx-auto mt-10 grid max-w-3xl grid-cols-3 gap-3 sm:mt-12 sm:gap-6">
+        {/* Cómo se arma: en celular una lista corta, desde sm en una sola línea */}
+        <Reveal as="ol" className="mx-auto mt-8 flex max-w-sm flex-col gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-5">
           {candyBarSteps.map((step, i) => (
-            <Reveal key={step.title} as="li" delay={i * 0.1} className="flex flex-col items-center text-center">
-              <span className="relative flex size-11 items-center justify-center rounded-full bg-ink font-display text-xl text-gold-light shadow-soft">
-                <span aria-hidden="true" className="animate-spin-slow absolute -inset-1.5 rounded-full border border-dashed border-gold/60" />
-                {i + 1}
-              </span>
-              <h3 className="mt-3 text-base leading-tight sm:text-xl">{step.title}</h3>
-              <p className="mt-1 hidden text-sm leading-relaxed text-muted sm:block">{step.text}</p>
-            </Reveal>
+            <Fragment key={step.title}>
+              {i > 0 && <Ornament className="hidden sm:flex" />}
+              <li className="flex items-center gap-3">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-ink font-display text-base text-gold-light">
+                  {i + 1}
+                </span>
+                <span className="font-display text-lg leading-tight text-ink">{step.title}</span>
+              </li>
+            </Fragment>
           ))}
-        </ol>
+        </Reveal>
 
-        <ul className="no-scrollbar -mx-4 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-2 pb-4 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:px-0">
+        <ul className="mx-auto mt-10 flex max-w-3xl flex-col gap-6 sm:mt-14 sm:gap-8">
           {candyBars.map((candyBar, i) => (
-            <CandyCard
+            <CandyTicket
               key={candyBar.id}
               candyBar={candyBar}
               index={i}
-              onOpen={(photoIndex) =>
+              onOpen={() =>
                 setLightbox({
                   photos: candyBar.photos.map((image) => ({ image, caption: candyBar.name, label: 'Candy bar' })),
-                  index: photoIndex,
+                  index: 0,
                 })
               }
             />
@@ -64,87 +65,101 @@ export default function CandyBarShowcase({ id }) {
         onClose={() => setLightbox(null)}
         onChange={(index) => setLightbox((l) => ({ ...l, index }))}
       />
-    </section>
+    </Section>
   )
 }
 
-function CandyCard({ candyBar, index, onOpen }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { amount: 0.5 })
+// Boleto. En celular: talón arriba (foto + nombre y precio), perforación horizontal y el
+// detalle abajo. Desde sm: foto a la izquierda, perforación vertical y todo el texto a la derecha.
+// El talón va en papel crema; el sello se "estampa" al aparecer.
+function CandyTicket({ candyBar, index, onOpen }) {
   const reduce = useReducedMotion()
-  const [shown, setShown] = useState(0)
-  const { id, name, idealFor, includes, photos } = candyBar
-
-  // Alterna las fotos cada tanto, desfasado por tarjeta para que no cambien todas juntas.
-  useEffect(() => {
-    if (!inView || reduce || photos.length < 2) return
-    const timer = setInterval(() => setShown((s) => (s + 1) % photos.length), 3600 + index * 700)
-    return () => clearInterval(timer)
-  }, [inView, reduce, photos.length, index])
-
-  const photo = photos[shown]
+  const { id, name, includes, photos } = candyBar
+  const photo = photos[0]
+  const tilt = index % 2 ? 1.2 : -1.2
 
   return (
     <motion.li
-      ref={ref}
-      initial={{ opacity: 0, y: reduce ? 0 : 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: reduce ? 0 : 24, rotate: reduce ? 0 : tilt }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      whileHover={reduce ? undefined : { y: -4 }}
       viewport={{ once: true, margin: '0px 0px -40px 0px' }}
-      transition={{ duration: 0.8, delay: index * 0.12, ease }}
-      className="group card-luxe card-luxe-arch relative flex w-[82%] shrink-0 snap-center flex-col p-3 text-center sm:w-auto"
+      transition={{ duration: 0.8, delay: 0.05, ease }}
+      className="ticket-shadow"
     >
-      <button
-        type="button"
-        onClick={() => onOpen(shown)}
-        aria-label={`Ver fotos del candy bar ${name}`}
-        className="relative block aspect-4/5 w-full overflow-hidden rounded-t-full bg-sand"
-      >
-        <AnimatePresence initial={false}>
-          <motion.img
-            key={photo.src}
-            src={photo.src}
-            alt={photo.alt}
-            loading="lazy"
-            style={{ objectPosition: photo.position ?? 'center' }}
-            initial={{ opacity: 0, scale: reduce ? 1 : 1.08 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ opacity: { duration: 0.8 }, scale: { duration: 4, ease: 'easeOut' } }}
-            className="absolute inset-0 size-full object-cover transition-transform duration-[1.4s] group-hover:scale-105"
-          />
-        </AnimatePresence>
-        <span className="absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent" />
-        <span className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-ink/55 px-3 py-1.5 text-[11px] text-white backdrop-blur-sm">
-          <Images className="size-3.5" /> {photos.length} fotos
-        </span>
-      </button>
+      <div className="ticket grid grid-cols-[auto_minmax(0,1fr)] [grid-template-areas:'photo_head''perf_perf''body_body'] sm:grid-cols-[13rem_auto_minmax(0,1fr)] sm:[grid-template-areas:'photo_perf_head''photo_perf_body']">
+        <div className="bg-cream/45 p-3 pr-0 [grid-area:photo] sm:pr-3">
+          <button
+            type="button"
+            onClick={onOpen}
+            aria-label={`Ver fotos del candy bar ${name}`}
+            className="group relative block size-26 overflow-hidden rounded-sm bg-sand shadow-soft sm:size-full sm:min-h-64"
+          >
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              loading="lazy"
+              style={{ objectPosition: photo.position ?? 'center' }}
+              className="absolute inset-0 size-full object-cover transition-transform duration-[1.2s] ease-luxe group-hover:scale-105"
+            />
+            {/* Paspartú */}
+            <span aria-hidden="true" className="absolute inset-1.5 rounded-[1px] border border-white/45" />
+            <span className="absolute bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full bg-ink/60 px-2 py-1 text-[11px] whitespace-nowrap text-white backdrop-blur-sm sm:bottom-3 sm:px-3 sm:text-xs">
+              <Images className="size-3" /> {photos.length} {photos.length === 1 ? 'foto' : 'fotos'}
+            </span>
+          </button>
+        </div>
 
-      <div className="flex flex-1 flex-col px-3 pb-4">
-        <p className="mt-5 text-[11px] font-semibold tracking-[0.3em] text-gold-dark uppercase">Candy bar</p>
-        <h3 className="mt-1 text-4xl leading-tight">{name}</h3>
-        <p className="mt-1 text-sm text-muted">
-          Desde <span className="font-display text-2xl text-gold-dark">{formatPrice(candyBarPrices[id])}</span>
-        </p>
-        <span aria-hidden="true" className="mx-auto mt-3 flex items-center gap-2">
-          <span className="h-px w-6 bg-gold/60" />
-          <span className="size-1.5 rotate-45 bg-gold" />
-          <span className="h-px w-6 bg-gold/60" />
+        <div className="relative flex flex-col justify-center bg-cream/45 px-4 py-4 [grid-area:head] sm:bg-transparent sm:px-7 sm:pt-7 sm:pb-0">
+          {/* Sello de boleto, estampado a mano */}
+          <motion.span
+            aria-hidden="true"
+            initial={reduce ? false : { opacity: 0, scale: 1.5, rotate: 0 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 7 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.55, ease: [0.3, 1.4, 0.5, 1] }}
+            className="absolute top-7 right-9 hidden rounded-sm border-[3px] border-double border-gold/70 px-3 py-1.5 type-label text-gold-dark sm:block"
+          >
+            Válido para tu fiesta
+          </motion.span>
+          <p className="flex items-center gap-2 type-label text-gold-dark tabular-nums">
+            Candy bar
+            <span aria-hidden="true" className="size-1 rotate-45 bg-gold" />
+            N° {String(index + 1).padStart(3, '0')}
+          </p>
+          <h3 className="mt-1 text-3xl leading-none sm:text-4xl">{name}</h3>
+          <p className="mt-2 text-sm text-muted">
+            Desde <span className="font-display text-2xl text-gold-dark">{formatPrice(candyBarPrices[id])}</span>
+          </p>
+        </div>
+
+        <span aria-hidden="true" className="ticket-perf-x [grid-area:perf] sm:ticket-perf-y" />
+
+        <div className="px-5 pt-4 pb-5 [grid-area:body] sm:pt-5 sm:pr-12 sm:pb-7 sm:pl-7">
+          <p className="flex items-center gap-3 type-label text-gold-dark">
+            Incluye
+            <span aria-hidden="true" className="h-px flex-1 bg-linear-to-r from-gold/40 to-transparent" />
+          </p>
+          <ul className="mt-3 space-y-1.5 text-sm text-ink lg:grid lg:grid-cols-2 lg:gap-x-6 lg:gap-y-2 lg:space-y-0">
+            {includes.map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <Button to={`/servicios?candy=${id}`} className="mt-6 w-full sm:w-auto">
+            Sumalo a tu evento <ArrowRight className="size-4" />
+          </Button>
+        </div>
+
+        {/* Leyenda impresa en el borde, como en los boletos de feria */}
+        <span
+          aria-hidden="true"
+          className="absolute top-1/2 right-3 hidden -translate-y-1/2 rotate-180 type-label whitespace-nowrap text-gold/70 [writing-mode:vertical-rl] sm:block"
+        >
+          Luxury Eventos · Candy bar
         </span>
-        <p className="mt-3 text-sm text-ink">
-          <span className="text-muted">Ideal para </span>
-          {idealFor.toLowerCase()}
-        </p>
-        <ul className="mt-4 space-y-1.5 text-left text-sm text-ink">
-          {includes.map((item) => (
-            <li key={item} className="flex items-start gap-2">
-              <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" />
-              {item}
-            </li>
-          ))}
-        </ul>
-        <Button to={`/servicios?candy=${id}`} className="mt-6 w-full sm:mt-auto sm:translate-y-0">
-          Sumalo a tu evento <ArrowRight className="size-4" />
-        </Button>
       </div>
     </motion.li>
   )

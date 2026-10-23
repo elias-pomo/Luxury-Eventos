@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { animate, useReducedMotion } from 'motion/react'
 import { formatPrice } from '../../utils/format'
+import { ease } from '../../utils/motion'
 
 // Precio que se desliza hasta el nuevo valor cuando cambia. El valor final se
 // anuncia a lectores de pantalla una sola vez (no en cada cuadro de la animación).
@@ -17,7 +18,7 @@ export default function AnimatedPrice({ value, className = '' }) {
     }
     const controls = animate(current.current, value, {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
+      ease: ease,
       onUpdate: (n) => {
         current.current = n
         setShown(n)

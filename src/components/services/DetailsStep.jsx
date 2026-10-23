@@ -7,7 +7,7 @@ import { formatPrice, todayISO } from '../../utils/format'
 
 export const fieldClass =
   'w-full rounded-sm border border-gold/25 bg-white px-4 py-3 text-base text-ink transition-colors outline-none placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold'
-const labelClass = 'mb-2 block text-[11px] font-semibold tracking-[0.2em] text-muted uppercase'
+const labelClass = 'mb-2 block type-label text-muted'
 
 // Paso 2: fecha, turno (según el régimen del evento) e invitados.
 export default function DetailsStep({ date, shift, guests, schedule, category, waiters, onChange }) {
@@ -70,7 +70,7 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
                     booked
                       ? 'border-gold/25 bg-sand/40 text-muted'
                       : active
-                        ? 'border-gold text-white'
+                        ? 'border-gold text-ink'
                         : 'border-gold/25 bg-white text-ink hover:border-gold'
                   }`}
                 >
@@ -82,7 +82,7 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
                     />
                   )}
                   <span className={`relative block text-sm font-medium ${booked ? 'line-through' : ''}`}>{label}</span>
-                  <span className={`relative block text-xs ${active ? 'text-white/85' : 'text-muted'}`}>
+                  <span className={`relative block text-xs ${active ? 'text-ink/75' : 'text-muted'}`}>
                     {booked ? 'Reservado' : time}
                   </span>
                 </motion.button>
@@ -166,7 +166,7 @@ function StepperButton({ label, icon: Icon, ...props }) {
     <button
       type="button"
       aria-label={label}
-      className="flex size-12 shrink-0 items-center justify-center rounded-full border border-gold/50 text-gold-dark transition-colors hover:bg-gold hover:text-white active:bg-gold active:text-white disabled:pointer-events-none disabled:opacity-30"
+      className="flex size-12 shrink-0 items-center justify-center rounded-full border border-gold/50 text-gold-dark transition-colors hover:bg-gold hover:text-ink active:bg-gold active:text-ink disabled:pointer-events-none disabled:opacity-30"
       {...props}
     >
       <Icon className="size-5" />

@@ -1,35 +1,58 @@
 import { photos } from './photos'
 
-// Tipos de candy bar que se muestran en la Galería. Los precios se definen en
-// el cotizador de Servicios.
+// Tamaños de candy bar (definidos por el salón). Los precios están en
+// candyBarPrices de pricing.js. La Galería muestra un boleto por cada uno y el
+// cotizador los ofrece en el paso de extras. `summary` es la línea corta que
+// acompaña al nombre.
 //
-// TODO: reemplazar por los tipos y descripciones reales (las fotos ya son reales).
+// TODO: las fotos son de candy bar reales del salón, pero no están asignadas por
+// tamaño: confirmar con el salón cuál corresponde a cada uno.
 export const candyBars = [
   {
-    id: 'clasico',
-    name: 'Clásico',
-    description:
-      'Una mesa dulce prolija y colorida, con golosinas surtidas presentadas en frascos y bandejas. Simple, alegre y siempre un éxito entre los chicos y los grandes.',
-    idealFor: 'Infantiles, bautismos y comuniones',
-    includes: ['Golosinas surtidas', 'Frascos y bandejas', 'Cartel con el nombre'],
+    id: 'pequeno',
+    name: 'Pequeño',
+    summary: '1 panel, 1 personaje y 2 mesas',
+    includes: [
+      '1 panel de diseño',
+      '1 personaje u ornamentación temática',
+      '2 mesas',
+      'Globos',
+      'Bandejas para lo dulce',
+    ],
     photos: [photos.candyAlgodones, photos.candyPatrullaDulces],
   },
   {
-    id: 'tematico',
-    name: 'Temático',
-    description:
-      'Diseñado a medida según la temática de tu fiesta: elegimos golosinas en los colores del evento, sumamos decoración especial y etiquetas personalizadas.',
-    idealFor: 'Cumpleaños, baby showers y revelaciones',
-    includes: ['Golosinas en los colores del evento', 'Decoración temática', 'Etiquetas personalizadas'],
-    photos: [photos.candyPatrulla, photos.candyMonsters],
+    id: 'mediano',
+    name: 'Mediano',
+    summary: '2 paneles, 2 personajes, 4 mesas y alfombra',
+    includes: ['2 paneles de diseño', '2 personajes u ornamentos', '4 mesas', 'Globos', 'Alfombra'],
+    photos: [photos.candyMonsters],
   },
   {
-    id: 'premium',
-    name: 'Premium',
-    description:
-      'La mesa más completa, con mesa dulce y una puesta elegante de flores, luces y exhibidores. Pensada para lucirse en las noches de gala.',
-    idealFor: '15 años, casamientos y fiestas de noche',
-    includes: ['Golosinas y mesa dulce', 'Ambientación con flores y luces', 'Exhibidores y vajilla premium'],
+    id: 'grande',
+    name: 'Grande',
+    summary: '3 paneles, 4 mesas, luces y carteles de neón',
+    includes: [
+      '3 paneles de diseño',
+      '2 personajes u ornamentos',
+      '4 mesas',
+      'Globos',
+      'Luces de protón',
+      'Carteles de neón',
+    ],
+    photos: [photos.candyPatrulla],
+  },
+  {
+    id: 'completo',
+    name: 'Completo',
+    summary: 'Todo el espacio ambientado, con lo que pida el diseño',
+    includes: [
+      'Un panel que abarca todo el espacio, o los paneles que pida el diseño',
+      'Alfombra',
+      'Todas las mesas necesarias',
+      'Todos los personajes u ornamentos necesarios',
+      'Luces y carteles de neón',
+    ],
     photos: [photos.candySafariMesa, photos.candySafari],
   },
 ]
@@ -37,7 +60,7 @@ export const candyBars = [
 // Cómo se arma un candy bar, en pasos.
 // TODO: confirmar con el salón.
 export const candyBarSteps = [
-  { title: 'Elegís el estilo', text: 'Clásico, temático o premium, según el tipo de fiesta.' },
-  { title: 'Definimos los detalles', text: 'Colores, temática, golosinas y carteles personalizados.' },
+  { title: 'Elegís el tamaño', text: 'Pequeño, mediano, grande o completo, según tu fiesta.' },
+  { title: 'Definimos los detalles', text: 'Colores, temática, personajes y carteles.' },
   { title: 'Lo armamos en el salón', text: 'El día del evento está listo antes de que lleguen tus invitados.' },
 ]

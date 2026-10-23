@@ -37,7 +37,7 @@ export const faqs = [
   },
   {
     question: '¿Puedo sumar DJ o candy bar?',
-    answer: `Sí. El DJ cuesta ${formatPrice(extras.dj.price)} (viene incluido en el Paquete Luxury) y el candy bar tiene tres opciones. Los sumás directamente en el cotizador y ves el total al instante.`,
+    answer: `Sí. El DJ cuesta ${formatPrice(extras.dj.price)} (viene incluido en el Paquete Luxury) y el candy bar viene en cuatro tamaños: pequeño, mediano, grande y completo. Los sumás directamente en el cotizador y ves el total al instante.`,
   },
   {
     question: '¿Cómo reservo mi fecha?',
