@@ -38,6 +38,14 @@ export const photos = {
   babyBosque: photo('bautismo6.webp', 'Baby shower "Oh Baby" con troncos, animalitos del bosque y globos verde oliva', 'center 40%'),
   babyPanda: photo('baby1.webp', 'Baby shower de osito panda con globos azules y blancos', 'center 40%'),
   babyVelita: photo('bautismo5.webp', 'Souvenir de velita con forma de leoncito', 'center 55%'),
+  babyConejitaPapas: photo('baby10.webp', 'Los futuros papás frente al arco "Oh Baby!" del bosque, con la torta y los regalos', 'center 45%'),
+  babyConejitaTorta: photo('baby9.webp', 'Los futuros papás cortando la torta sobre un hongo gigante', 'center 55%'),
+  babyConejitaMesa: photo('baby8.webp', 'Mesa dulce sobre hongos rojos junto al arco del bosque y los regalos', 'center 40%'),
+  babyConejitaRincon: photo('baby11.webp', 'Hongo gigante con conejita bailarina, casita del bosque y mantel a cuadros', 'center 50%'),
+  babyConejitaNombre: photo('baby7.webp', 'Conejita y letras con el nombre de la bebé entre tartitas y profiteroles', 'center 55%'),
+  babySouvenirs: photo('baby3.webp', 'Souvenirs en cajitas y bolsitas con moños de colores en un estante en arco', 'center 40%'),
+  babyMasitas: photo('catering2.webp', 'Bandejas con tartitas, lemon pie, brownies y alfajores de maicena', 'center 50%'),
+  babyProfiteroles: photo('catering1.webp', 'Profiteroles en bandeja de flor y tartitas de frutos rojos', 'center 45%'),
 
   // Revelación
   revelacionMesa: photo('revelacion1.webp', 'Mesa dulce en azul con cortinas, luces y tortas decoradas', 'center 40%'),
@@ -50,28 +58,40 @@ export const photos = {
   // Comuniones
   comunionCaliz: photo('comunion1.webp', 'Comunión en dorado y blanco con cáliz, sillón blanco y mesas de madera', 'center 40%'),
   comunionAmarilla: photo('comunion2.webp', 'Comunión en amarillo y blanco con luces y cubos con el nombre', 'center 45%'),
-  comunionRosa: photo('comunion3.webp', 'Comunión en rosa y dorado con sillón blanco sobre alfombra', 'center 55%'),
-  comunionAngel: photo('comunion4.webp', 'Comunión en celeste con angelito y cubos con el nombre', 'center 30%'),
   comunionDorada: photo('comunion5.webp', 'Comunión con columnas doradas, flores y sillón blanco', 'center 50%'),
-  comunionArco: photo('baby3.webp', 'Arco de globos rosa, blanco y plateado con el cartel "Mi Primera Comunión"', 'center 45%'),
+  comunionVerdeFamilia: photo('comunion3.webp', 'Familia junto a la mesa de comunión con globos verde, dorado y crema y el neón "Mi primera comunión"', 'center 50%'),
+  comunionVerde: photo('comunion4.webp', 'El nene de la comunión junto a la torta con cruz y mesas doradas', 'center 40%'),
+  comunionVerdeAbrazo: photo('comunion6.webp', 'Abrazo frente a la mesa de comunión con lámpara de plumas y candelabros de cristal', 'center 40%'),
+  comunionVerdeHermanos: photo('comunion7.webp', 'Los hermanos y su abuela frente a la torta de comunión', 'center 45%'),
+  comunionVerdeInvitados: photo('comunion8.webp', 'Invitados alrededor de la mesa de comunión sobre alfombra blanca', 'center 45%'),
   comunionSouvenir: photo('baby6.webp', 'Souvenirs de frascos con angelitos de porcelana fría', 'center 40%'),
 
   // Despedidas
   despedidaLiving: photo('soltero1.webp', 'Living de puff blancos con luces violetas y verdes', 'center 55%'),
 
   // Candy bar
-  candySafari: photo('candy1.webp', 'Candy bar safari con troncos, jirafa y jeep', 'center 55%'),
   candySafariMesa: photo('candy2.webp', 'Mesa dulce safari con alfajores, trufas y tarta', 'center 50%'),
-  candyPatrulla: photo('candy3.webp', 'Candy bar de Paw Patrol con arco de neón y sillón blanco', 'center 40%'),
-  candyPatrullaDulces: photo('candy4.webp', 'Bandeja de alfajores y donas en tonos lila', 'center 55%'),
+  candyLilaDulces: photo('candy4.webp', 'Bandeja de alfajores y donas en tonos lila', 'center 55%'),
   candyMonsters: photo('candy5.webp', 'Candy bar de Monsters Inc. con algodones de azúcar', 'center 50%'),
-  candyAlgodones: photo('candy6.webp', 'Exhibidor con algodones de azúcar, manzanas acarameladas y pochoclos', 'center 40%'),
+  // K-pop (cumpleaños)
+  candyKpop: photo('candy1.webp', 'Candy bar de K-pop en violeta y plateado con neón "Happy Birthday", personajes y la cumpleañera', 'center 45%'),
+  candyKpopPaneles: photo('candy14.webp', 'Candy bar de K-pop con panel de lentejuelas, arco con neón, biblioteca y alfombra violeta', 'center 55%'),
+  candyKpopBiblioteca: photo('candy15.webp', 'Biblioteca blanca en arco con souvenirs personalizados y una de las cantantes', 'center 40%'),
+  candyKpopPersonaje: photo('candy3.webp', 'Personaje de K-pop recortado junto a tartas y cake pops', 'center 45%'),
+  // Conejita del bosque (primer añito)
+  candyConejita: photo('candy11.webp', 'Candy bar de conejita del bosque con arco de globos, mariposas de neón y hongos gigantes', 'center 50%'),
+  candyConejitaArco: photo('candy13.webp', 'Arco del bosque con neón "Happy Birthday", conejita bailarina y el número 1 de neón', 'center 50%'),
+  candyConejitaLuces: photo('candy12.webp', 'La conejita sobre una base en forma de nube con luces violetas y cerquito de madera', 'center 50%'),
+  candyConejitaCerco: photo('candy6.webp', 'Cerquito de madera con flores delante del arco de la conejita', 'center 35%'),
+  // Oh Baby! (baby shower)
+  candyOhBaby: photo('candy7.webp', 'Arco "Oh Baby!" con fondo de bosque, casita, tronco y conejita sobre mantel a cuadros', 'center 45%'),
+  candyOhBabyHongo: photo('candy8.webp', 'Hongo gigante con conejita sobre base de nube junto al arco "Oh Baby!"', 'center 50%'),
+  candyOhBabyTronco: photo('candy10.webp', 'Tronco, macetas y hongos rojos frente a la casita del bosque', 'center 50%'),
+  candyOhBabyTorta: photo('candy9.webp', 'Torta con conejita sobre el hongo gigante y souvenirs tejidos', 'center 40%'),
 
   // TODO: fotos de muestra (ilustraciones) hasta tener fotos reales para estos lugares.
   muestraQuince1: photo('muestra/quince-1.svg', 'Foto de muestra: mesa principal de 15 años'),
   muestraQuince2: photo('muestra/quince-2.svg', 'Foto de muestra: el vals de 15 años'),
-  muestraInfantiles: photo('muestra/infantiles-1.svg', 'Foto de muestra: rincón de juegos infantil'),
-  muestraComuniones: photo('muestra/comuniones-1.svg', 'Foto de muestra: salón ambientado para una comunión'),
   muestraDespedidas1: photo('muestra/despedidas-1.svg', 'Foto de muestra: la pista en una despedida'),
   muestraDespedidas2: photo('muestra/despedidas-2.svg', 'Foto de muestra: el brindis en una despedida'),
   muestraDespedidas3: photo('muestra/despedidas-3.svg', 'Foto de muestra: living con luces en una despedida'),

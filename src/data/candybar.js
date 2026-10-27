@@ -5,8 +5,8 @@ import { photos } from './photos'
 // cotizador los ofrece en el paso de extras. `summary` es la línea corta que
 // acompaña al nombre.
 //
-// TODO: las fotos son de candy bar reales del salón, pero no están asignadas por
-// tamaño: confirmar con el salón cuál corresponde a cada uno.
+// TODO: las fotos son de candy bar reales del salón, repartidas por tamaño según lo
+// que se ve en cada armado (paneles, personajes, neón): confirmar con el salón.
 export const candyBars = [
   {
     id: 'pequeno',
@@ -19,14 +19,14 @@ export const candyBars = [
       'Globos',
       'Bandejas para lo dulce',
     ],
-    photos: [photos.candyAlgodones, photos.candyPatrullaDulces],
+    photos: [photos.candySafariMesa, photos.candyLilaDulces, photos.candyKpopPersonaje],
   },
   {
     id: 'mediano',
     name: 'Mediano',
     summary: '2 paneles, 2 personajes, 4 mesas y alfombra',
     includes: ['2 paneles de diseño', '2 personajes u ornamentos', '4 mesas', 'Globos', 'Alfombra'],
-    photos: [photos.candyMonsters],
+    photos: [photos.candyOhBaby, photos.candyOhBabyHongo, photos.candyOhBabyTronco, photos.candyOhBabyTorta, photos.candyMonsters],
   },
   {
     id: 'grande',
@@ -40,7 +40,7 @@ export const candyBars = [
       'Luces de protón',
       'Carteles de neón',
     ],
-    photos: [photos.candyPatrulla],
+    photos: [photos.candyConejita, photos.candyConejitaArco, photos.candyConejitaLuces, photos.candyConejitaCerco],
   },
   {
     id: 'completo',
@@ -53,7 +53,7 @@ export const candyBars = [
       'Todos los personajes u ornamentos necesarios',
       'Luces y carteles de neón',
     ],
-    photos: [photos.candySafariMesa, photos.candySafari],
+    photos: [photos.candyKpopPaneles, photos.candyKpop, photos.candyKpopBiblioteca],
   },
 ]
 
