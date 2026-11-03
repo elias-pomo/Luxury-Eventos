@@ -31,7 +31,7 @@ const localBusiness = () => ({
   hasMap: site.address.mapsUrl,
   maximumAttendeeCapacity: site.capacity,
   sameAs: [site.social.instagram, site.social.facebook],
-  ...(site.url && { url: site.url, image: `${site.url}/og-image.jpg` }),
+  ...(site.url && { url: site.url, image: `${site.url}/og-share.jpg` }),
 })
 
 // Inyecta en <head> los datos estructurados y, si están configurados, Plausible / GA4.

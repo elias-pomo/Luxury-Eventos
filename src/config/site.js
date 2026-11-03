@@ -5,8 +5,8 @@ export const site = {
   name: 'Luxury Eventos',
   // Dominio definitivo, sin barra final (ej: 'https://luxuryeventos.com.ar'). Lo usan
   // la imagen y el link que se muestran al compartir el sitio en WhatsApp o redes.
-  // TODO: completar cuando esté el dominio.
-  url: '',
+  // Hoy es el de Vercel; cambiarlo cuando haya dominio propio.
+  url: 'https://luxury-eventos.vercel.app',
   tagline: 'Donde cada celebración se vuelve inolvidable',
   description:
     'Un salón cálido y elegante en El Colmenar, pensado para celebraciones íntimas de hasta 100 invitados. Nos encargamos de cada detalle para que vos solo te ocupes de disfrutar.',
