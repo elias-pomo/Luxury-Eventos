@@ -83,6 +83,7 @@ export default function ServicesPreview() {
                 <div className="relative aspect-4/3 overflow-hidden rounded-t-full bg-sand">
                   <Photo
                     image={photo}
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 80vw"
                     className="size-full transition-transform duration-[1.4s] ease-out group-hover:scale-110"
                   />
                   <span className="absolute inset-0 bg-linear-to-t from-ink/55 via-transparent to-transparent" />

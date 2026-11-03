@@ -4,6 +4,7 @@ import Sparkles from './Sparkles'
 import SplitText from './SplitText'
 import Ornament from './Ornament'
 import { ease } from '../../utils/motion'
+import { imgProps } from '../../utils/img'
 
 
 // Encabezado de las páginas internas (Galería, Servicios, Contacto), con el mismo
@@ -22,9 +23,11 @@ export default function PageHeader({ eyebrow, title, subtitle, image }) {
       {image && (
         <motion.div style={{ y: reduce ? 0 : photoY }} className="absolute -inset-y-[12%] inset-x-0">
           <motion.img
-            src={image.src}
+            {...imgProps(image)}
             alt=""
             loading="eager"
+            fetchPriority="high"
+            decoding="async"
             style={{ objectPosition: image.position ?? 'center' }}
             initial={{ scale: reduce ? 1 : 1.15 }}
             animate={{ scale: 1 }}

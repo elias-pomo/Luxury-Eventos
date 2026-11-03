@@ -6,6 +6,7 @@ import Button from '../ui/Button'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
 import { ease } from '../../utils/motion'
+import { imgProps } from '../../utils/img'
 import Section from '../ui/Section'
 
 const preview = [
@@ -70,7 +71,7 @@ function Tile({ image, label, className = '', shift, index }) {
       className={`group relative overflow-hidden rounded-sm ${className}`}
     >
       <motion.img
-        src={image.src}
+        {...imgProps(image, '(min-width: 640px) 50vw, 100vw')}
         alt={image.alt}
         loading="lazy"
         decoding="async"

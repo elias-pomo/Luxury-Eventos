@@ -7,7 +7,7 @@
 
 export const images = {
   hero: {
-    src: '/images/hero.jpg',
+    src: '/images/hero.webp',
     alt: 'Salón ambientado con mesas redondas, centros de mesa con luces y telas rosadas',
     position: 'center 70%',
   },
@@ -23,22 +23,22 @@ export const images = {
     position: 'center 30%',
   },
   ballroom: {
-    src: '/images/ballroom.jpg',
+    src: '/images/ballroom.webp',
     alt: 'Mesa elegante con mantel negro, copas y sitiales dorados',
     position: 'center 55%',
   },
   table: {
-    src: '/images/table.jpg',
+    src: '/images/table.webp',
     alt: 'Salón de noche con centros de mesa iluminados',
     position: 'center 60%',
   },
   balloons: {
-    src: '/images/balloons.jpg',
+    src: '/images/balloons.webp',
     alt: 'Salón iluminado con luces azules y sonido profesional',
     position: 'center 40%',
   },
   party: {
-    src: '/images/party.jpg',
+    src: '/images/party.webp',
     alt: 'Centro de mesa con aro de flores y luces cálidas',
     position: 'center 45%',
   },

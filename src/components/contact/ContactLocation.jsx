@@ -92,6 +92,7 @@ export default function ContactLocation() {
               >
                 <Photo
                   image={photo.image}
+                  sizes="(min-width: 640px) 45vw, 85vw"
                   className="size-full transition-transform duration-[1.4s] ease-out group-hover:scale-110"
                 />
                 <span className="absolute inset-0 flex flex-col items-start justify-end bg-linear-to-t from-ink/80 via-ink/10 to-transparent p-4 text-left">

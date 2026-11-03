@@ -3,6 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { images } from '../../data/images'
 import { site } from '../../config/site'
 import { whatsappLink } from '../../utils/whatsapp'
+import { imgProps } from '../../utils/img'
 import { WhatsAppIcon } from '../icons/SocialIcons'
 import Button from '../ui/Button'
 import Reveal from '../ui/Reveal'
@@ -18,9 +19,10 @@ export default function CtaBanner() {
   return (
     <section ref={ref} className="relative overflow-hidden py-28 sm:py-36">
       <motion.img
-        src={images.table.src}
+        {...imgProps(images.table)}
         alt=""
         loading="lazy"
+        decoding="async"
         style={{ y: reduce ? 0 : y, objectPosition: images.table.position }}
         className="absolute inset-x-0 -inset-y-[14%] h-[128%] w-full object-cover"
       />

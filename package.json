@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/make-variants.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/make-variants.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "images": "node scripts/optimize-images.mjs"

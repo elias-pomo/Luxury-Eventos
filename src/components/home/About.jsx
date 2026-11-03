@@ -7,6 +7,7 @@ import Reveal from '../ui/Reveal'
 import RotatingSeal from '../ui/RotatingSeal'
 import SectionTitle from '../ui/SectionTitle'
 import { ease } from '../../utils/motion'
+import { imgProps } from '../../utils/img'
 import Section from '../ui/Section'
 import Card from '../ui/Card'
 
@@ -33,9 +34,10 @@ export default function About() {
           />
           <div ref={ref} className="relative aspect-4/5 w-full overflow-hidden rounded-t-full shadow-soft">
             <motion.img
-              src={images.owner.src}
+              {...imgProps(images.owner, '(min-width: 1024px) 40vw, 90vw')}
               alt={images.owner.alt}
               loading="lazy"
+              decoding="async"
               style={{ y: reduce ? 0 : y, objectPosition: images.owner.position }}
               className="absolute inset-x-0 -inset-y-[10%] h-[120%] w-full object-cover"
             />

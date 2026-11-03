@@ -2,9 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react'
 import { Pause, Play } from 'lucide-react'
 import { ease } from '../../utils/motion'
+import { imgProps, preloadImage } from '../../utils/img'
 
 const MAX_SLOTS = 5
 const STEP_MS = 1700 // cada cuánto cambia un lugar (van de a uno, en secuencia)
+
+// Ancho que ocupa cada foto en pantalla (para elegir la versión justa): la grande ocupa casi
+// todo el ancho; las otras, la mitad en celular y un tercio en escritorio.
+const SIZES_BIG = '(min-width: 1024px) 60vw, 100vw'
+const SIZES_SMALL = '(min-width: 1024px) 30vw, 50vw'
 
 // Disposición según cuántos lugares hay (1 a 5). El primero siempre es la foto grande.
 // Celular: 2 columnas · escritorio: 4. Las filas tienen alto fijo, así que nunca se alarga.
@@ -53,6 +59,15 @@ export default function EventMosaic({ photos, showLabel, paused: externalPause, 
     }, STEP_MS)
     return () => clearInterval(timer)
   }, [running, rotating.length])
+
+  // Baja con anticipación la foto que va a aparecer en el próximo cambio, así el fundido no
+  // espera a la red ni a la decodificación.
+  useEffect(() => {
+    if (!running) return
+    const slot = rotating[rotation.step % rotating.length]
+    const next = ((rotation.positions[slot] ?? 0) + 1) % slots[slot].length
+    preloadImage(photos[slots[slot][next]].image, slot === 0 ? SIZES_BIG : SIZES_SMALL)
+  }, [running, rotation])
 
   return (
     <div ref={ref}>
@@ -114,8 +129,9 @@ function MosaicSlot({ photo, big, position, total, showLabel, reduce, onOpen }) 
       <AnimatePresence initial={false}>
         <motion.img
           key={photo.image.src}
-          src={photo.image.src}
+          {...imgProps(photo.image, big ? SIZES_BIG : SIZES_SMALL)}
           alt={photo.image.alt}
+          decoding="async"
           style={{ objectPosition: photo.image.position ?? 'center' }}
           initial={{ opacity: 0, scale: reduce ? 1 : 1.1 }}
           animate={{ opacity: 1, scale: 1 }}

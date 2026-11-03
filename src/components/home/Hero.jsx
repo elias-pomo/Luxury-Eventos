@@ -7,6 +7,7 @@ import Button from '../ui/Button'
 import Sparkles from '../ui/Sparkles'
 import SplitText from '../ui/SplitText'
 import { ease } from '../../utils/motion'
+import { imgProps, preloadImage } from '../../utils/img'
 
 const fadeUp = (delay) => ({
   initial: { opacity: 0, y: 30 },
@@ -37,14 +38,20 @@ export default function Hero() {
 
   const slide = slides[index]
 
+  // La foto que sigue se baja con anticipación: al cambiar ya está lista y no parpadea.
+  useEffect(() => {
+    preloadImage(slides[(index + 1) % slides.length])
+  }, [index])
+
   return (
     <section ref={ref} className="relative flex h-dvh min-h-150 items-center justify-center overflow-hidden bg-ink">
       <motion.div style={{ y: reduce ? 0 : photoY }} className="absolute -inset-y-[16%] inset-x-0">
         <AnimatePresence initial={false}>
           <motion.img
             key={slide.src}
-            src={slide.src}
+            {...imgProps(slide)}
             alt={slide.alt}
+            decoding="async"
             style={{ objectPosition: slide.position }}
             initial={{ opacity: 0, scale: reduce ? 1 : 1.18 }}
             animate={{ opacity: 1, scale: 1 }}

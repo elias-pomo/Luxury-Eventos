@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { ease } from '../../utils/motion'
+import { imgProps } from '../../utils/img'
 
 // Visor de fotos a pantalla completa. `photos`: [{ image, caption, label }].
 // `index` null = cerrado. Se monta en <body> para que ningún ancestro con
@@ -75,7 +76,7 @@ export default function Lightbox({ photos, index, onClose, onChange }) {
             <AnimatePresence mode="wait" initial={false}>
               <motion.img
                 key={index}
-                src={photo.image.src}
+                {...imgProps(photo.image)}
                 alt={photo.image.alt}
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}

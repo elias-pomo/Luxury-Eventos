@@ -102,7 +102,7 @@ En [`src/config/site.js`](src/config/site.js): nombre, dueña, WhatsApp, direcci
 
 ### Imágenes
 
-1. Copiá la foto en `public/images/`, en **.webp** o **.jpg** de menos de 300 KB, con el nombre en minúsculas y sin espacios.
+1. Copiá la foto en `public/images/` como **.jpg** o **.png** (nombre en minúsculas y sin espacios) y corré `npm run images`: la pasa a **.webp** (máx. 1920 px) y deja el original en `fotos-originales/`. Después la versión chica para celular (`public/images/w/`, ignorada por git) se genera sola en `npm run dev` y `npm run build`.
 2. Actualizá su entrada en [`src/data/images.js`](src/data/images.js):
 
 ```js
@@ -143,10 +143,7 @@ El proyecto genera un sitio estático (`npm run build` → `dist/`) y se puede p
 
 Como es una SPA con rutas del lado del cliente, el hosting tiene que redirigir todas las rutas a `index.html`. Si no, recargar `/galeria` da 404.
 
-- **Vercel:** agregar `vercel.json` en la raíz:
-  ```json
-  { "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }
-  ```
+- **Vercel:** ya está resuelto en [`vercel.json`](vercel.json): redirige las rutas a `index.html`, da caché largo a `/assets` y de un día a `/images`, y fija `npm run build` como comando (genera las fotos chicas antes de compilar).
 - **Netlify:** agregar `public/_redirects` con:
   ```
   /*  /index.html  200

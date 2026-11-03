@@ -9,6 +9,7 @@ import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
 import Lightbox from './Lightbox'
 import { ease } from '../../utils/motion'
+import { imgProps } from '../../utils/img'
 import Section from '../ui/Section'
 import Ornament from '../ui/Ornament'
 
@@ -96,9 +97,10 @@ function CandyTicket({ candyBar, index, onOpen }) {
             className="group relative block size-26 overflow-hidden rounded-sm bg-sand shadow-soft sm:size-full sm:min-h-64"
           >
             <img
-              src={photo.src}
+              {...imgProps(photo, '(min-width: 640px) 208px, 104px')}
               alt={photo.alt}
               loading="lazy"
+              decoding="async"
               style={{ objectPosition: photo.position ?? 'center' }}
               className="absolute inset-0 size-full object-cover transition-transform duration-[1.2s] ease-luxe group-hover:scale-105"
             />

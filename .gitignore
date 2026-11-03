@@ -4,3 +4,6 @@ dist
 .env.*
 *.log
 .DS_Store
+
+# Versiones chicas de las fotos (se generan con scripts/make-variants.mjs)
+public/images/w/
