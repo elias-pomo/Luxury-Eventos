@@ -1,4 +1,5 @@
 import { site } from '../config/site'
+import { deposit } from '../data/pricing'
 import { formatDate, formatPrice } from './format'
 
 // Arma el link de WhatsApp con un mensaje precargado.
@@ -34,6 +35,9 @@ export const quoteMessage = ({ quote, name, date, shift, guests, theme }) => {
 
   lines.push('', '*Presupuesto estimado*')
   quoteLines.forEach(({ label, amount, included }) => lines.push(`- ${label}: ${included ? 'incluidos' : price(amount)}`))
-  lines.push(`*Total: ${price(total)}*`, '', '¿Tienen disponibilidad para esa fecha?')
+  lines.push(`*Total: ${price(total)}*`, '')
+  lines.push(`${deposit.name} (aparte, reintegrable): ${price(deposit.amount)}`)
+  lines.push('Al terminar la fiesta se controla todo y, si no se rompió ni se perdió nada, se devuelve en efectivo o por transferencia.')
+  lines.push('', '¿Tienen disponibilidad para esa fecha?')
   return lines.join('\n')
 }

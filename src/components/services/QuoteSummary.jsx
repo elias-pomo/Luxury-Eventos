@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { CalendarDays, Clock, RotateCcw, Share2, Sparkles, Users } from 'lucide-react'
-import { pricesUpdatedAt, quoteNotes } from '../../data/pricing'
+import { CalendarDays, Clock, RotateCcw, Share2, ShieldCheck, Sparkles, Users } from 'lucide-react'
+import { deposit, pricesUpdatedAt, quoteNotes } from '../../data/pricing'
 import { formatDate, formatPrice } from '../../utils/format'
 import { WhatsAppIcon } from '../icons/SocialIcons'
 import AnimatedPrice from '../ui/AnimatedPrice'
@@ -107,6 +107,18 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
             <div className="relative flex items-end justify-between gap-4">
               <span className="type-label text-muted">Total estimado</span>
               <AnimatedPrice value={quote.total} className="font-display text-4xl text-gold-gradient sm:text-5xl" />
+            </div>
+          </div>
+
+          {/* Depósito de garantía: aparte del total porque se devuelve. */}
+          <div className="mt-4 flex gap-3 rounded-sm border border-dashed border-gold/50 bg-white px-4 py-3.5">
+            <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-gold-dark" />
+            <div className="min-w-0 flex-1">
+              <p className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                <span className="type-label text-ink">{deposit.name}</span>
+                <span className="font-display text-xl text-ink">{formatPrice(deposit.amount)}</span>
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-muted">{deposit.note}</p>
             </div>
           </div>
         </div>

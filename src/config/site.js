@@ -63,13 +63,18 @@ export const site = {
   },
 
   capacity: 100,
-  stats: [
-    { value: '100', label: 'Invitados' },
-    { value: '+250', label: 'Eventos realizados' },
-    { value: '5', label: 'Años de trayectoria' },
-    { value: '100%', label: 'Climatizado' },
-  ],
+  // Trayectoria (datos de Fernanda, noviembre de 2026): se usan en las cifras y en los textos de Nosotros.
+  yearsActive: 4,
+  eventsDone: 350,
 }
+
+// Cifras de Nosotros (Inicio y Contacto), armadas con los datos de arriba.
+site.stats = [
+  { value: String(site.capacity), label: 'Invitados' },
+  { value: `+${site.eventsDone}`, label: 'Eventos realizados' },
+  { value: String(site.yearsActive), label: 'Años de trayectoria' },
+  { value: '100%', label: 'Climatizado' },
+]
 
 // Título de la pestaña del navegador en cada página (se suma " | Luxury Eventos").
 export const pageTitles = {

@@ -25,7 +25,10 @@ export const photos = {
 
   // Infantiles
   infantilMonsters: photo('infantiles5.webp', 'Ambientación de Monsters Inc. con arco de globos verde, azul y lila', 'center 35%'),
-  infantilPocoyo: photo('infantiles7.webp', 'Ambientación de Pocoyó con arco de globos de colores', 'center 40%'),
+  infantilPocoyo: photo('infantiles8.webp', 'Ambientación de Pocoyó con arco de globos de colores, neón "Happy Birthday" y sillón blanco', 'center 50%'),
+  infantilPocoyoChicos: photo('infantiles9.webp', 'Los chicos frente al arco de Pocoyó con globos naranja, azul, amarillo y verde', 'center 45%'),
+  infantilPintacaritas: photo('infantiles10.webp', 'Pintacaritas para los chicos en el cumpleaños de Pocoyó', 'center 40%'),
+  infantilSouvenirs: photo('infantiles7.webp', 'Biblioteca en arco con souvenirs de Spider-Man y K-pop y vasos personalizados', 'center 40%'),
   infantilPooh: photo('infantiles2.webp', 'Mesa dulce de Winnie Pooh con troncos y cubos con el nombre', 'center 45%'),
   infantilFrutillita: photo('infantiles4.webp', 'Ambientación de Frutillitas en rosa, rojo y verde', 'center 45%'),
   infantilVampirina: photo('revelacion2.webp', 'Ambientación de Vampirina con globos negros, lila y rosa', 'center 28%'),
@@ -64,7 +67,32 @@ export const photos = {
   comunionVerdeAbrazo: photo('comunion6.webp', 'Abrazo frente a la mesa de comunión con lámpara de plumas y candelabros de cristal', 'center 40%'),
   comunionVerdeHermanos: photo('comunion7.webp', 'Los hermanos y su abuela frente a la torta de comunión', 'center 45%'),
   comunionVerdeInvitados: photo('comunion8.webp', 'Invitados alrededor de la mesa de comunión sobre alfombra blanca', 'center 45%'),
+  comunionVerdeMesa: photo('comunion9.webp', 'Mesa de comunión con globos verde, dorado y crema, cáliz, columnas doradas y sillón blanco', 'center 50%'),
+  comunionVerdeSillon: photo('comunion10.webp', 'Sillón capitoné blanco bajo el neón "Mi primera comunión" y el arco con hiedra', 'center 55%'),
+  comunionVerdeLampara: photo('comunion11.webp', 'Lámpara de plumas y bandeja de tres pisos sobre cilindros dorados', 'center 45%'),
+  comunionVerdeBienvenida: photo('comunion12.webp', 'Cartel de bienvenida en atril con liliums y farol sobre alfombra de yute', 'center 40%'),
+  // Comunión en rosa viejo, blanco y dorado
+  comunionRosaMesa: photo('comunion13.webp', 'Comunión en rosa viejo, blanco y dorado con tul, neón "Mi primera comunión", cilindros dorados y sillón blanco', 'center 50%'),
+  comunionRosaArco: photo('comunion14.webp', 'Arco de globos rosa viejo, blanco y dorado con tul durazno y camino de flores blancas', 'center 45%'),
+  comunionRosaDetalle: photo('comunion15.webp', 'Mesas de mármol y dorado con candelabro de cristal frente al fondo del cáliz', 'center 50%'),
+  comunionRosaMesas: photo('comunion16.webp', 'Mesas redondas con mantel negro, sillas enfundadas y bajoplatos dorados', 'center 55%'),
+  comunionRosaSalon: photo('comunion17.webp', 'El salón vestido de negro y rosa viejo con la mesa de comunión al fondo', 'center 45%'),
+  comunionRosaSouvenirs: photo('comunion18.webp', 'Souvenirs en frasquitos sobre camino de raso rosa viejo', 'center 30%'),
+  comunionRosaBienvenida: photo('comunion19.webp', 'Cartel de bienvenida con tul durazno, flores y hiedra en un atril', 'center 40%'),
   comunionSouvenir: photo('baby6.webp', 'Souvenirs de frascos con angelitos de porcelana fría', 'center 40%'),
+
+  // Corporativos (fiesta de fin de año con sorteos)
+  corporativoPremios: photo('corporativo1.webp', 'Mesa de premios para el sorteo con electrodomésticos bajo un arco de globos plateados y violetas', 'center 55%'),
+  corporativoFiesta: photo('corporativo2.webp', 'Compañeros festejando en el salón con luces verdes', 'center 40%'),
+  corporativoGrupo: photo('corporativo3.webp', 'Foto grupal de los compañeros en el salón', 'center 55%'),
+  corporativoPista: photo('corporativo4.webp', 'La pista con luces rosas y los invitados bailando', 'center 40%'),
+  corporativoArco: photo('corporativo5.webp', 'Invitados posando frente al arco de globos plateados y violetas', 'center 40%'),
+  // Corporativos (jornada de empresa con coffee break)
+  corporativoReunion: photo('corporativo6.webp', 'Jornada de empresa con mesas redondas vestidas de blanco y una pantalla al fondo', 'center 50%'),
+  corporativoCoffee: photo('corporativo7.webp', 'Coffee break con platos de medialunas, masitas y alfajores sobre mantel negro', 'center 45%'),
+  corporativoRecepcion: photo('corporativo8.webp', 'Los asistentes llegando a la jornada entre las mesas redondas', 'center 50%'),
+  corporativoMesa: photo('corporativo9.webp', 'Mesa redonda con mantel blanco, cartel de mesa y copas lista para la jornada', 'center 45%'),
+  corporativoJornada: photo('corporativo10.webp', 'Asistentes reunidos en las mesas durante la jornada', 'center 35%'),
 
   // Despedidas
   despedidaLiving: photo('soltero1.webp', 'Living de puff blancos con luces violetas y verdes', 'center 55%'),

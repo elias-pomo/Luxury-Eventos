@@ -57,7 +57,8 @@ export default function About() {
           <Reveal delay={0.1} className="space-y-4 leading-relaxed text-muted">
             <p className="mt-6">{site.description}</p>
             <p>
-              Hace más de 5 años que acompañamos a familias de Tucumán en sus días más importantes. Desde la
+              Hace {site.yearsActive} años que acompañamos a familias de Tucumán en sus días más importantes, y ya
+              son más de {site.eventsDone} eventos. Desde la
               primera consulta hasta el último baile, {site.owner.split(' ')[0]} y su equipo están presentes para
               que todo salga tal como lo imaginaste.
             </p>

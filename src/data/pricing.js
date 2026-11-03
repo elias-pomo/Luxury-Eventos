@@ -5,8 +5,8 @@ export const pricesUpdatedAt = 'octubre de 2026'
 
 // Personal del salón (se trabaja solo con personal propio).
 export const staff = {
-  // 1 mozo hasta 30 invitados, 2 desde 31 y 3 desde 61 (máximo 3).
-  waiter: { name: 'Mozo', price: 30000, thresholds: [31, 61] },
+  // 1 mozo hasta 34 invitados, 2 desde 35 y 3 desde 72 (máximo 3).
+  waiter: { name: 'Mozo', price: 30000, thresholds: [35, 72] },
   // Uno por evento, sin importar la cantidad de invitados.
   kitchenHelper: { name: 'Ayudante de cocina', price: 30000 },
 }
@@ -101,6 +101,14 @@ export const candyBarPrices = {
   mediano: 125000,
   grande: 150000,
   completo: 200000,
+}
+
+// Depósito de garantía: igual para todos los eventos. Va APARTE del total
+// (no es un costo: se devuelve). Fernanda pide que figure sí o sí en el presupuesto.
+export const deposit = {
+  name: 'Depósito de garantía',
+  amount: 35000,
+  note: 'Se abona aparte del total. Cuando termina la fiesta se controla todo y, si no se rompió ni se perdió nada, se reintegra el importe en efectivo o por transferencia.',
 }
 
 // Aclaraciones que se muestran junto al total.
