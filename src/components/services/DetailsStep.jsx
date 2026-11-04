@@ -142,7 +142,7 @@ export default function DetailsStep({ date, shift, guests, schedule, category, w
         <p>
           {category?.staffIncluded ? (
             <>
-              <span className="font-semibold text-ink">Mozos y ayudante de cocina incluidos.</span> Trabajamos solo con
+              <span className="font-semibold text-ink">Servicio de mozos incluido.</span> Trabajamos solo con
               personal del salón.
             </>
           ) : (

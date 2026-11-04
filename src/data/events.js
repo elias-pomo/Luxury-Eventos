@@ -50,7 +50,7 @@ export const eventTypes = [
     icon: Baby,
     short: 'Un encuentro tierno y delicado para recibir al bebé con la familia y amigos.',
     tagline: 'Tierno y delicado',
-    perks: ['Decoración a medida', 'Mediodía o tarde'],
+    perks: ['Candy bar a elección', 'Mediodía o tarde'],
   },
   {
     id: 'revelacion',
@@ -59,7 +59,7 @@ export const eventTypes = [
     icon: Gift,
     short: 'El momento más esperado, ambientado para que la sorpresa sea inolvidable.',
     tagline: 'La gran sorpresa',
-    perks: ['Decoración a medida', 'Mediodía o tarde'],
+    perks: ['Candy bar a elección', 'Mediodía o tarde'],
   },
   {
     id: 'bautismos',
@@ -68,7 +68,7 @@ export const eventTypes = [
     icon: Droplets,
     short: 'Una celebración serena y luminosa para compartir este día tan especial.',
     tagline: 'Sereno y luminoso',
-    perks: ['Decoración a medida', 'Cocina y asador'],
+    perks: ['Candy bar a elección', 'Cocina y asador'],
   },
   {
     id: 'comuniones',
@@ -77,7 +77,7 @@ export const eventTypes = [
     icon: Church,
     short: 'Ambientaciones delicadas y cálidas para festejar en familia.',
     tagline: 'Cálido y en familia',
-    perks: ['Decoración a medida', 'Cocina y asador'],
+    perks: ['Candy bar a elección', 'Cocina y asador'],
   },
   {
     id: 'despedidas',
@@ -95,6 +95,6 @@ export const eventTypes = [
     icon: Briefcase,
     short: 'Cenas de fin de año, lanzamientos y celebraciones de empresa con un servicio impecable.',
     tagline: 'Servicio impecable',
-    perks: ['Mozos incluidos', 'Habilitación IPLA'],
+    perks: ['Mozos incluidos', 'Sonido y luces'],
   },
 ]

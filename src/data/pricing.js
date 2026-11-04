@@ -66,8 +66,7 @@ export const categories = [
         name: 'Plan Premium',
         price: 600000,
         includes: [
-          '3 mozos y ayudante de cocina',
-          'Habilitación IPLA (alcohol en horario nocturno)',
+          'Servicio de mozos incluido',
           'Sonido y luces',
           'Aire acondicionado y ventiladores',
           ...baseIncludes.filter((item) => item !== 'Equipo de sonido'),
