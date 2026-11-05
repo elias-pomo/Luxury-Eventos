@@ -61,6 +61,7 @@
 /* Secciones claras: fondo marfil con ondas y destellos dorados (public/images/fondo2.jpg) */
 @utility bg-luxe {
   --paper: #f8f1e4;
+  --tone: #f8f1e4;
   background-color: var(--paper);
   background-repeat: no-repeat;
   /* Celular: la imagen arriba a la izquierda y abajo a la derecha (480 px de alto), con un
@@ -82,6 +83,7 @@
 /* Igual que bg-luxe (se mantiene el nombre para las secciones centradas) */
 @utility bg-luxe-center {
   --paper: #f8f1e4;
+  --tone: #f8f1e4;
   background-color: var(--paper);
   background-repeat: no-repeat;
   /* Celular: la imagen arriba a la izquierda y abajo a la derecha (480 px de alto), con un
@@ -103,6 +105,8 @@
 /* Secciones crema: la misma imagen con un velo crema encima, para alternar con las marfil */
 @utility bg-luxe-cream {
   --paper: #f8f1e4;
+  /* Color resultante del papel con el velo crema (para el fundido entre secciones) */
+  --tone: #f3e8d5;
   background-color: var(--paper);
   background-repeat: no-repeat;
   /* Celular: la imagen arriba a la izquierda y abajo a la derecha (480 px de alto), con un
@@ -127,6 +131,7 @@
    así que se ubica la imagen dos veces, arriba a la izquierda y abajo a la derecha, para
    que se vean las ondas doradas. En escritorio cubre toda la sección. */
 @utility bg-luxe-dark {
+  --tone: #0a0a0a;
   background-color: #0a0a0a;
   background-image: var(--texture-dark), var(--texture-dark);
   background-repeat: no-repeat;
@@ -137,6 +142,69 @@
     background-size: cover;
     background-position: center;
   }
+}
+
+/* ===== Fundido entre secciones =====
+   Las secciones de cada página (hijas directas de <main>) se funden con la vecina en vez de
+   cortar en seco: en el borde, cada una toma el color intermedio entre las dos y de ahí vuelve
+   a su propio fondo (franja de --seam de alto, nunca más del 40 % de la sección). Las franjas
+   van detrás del contenido. El color de la vecina sale de su clase de fondo (bg-luxe*, o bg-ink
+   en las secciones con foto: Hero, PageHeader y CtaBanner). Junto a una sección con foto, la
+   otra hace todo el fundido desde el tinta, y la de foto solo oscurece su foto hasta el tinta
+   en el borde (franja corta y por encima de la foto). */
+main > section {
+  --seam: 4.5rem;
+  position: relative;
+  isolation: isolate;
+  @media (width >= 64rem) {
+    --seam: 7rem;
+  }
+}
+main > .bg-ink {
+  --tone: #1f1b16;
+}
+
+main > section + section::before,
+main > section:has(+ section)::after {
+  --c: color-mix(in oklab, var(--near, var(--tone)) var(--near-weight, 50%), var(--tone));
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  z-index: -1;
+  height: min(var(--seam), 40%);
+  pointer-events: none;
+}
+main > section + section::before {
+  --near: var(--tone-prev);
+  --near-weight: var(--weight-prev, 50%);
+  top: 0;
+  background: linear-gradient(to bottom, var(--c), color-mix(in oklab, var(--c) 50%, transparent) 35%, color-mix(in oklab, var(--c) 15%, transparent) 70%, transparent);
+}
+main > section:has(+ section)::after {
+  --near: var(--tone-next);
+  --near-weight: var(--weight-next, 50%);
+  bottom: 0;
+  background: linear-gradient(to top, var(--c), color-mix(in oklab, var(--c) 50%, transparent) 35%, color-mix(in oklab, var(--c) 15%, transparent) 70%, transparent);
+}
+
+/* Color de la sección anterior */
+main > :is(.bg-luxe, .bg-luxe-center) + section { --tone-prev: #f8f1e4; }
+main > .bg-luxe-cream + section { --tone-prev: #f3e8d5; }
+main > .bg-luxe-dark + section { --tone-prev: #0a0a0a; }
+main > .bg-ink + section { --tone-prev: #1f1b16; --weight-prev: 100%; }
+/* Color de la sección siguiente */
+main > section:has(+ :is(.bg-luxe, .bg-luxe-center)) { --tone-next: #f8f1e4; }
+main > section:has(+ .bg-luxe-cream) { --tone-next: #f3e8d5; }
+main > section:has(+ .bg-luxe-dark) { --tone-next: #0a0a0a; }
+main > section:has(+ .bg-ink) { --tone-next: #1f1b16; --weight-next: 100%; }
+
+/* Secciones con foto: franja corta de tinta puro encima de la foto */
+main > .bg-ink::before,
+main > .bg-ink::after {
+  --weight-prev: 0%;
+  --weight-next: 0%;
+  z-index: 1;
+  height: min(var(--seam), 3rem);
 }
 
 /* ===== Utilidades propias ===== */

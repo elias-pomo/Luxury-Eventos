@@ -80,12 +80,12 @@ export const eventTypes = [
     perks: ['Decoración a medida', 'Cocina y asador'],
   },
   {
-    id: 'despedidas',
-    photo: photos.despedidaLiving,
-    name: 'Despedidas de Solteros',
+    id: 'adultos',
+    photo: photos.adultosMesa,
+    name: 'Cumpleaños y Fiestas',
     icon: Martini,
-    short: 'La última gran fiesta antes del casamiento, con música, brindis y mucha diversión.',
-    tagline: 'La última gran fiesta',
+    short: 'Cumpleaños de adultos, aniversarios, despedidas y reuniones con amigos: música, brindis y una mesa a tu gusto.',
+    tagline: 'Entre grandes',
     perks: ['DJ opcional', 'Patio para fumadores'],
   },
   {

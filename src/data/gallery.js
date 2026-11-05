@@ -35,8 +35,8 @@ export const gallerySections = [
     eyebrow: 'Noches de gala',
     title: 'Fiestas para recordar toda la vida',
     subtitle:
-      'Quince, dieciocho, casamientos y despedidas: luces, pista y una puesta elegante para las noches más importantes.',
-    events: ['quince', 'dieciocho', 'casamientos', 'despedidas'],
+      'Quince, dieciocho, casamientos y cumpleaños de adultos: luces, pista y una puesta elegante para las noches más importantes.',
+    events: ['quince', 'dieciocho', 'casamientos', 'adultos'],
     dark: true,
     intro: {
       title: 'Noches que se viven a pleno',
@@ -44,7 +44,7 @@ export const gallerySections = [
       points: [
         `Hasta ${site.capacity} invitados en un ambiente íntimo`,
         `15, 18 y casamientos: ${shiftsText(site.shiftSchedules.premium).toLowerCase()}`,
-        `Despedidas: ${shiftsText(site.shiftSchedules.standard).toLowerCase()}`,
+        `Cumpleaños y fiestas: ${shiftsText(site.shiftSchedules.standard).toLowerCase()}`,
         'Mozos, sonido, luces y aire incluidos en los eventos premium',
         'Paquete Luxury con DJ del salón',
       ],
@@ -87,9 +87,9 @@ export const galleryEventDetails = {
     text: 'Un casamiento íntimo y elegante, con mesas vestidas de gala, luces cálidas y cada detalle cuidado para que ustedes solo se ocupen de disfrutar.',
     points: [`Hasta ${site.capacity} invitados`, 'Mesas de gala y centros de mesa', 'Pista para el vals y la fiesta'],
   },
-  despedidas: {
-    text: 'La última gran fiesta antes del “sí”. Música, brindis y un ambiente relajado para festejar a lo grande con amigos.',
-    points: ['DJ como extra', 'Brindis y música', 'Ambiente distendido'],
+  adultos: {
+    text: 'Tus 30, 40, 50 o los que cumplas, un aniversario, una despedida o una reunión con amigos: armamos la fiesta con la temática que elijas, música, brindis y una mesa para disfrutar sin apuro.',
+    points: ['Temática a elección', 'DJ como extra', 'Lunch y mesa dulce'],
   },
 }
 
@@ -131,17 +131,19 @@ export const galleryPhotos = [
   { image: photos.muestraQuince1, event: 'quince', caption: 'Mesa principal' },
   { image: photos.dieciochoMesa, event: 'dieciocho', caption: 'Negro y dorado' },
   { image: photos.bodaMesaDulce, event: 'casamientos', caption: 'Mesa dulce dorada' },
-  { image: photos.despedidaLiving, event: 'despedidas', caption: 'Living con luces' },
-  { image: photos.muestraDespedidas1, event: 'despedidas', caption: 'La pista' },
+  { image: photos.adultosMesa, event: 'adultos', caption: 'Noche ochentosa' },
+  { image: photos.adultosTorta, event: 'adultos', caption: 'Mis 50' },
   { image: photos.dieciochoFiesta, event: 'dieciocho', caption: 'La fiesta' },
   { image: photos.quinceSalon, event: 'quince', caption: 'El salón para la cena' },
   { image: photos.muestraQuince2, event: 'quince', caption: 'El vals' },
   { image: photos.bodaAbrazo, event: 'casamientos', caption: 'Los novios' },
-  { image: photos.muestraDespedidas2, event: 'despedidas', caption: 'El brindis' },
+  { image: photos.adultosCumpleanero, event: 'adultos', caption: 'El cumpleañero' },
   { image: photos.dieciochoTorta, event: 'dieciocho', caption: 'La torta' },
   { image: photos.bodaMesa, event: 'casamientos', caption: 'Columnas doradas' },
   { image: photos.dieciochoSalon, event: 'dieciocho', caption: 'La recepción' },
   { image: photos.bodaRamo, event: 'casamientos', caption: 'El ramo' },
-  { image: photos.muestraDespedidas3, event: 'despedidas', caption: 'Living y luces' },
+  { image: photos.adultosDetalle, event: 'adultos', caption: 'Brillo disco' },
+  { image: photos.adultosLiving, event: 'adultos', caption: 'Living con luces' },
+  { image: photos.adultosLunch, event: 'adultos', caption: 'Mesa de lunch' },
   { image: photos.dieciochoLunch, event: 'dieciocho', caption: 'Mesa de lunch' },
 ]

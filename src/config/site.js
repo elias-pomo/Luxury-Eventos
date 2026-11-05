@@ -41,7 +41,7 @@ export const site = {
   // indica cuál usa con `schedule`.
   shiftSchedules: {
     standard: {
-      label: 'Infantiles, familiares y despedidas',
+      label: 'Infantiles, familiares y adultos',
       shifts: [
         { label: 'Turno mediodía', time: '12 a 17 h' },
         { label: 'Turno tarde', time: '17 a 22 h' },

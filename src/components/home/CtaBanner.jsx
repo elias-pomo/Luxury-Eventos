@@ -16,7 +16,7 @@ export default function CtaBanner() {
   const y = useTransform(scrollYProgress, [0, 1], ['-12%', '12%'])
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-28 sm:py-36">
+    <section ref={ref} className="relative overflow-hidden bg-ink py-28 sm:py-36">
       <motion.img
         src={images.table.src}
         alt=""

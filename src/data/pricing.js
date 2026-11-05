@@ -49,8 +49,8 @@ export const categories = [
     plans: [{ id: 'salon', name: 'Salón', price: 350000, includes: baseIncludes, extras: ['aire', 'dj', 'candy'] }],
   },
   {
-    id: 'despedida',
-    events: ['despedidas'],
+    id: 'adultos',
+    events: ['adultos'],
     schedule: 'standard',
     staffIncluded: false,
     plans: [{ id: 'salon', name: 'Salón', price: 350000, includes: baseIncludes, extras: ['aire', 'dj', 'candy'] }],
