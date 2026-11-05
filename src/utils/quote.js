@@ -24,7 +24,7 @@ export function buildQuote({ eventId, planId, guests, aire, dj, candyId }) {
   const lines = [{ kind: 'venue', label: plan.name, amount: plan.price }]
 
   if (category.staffIncluded) {
-    lines.push({ kind: 'staff', label: 'Mozos y ayudante de cocina', amount: 0, included: true })
+    lines.push({ kind: 'staff', label: 'Servicio de mozos', amount: 0, included: true })
   } else {
     lines.push({ kind: 'staff', label: `${waiters} ${waiters === 1 ? 'mozo' : 'mozos'}`, amount: waiters * staff.waiter.price })
     lines.push({ kind: 'staff', label: staff.kitchenHelper.name, amount: staff.kitchenHelper.price })

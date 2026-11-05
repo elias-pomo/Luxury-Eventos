@@ -3,6 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { images } from '../../data/images'
 import { site } from '../../config/site'
 import { whatsappLink } from '../../utils/whatsapp'
+import { imgProps } from '../../utils/img'
 import { WhatsAppIcon } from '../icons/SocialIcons'
 import Button from '../ui/Button'
 import Reveal from '../ui/Reveal'
@@ -18,9 +19,10 @@ export default function CtaBanner() {
   return (
     <section ref={ref} className="relative overflow-hidden bg-ink py-28 sm:py-36">
       <motion.img
-        src={images.table.src}
+        {...imgProps(images.table)}
         alt=""
         loading="lazy"
+        decoding="async"
         style={{ y: reduce ? 0 : y, objectPosition: images.table.position }}
         className="absolute inset-x-0 -inset-y-[14%] h-[128%] w-full object-cover"
       />
@@ -28,7 +30,7 @@ export default function CtaBanner() {
       <Sparkles />
 
       <Reveal className="container-page relative z-10 flex flex-col items-center text-center text-white">
-        <span className="mb-5 text-xs tracking-[0.4em] text-gold-light uppercase">Reservá tu fecha</span>
+        <span className="mb-5 type-eyebrow text-gold-light">Reservá tu fecha</span>
         <h2 className="max-w-3xl text-4xl leading-tight sm:text-6xl">
           ¿Tenés una fecha en mente? <em className="text-gold-shimmer">Hagámosla realidad</em>
         </h2>
@@ -36,10 +38,10 @@ export default function CtaBanner() {
           Armá tu presupuesto online en pocos minutos o escribinos para consultar disponibilidad y coordinar una
           visita al salón. Te respondemos todos los días.
         </p>
-        <div className="mt-8 flex flex-col gap-3 text-xs tracking-[0.2em] text-gold-light uppercase sm:flex-row sm:gap-10">
+        <div className="mt-8 flex flex-col gap-3 type-label text-gold-light sm:flex-row sm:gap-10">
           {Object.values(site.shiftSchedules).map(({ label, shifts }) => (
             <p key={label}>
-              <span className="block text-[10px] tracking-[0.25em] text-white/60">{label}</span>
+              <span className="block text-xs tracking-[0.16em] text-white/60">{label}</span>
               <span className="mt-1 block">{shifts.map((s) => s.time).join(' · ')}</span>
             </p>
           ))}

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { navLinks, site } from '../../config/site'
 import Button from '../ui/Button'
+import { ease } from '../../utils/motion'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -92,7 +93,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: '100dvh' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.4, ease: ease }}
             className="overflow-hidden bg-ivory md:hidden"
           >
             <ul className="flex flex-col items-center gap-8 pt-16">

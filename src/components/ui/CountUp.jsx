@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { animate, useInView, useReducedMotion } from 'motion/react'
+import { ease } from '../../utils/motion'
 
 // Cuenta desde 0 hasta el número de `value` al entrar en pantalla, respetando
 // lo que tenga antes y después (ej: '+130', '100%').
@@ -16,7 +17,7 @@ export default function CountUp({ value, className = '' }) {
     if (!inView || !number || reduce) return
     const controls = animate(0, Number(number), {
       duration: 1.6,
-      ease: [0.22, 1, 0.36, 1],
+      ease: ease,
       onUpdate: (n) => setCurrent(Math.round(n)),
     })
     return () => controls.stop()

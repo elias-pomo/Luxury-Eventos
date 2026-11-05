@@ -6,11 +6,13 @@ import { site } from '../../config/site'
 import Button from '../ui/Button'
 import Sparkles from '../ui/Sparkles'
 import SplitText from '../ui/SplitText'
+import { ease } from '../../utils/motion'
+import { imgProps, preloadImage } from '../../utils/img'
 
 const fadeUp = (delay) => ({
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 1, delay, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 1, delay, ease: ease },
 })
 
 // Fotos que se van alternando en la portada (cada una con su zoom lento).
@@ -36,14 +38,20 @@ export default function Hero() {
 
   const slide = slides[index]
 
+  // La foto que sigue se baja con anticipación: al cambiar ya está lista y no parpadea.
+  useEffect(() => {
+    preloadImage(slides[(index + 1) % slides.length])
+  }, [index])
+
   return (
     <section ref={ref} className="relative flex h-dvh min-h-150 items-center justify-center overflow-hidden bg-ink">
       <motion.div style={{ y: reduce ? 0 : photoY }} className="absolute -inset-y-[16%] inset-x-0">
         <AnimatePresence initial={false}>
           <motion.img
             key={slide.src}
-            src={slide.src}
+            {...imgProps(slide)}
             alt={slide.alt}
+            decoding="async"
             style={{ objectPosition: slide.position }}
             initial={{ opacity: 0, scale: reduce ? 1 : 1.18 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -61,12 +69,12 @@ export default function Hero() {
         style={{ y: reduce ? 0 : textY, opacity: reduce ? 1 : textOpacity }}
         className="container-page relative z-10 flex flex-col items-center text-center text-white"
       >
-        <motion.span {...fadeUp(0.2)} className="mb-6 flex items-center gap-4 text-[11px] tracking-[0.35em] text-gold-light uppercase sm:text-xs sm:tracking-[0.5em]">
+        <motion.span {...fadeUp(0.2)} className="mb-6 flex items-center gap-4 type-label sm:type-eyebrow text-gold-light">
           <motion.span
             aria-hidden="true"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.5, ease: ease }}
             className="hidden h-px w-12 origin-right bg-gold-light sm:block"
           />
           Salón de eventos · {site.address.city.split(',')[0]}
@@ -74,7 +82,7 @@ export default function Hero() {
             aria-hidden="true"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.5, ease: ease }}
             className="hidden h-px w-12 origin-left bg-gold-light sm:block"
           />
         </motion.span>
@@ -91,7 +99,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div {...fadeUp(1.3)} className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <Button to="/servicios">Armá tu evento</Button>
+          <Button to="/servicios" className="btn-sheen">Armá tu evento</Button>
           <Button to="/galeria" variant="light">Conocé el salón</Button>
         </motion.div>
       </motion.div>

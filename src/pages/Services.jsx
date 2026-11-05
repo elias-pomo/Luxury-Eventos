@@ -16,6 +16,7 @@ import { formatPrice } from '../utils/format'
 import { buildQuote, findCategory } from '../utils/quote'
 import { clearSaved, emptySelection, loadSaved, paramsToSelection, save, selectionToParams } from '../utils/quoteState'
 import { quoteMessage, whatsappLink } from '../utils/whatsapp'
+import Section from '../components/ui/Section'
 
 // Al entrar: si la URL trae algo (?tipo= del Inicio y la Galería, ?candy= de "Sumalo a
 // tu evento", o un presupuesto compartido completo) manda la URL; si no, se retoma lo
@@ -126,7 +127,7 @@ export default function Services() {
         image={images.party}
       />
 
-      <section className="bg-luxe-cream py-14 sm:py-24">
+      <Section tone="cream" spacing="tight">
         <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-14">
           <div className="space-y-10">
             <Step number={1} title="¿Qué vas a festejar?" subtitle="Elegí el tipo de evento para ver qué incluye y su precio.">
@@ -194,7 +195,7 @@ export default function Services() {
             />
           </div>
         </div>
-      </section>
+      </Section>
 
       <MobileTotalBar total={quote?.total ?? 0} visible={!!quote && showBar} onView={scrollToSummary} />
     </>

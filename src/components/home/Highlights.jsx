@@ -1,11 +1,10 @@
-import { useRef, useState } from 'react'
-import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react'
+import { useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { badgeLabels, highlights, highlightsIntro, highlightsNote } from '../../data/highlights'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
-
-const ease = [0.22, 1, 0.36, 1]
-const AUTOPLAY_S = 5
+import { ease } from '../../utils/motion'
+import Section from '../ui/Section'
 
 const badgeStyles = {
   included: 'bg-gold/20 text-gold-light',
@@ -15,30 +14,22 @@ const badgeStyles = {
 }
 
 // Lo que tiene el salón, compacto: una grilla de íconos (3 columnas también en celular)
-// y un panel que muestra el detalle del elegido. Avanza solo mientras está a la vista
-// hasta que la persona toca uno; con "reducir movimiento" no avanza.
+// y un panel que muestra el detalle del elegido. Cambia solo cuando la persona toca un ícono.
 export default function Highlights() {
   const [active, setActive] = useState(0)
-  const [auto, setAuto] = useState(true)
-  const ref = useRef(null)
-  const inView = useInView(ref, { amount: 0.5 })
   const reduce = useReducedMotion()
-  const running = auto && inView && !reduce
 
   const item = highlights[active]
   const Icon = item.icon
 
-  const choose = (i) => {
-    setAuto(false)
-    setActive(i)
-  }
+  const choose = (i) => setActive(i)
 
   return (
-    <section className="bg-luxe-cream py-20 sm:py-28">
+    <Section tone="light">
       <div className="container-page">
         <SectionTitle eyebrow="El salón" title="Todo lo que tu evento necesita" subtitle={highlightsIntro} />
 
-        <div ref={ref} className="mx-auto mt-10 grid max-w-5xl gap-4 sm:mt-14 lg:grid-cols-[1.1fr_1fr] lg:gap-8">
+        <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:mt-14 lg:grid-cols-[1.1fr_1fr] lg:gap-8">
           {/* Grilla de íconos */}
           <Reveal className="grid grid-cols-3 gap-2.5 sm:gap-4">
             {highlights.map(({ icon: TileIcon, title }, i) => {
@@ -52,7 +43,7 @@ export default function Highlights() {
                   onClick={() => choose(i)}
                   whileTap={{ scale: 0.95 }}
                   className={`relative flex min-h-26 flex-col items-center justify-center gap-2 card-luxe card-luxe-sm px-1.5 py-3 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:min-h-32 sm:gap-3 ${
-                    on ? 'border-gold! text-white [--cc:#fff]' : 'text-ink'
+                    on ? 'border-gold! text-ink [--cc:var(--color-ink)]' : 'text-ink'
                   }`}
                 >
                   {on && (
@@ -67,9 +58,9 @@ export default function Highlights() {
                     transition={{ duration: 0.5 }}
                     className="relative"
                   >
-                    <TileIcon className={`size-6 sm:size-7 ${on ? 'text-white' : 'text-gold-dark'}`} strokeWidth={1.5} />
+                    <TileIcon className={`size-6 sm:size-7 ${on ? 'text-ink' : 'text-gold-dark'}`} strokeWidth={1.5} />
                   </motion.span>
-                  <span className="relative text-[11.5px] leading-tight font-medium sm:text-sm">{title}</span>
+                  <span className="relative text-xs leading-tight font-medium sm:text-sm">{title}</span>
                 </motion.button>
               )
             })}
@@ -107,7 +98,7 @@ export default function Highlights() {
                       <Icon className="size-6" strokeWidth={1.5} />
                     </span>
                     <span
-                      className={`rounded-full px-3 py-1 text-[10px] font-semibold tracking-[0.15em] uppercase ${badgeStyles[item.badge]}`}
+                      className={`rounded-full px-3 py-1 type-label ${badgeStyles[item.badge]}`}
                     >
                       {badgeLabels[item.badge]}
                     </span>
@@ -125,22 +116,10 @@ export default function Highlights() {
                 <span className="text-gold-light">{active + 1}</span> / {highlights.length}
               </p>
 
-              {/* Hilo que se llena mientras dura cada uno (solo en avance automático) */}
-              {running && (
-                <motion.span
-                  key={active}
-                  aria-hidden="true"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: AUTOPLAY_S, ease: 'linear' }}
-                  onAnimationComplete={() => setActive((i) => (i + 1) % highlights.length)}
-                  className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-gold-light"
-                />
-              )}
             </div>
           </Reveal>
         </div>
       </div>
-    </section>
+    </Section>
   )
 }

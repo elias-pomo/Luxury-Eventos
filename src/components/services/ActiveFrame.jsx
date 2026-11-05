@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { ease } from '../../utils/motion'
 
 // Marco dorado de la opción elegida. Las opciones de un mismo grupo comparten
 // `layoutId`, así el marco se desliza de una a otra al cambiar la elección.
@@ -21,6 +22,6 @@ export const staggerGroup = {
 }
 export const staggerItem = {
   hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: ease } },
 }
 export const inViewOnce = { once: true, margin: '0px 0px -60px 0px' }

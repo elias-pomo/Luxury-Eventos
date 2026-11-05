@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { CalendarDays, Clock, RotateCcw, Share2, Sparkles, Users } from 'lucide-react'
-import { pricesUpdatedAt, quoteNotes } from '../../data/pricing'
+import { CalendarDays, Clock, RotateCcw, Share2, ShieldCheck, Sparkles, Users } from 'lucide-react'
+import { deposit, pricesUpdatedAt, quoteNotes } from '../../data/pricing'
 import { formatDate, formatPrice } from '../../utils/format'
 import { WhatsAppIcon } from '../icons/SocialIcons'
 import AnimatedPrice from '../ui/AnimatedPrice'
@@ -10,14 +10,14 @@ import { fieldClass } from './DetailsStep'
 // Tarjeta marfil con doble marco dorado (como el arco de "Nosotros") y el total
 // sobre una franja crema con el enrejado art déco del sitio.
 const secondaryButton =
-  'inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-gold/60 px-2 py-1.5 text-[10px] font-semibold tracking-[0.12em] text-gold-dark uppercase transition-colors hover:bg-gold hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold'
+  'inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-gold/60 px-2 py-1.5 text-[10px] font-semibold tracking-[0.12em] text-gold-dark uppercase transition-colors hover:bg-gold hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold'
 
 export default function QuoteSummary({ ref, quote, date, shift, guests, name, error, onNameChange, onSend, onShare, shareStatus, onReset }) {
   return (
-    <div ref={ref} className="bg-luxe-center relative rounded-sm border border-gold/50 bg-ivory p-6 shadow-soft sm:p-8">
+    <div ref={ref} className="relative rounded-sm border border-gold/50 bg-ivory p-6 shadow-soft sm:p-8">
       <span aria-hidden="true" className="pointer-events-none absolute inset-2 rounded-[1px] border border-gold/25" />
 
-      <p className="relative flex items-center justify-center gap-3 text-xs tracking-[0.35em] text-gold-dark uppercase">
+      <p className="relative flex items-center justify-center gap-3 type-eyebrow text-gold-dark">
         <span className="h-px w-8 bg-gold" />
         Tu presupuesto
         <span className="h-px w-8 bg-gold" />
@@ -27,7 +27,7 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
         <div className="relative mt-6 flex flex-col items-center text-center">
           <motion.span
             animate={{ rotate: [0, 12, -8, 0], scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.5 }}
+            transition={{ duration: 2, delay: 0.3 }}
             className="flex size-12 items-center justify-center rounded-full border border-gold/40 text-gold-dark"
           >
             <Sparkles className="size-5" />
@@ -83,7 +83,7 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
                   <span className="text-muted">{label}</span>
                   <span aria-hidden="true" className="min-w-4 flex-1 border-b border-dotted border-gold/40" />
                   {included ? (
-                    <span className="shrink-0 rounded-full bg-gold/15 px-2.5 py-0.5 text-[10px] font-semibold tracking-[0.15em] text-gold-dark uppercase">
+                    <span className="shrink-0 rounded-full bg-gold/15 px-2.5 py-0.5 type-label text-gold-dark">
                       Incluidos
                     </span>
                   ) : (
@@ -105,8 +105,20 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
               className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-gold-light/60 to-transparent"
             />
             <div className="relative flex items-end justify-between gap-4">
-              <span className="text-[11px] tracking-[0.25em] text-muted uppercase">Total estimado</span>
+              <span className="type-label text-muted">Total estimado</span>
               <AnimatedPrice value={quote.total} className="font-display text-4xl text-gold-gradient sm:text-5xl" />
+            </div>
+          </div>
+
+          {/* Depósito de garantía: aparte del total porque se devuelve. */}
+          <div className="mt-4 flex gap-3 rounded-sm border border-dashed border-gold/50 bg-white px-4 py-3.5">
+            <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-gold-dark" />
+            <div className="min-w-0 flex-1">
+              <p className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                <span className="type-label text-ink">{deposit.name}</span>
+                <span className="font-display text-xl text-ink">{formatPrice(deposit.amount)}</span>
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-muted">{deposit.note}</p>
             </div>
           </div>
         </div>
@@ -120,7 +132,7 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
         noValidate
         className="relative mt-7"
       >
-        <label htmlFor="quote-name" className="mb-2 block text-[11px] font-semibold tracking-[0.2em] text-muted uppercase">
+        <label htmlFor="quote-name" className="mb-2 block type-label text-muted">
           Tu nombre
         </label>
         <input
@@ -150,7 +162,7 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
           type="submit"
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.98 }}
-          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-xs font-semibold tracking-[0.2em] text-white uppercase shadow-gold transition-colors duration-300 hover:bg-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 type-label text-ink shadow-gold transition-colors duration-300 hover:bg-gold-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
         >
           <WhatsAppIcon className="size-4" /> Enviar por WhatsApp
         </motion.button>
@@ -167,7 +179,7 @@ export default function QuoteSummary({ ref, quote, date, shift, guests, name, er
         </div>
       )}
 
-      <ul className="relative mt-6 space-y-1.5 text-[11px] leading-relaxed text-muted/80">
+      <ul className="relative mt-6 space-y-1.5 text-xs leading-relaxed text-muted/80">
         <li>Total estimado. Precios actualizados a {pricesUpdatedAt}; la reserva se confirma por WhatsApp.</li>
         {quoteNotes.map((note) => (
           <li key={note}>{note}</li>

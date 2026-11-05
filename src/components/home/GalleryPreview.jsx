@@ -5,6 +5,9 @@ import { images } from '../../data/images'
 import Button from '../ui/Button'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
+import { ease } from '../../utils/motion'
+import { imgProps } from '../../utils/img'
+import Section from '../ui/Section'
 
 const preview = [
   { image: images.ballroom, label: 'Mesas de gala', className: 'col-span-2 sm:row-span-2', shift: 10 },
@@ -14,11 +17,10 @@ const preview = [
   { image: images.toast, label: 'Eventos de día', shift: 9 },
 ]
 
-const ease = [0.22, 1, 0.36, 1]
 
 export default function GalleryPreview() {
   return (
-    <section className="bg-luxe-dark py-24 sm:py-32">
+    <Section tone="dark" art>
       <div className="container-page">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionTitle
@@ -47,7 +49,7 @@ export default function GalleryPreview() {
           </Button>
         </div>
       </div>
-    </section>
+    </Section>
   )
 }
 
@@ -69,7 +71,7 @@ function Tile({ image, label, className = '', shift, index }) {
       className={`group relative overflow-hidden rounded-sm ${className}`}
     >
       <motion.img
-        src={image.src}
+        {...imgProps(image, '(min-width: 640px) 50vw, 100vw')}
         alt={image.alt}
         loading="lazy"
         decoding="async"

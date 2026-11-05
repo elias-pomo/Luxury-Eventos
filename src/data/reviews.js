@@ -1,3 +1,6 @@
+// Pasar a true cuando las reseñas sean reales: recién ahí se muestran en el Inicio.
+export const reviewsReady = false
+
 // Reseñas de clientes para la sección de testimonios del Inicio.
 //
 // ⚠️ TODO: estas reseñas son EJEMPLOS para maquetar. Antes de publicar,

@@ -48,7 +48,7 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
                 >
                   <span
                     className={`flex size-11 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 ${
-                      active ? 'border-gold bg-gold text-white' : 'border-gold/40 text-gold-dark'
+                      active ? 'border-gold bg-gold text-ink' : 'border-gold/40 text-gold-dark'
                     }`}
                   >
                     <motion.span animate={active ? activeMotion : { rotate: 0, y: 0 }} className="flex">
@@ -106,7 +106,7 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
                 onClick={() => onChange({ planId: luxury.id, dj: false })}
                 whileHover={{ x: 2 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gold px-5 text-xs font-semibold tracking-[0.15em] text-white uppercase shadow-gold"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gold px-5 type-label text-ink shadow-gold"
               >
                 Pasar a Luxury <ArrowRight className="size-3.5" />
               </motion.button>
@@ -121,7 +121,7 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
           <p className="mb-4 text-xs text-muted">
             Exclusivo del salón.{' '}
             <Link to="/galeria#candy-bar" className="font-semibold text-gold-dark underline-offset-4 hover:underline">
-              Ver los estilos en la galería
+              Ver los tamaños en la galería
             </Link>
           </p>
           <motion.div
@@ -133,7 +133,7 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
             viewport={inViewOnce}
             className="grid gap-3 sm:grid-cols-2"
           >
-            {[{ id: '', name: 'Sin candy bar', idealFor: 'Lo podés sumar más adelante' }, ...candyBars].map(({ id, name, idealFor }) => {
+            {[{ id: '', name: 'Sin candy bar', summary: 'Lo podés sumar más adelante' }, ...candyBars].map(({ id, name, summary }) => {
               const active = values.candyId === id
               return (
                 <motion.button
@@ -156,7 +156,7 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
                       <span className="font-display text-xl">{name}</span>
                       {id && <span className="shrink-0 text-sm font-semibold text-gold-dark">{formatPrice(candyBarPrices[id])}</span>}
                     </span>
-                    <span className="block text-xs text-muted">{idealFor}</span>
+                    <span className="block text-xs text-muted">{summary}</span>
                   </span>
                 </motion.button>
               )

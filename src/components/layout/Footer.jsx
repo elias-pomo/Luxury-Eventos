@@ -35,7 +35,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="mb-5 text-xs font-semibold tracking-[0.3em] text-gold uppercase">Navegación</p>
+          <p className="mb-5 type-eyebrow text-gold">Navegación</p>
           <ul className="space-y-3 text-sm">
             {navLinks.map(({ to, label }) => (
               <li key={to}>
@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="mb-5 text-xs font-semibold tracking-[0.3em] text-gold uppercase">Contacto</p>
+          <p className="mb-5 type-eyebrow text-gold">Contacto</p>
           <ul className="space-y-4 text-sm">
             <li className="flex gap-3">
               <MapPin className="size-4 shrink-0 text-gold" />

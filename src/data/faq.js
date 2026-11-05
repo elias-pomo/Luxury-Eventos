@@ -1,5 +1,5 @@
 import { site } from '../config/site'
-import { extras, quoteNotes, staff } from './pricing'
+import { deposit, extras, quoteNotes, staff } from './pricing'
 import { formatPrice } from '../utils/format'
 
 // Preguntas frecuentes de Contacto. Todo sale de datos reales del salón
@@ -37,7 +37,11 @@ export const faqs = [
   },
   {
     question: '¿Puedo sumar DJ o candy bar?',
-    answer: `Sí. El DJ cuesta ${formatPrice(extras.dj.price)} (viene incluido en el Paquete Luxury) y el candy bar tiene tres opciones. Los sumás directamente en el cotizador y ves el total al instante.`,
+    answer: `Sí. El DJ cuesta ${formatPrice(extras.dj.price)} (viene incluido en el Paquete Luxury) y el candy bar viene en cuatro tamaños: pequeño, mediano, grande y completo. Los sumás directamente en el cotizador y ves el total al instante.`,
+  },
+  {
+    question: '¿Hay que dejar un depósito?',
+    answer: `Sí, un ${deposit.name.toLowerCase()} de ${formatPrice(deposit.amount)}, igual para todos los eventos y aparte del presupuesto. Cuando termina la fiesta se controla todo y, si no se rompió ni se perdió nada, se te devuelve en efectivo o por transferencia.`,
   },
   {
     question: '¿Cómo reservo mi fecha?',

@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react'
+import { ease } from '../../utils/motion'
 
-const ease = [0.22, 1, 0.36, 1]
 
 // Texto que sube palabra por palabra desde una "máscara" (efecto de título de revista).
 // `wordClassName` se aplica a cada palabra (ej: el dorado con brillo).

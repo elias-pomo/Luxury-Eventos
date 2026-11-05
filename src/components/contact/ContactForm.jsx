@@ -6,6 +6,7 @@ import { track } from '../../utils/analytics'
 import { todayISO } from '../../utils/format'
 import { contactMessage, whatsappLink } from '../../utils/whatsapp'
 import Button from '../ui/Button'
+import Card from '../ui/Card'
 
 const empty = { name: '', date: '', message: '' }
 
@@ -35,7 +36,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="card-luxe relative p-5 sm:p-8">
+    <Card as="form" onSubmit={onSubmit} noValidate className="p-5 sm:p-8">
       <h3 className="text-3xl">{contactForm.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted">{contactForm.subtitle}</p>
 
@@ -72,14 +73,14 @@ export default function ContactForm() {
       <Button type="submit" className="mt-6 w-full">
         <Send className="size-4" /> {contactForm.submit}
       </Button>
-    </form>
+    </Card>
   )
 }
 
 function Field({ id, label, error, children }) {
   return (
     <div>
-      <label htmlFor={`contact-${id}`} className="mb-2 block text-[11px] font-semibold tracking-[0.2em] text-muted uppercase">
+      <label htmlFor={`contact-${id}`} className="mb-2 block type-label text-muted">
         {label}
       </label>
       {children}

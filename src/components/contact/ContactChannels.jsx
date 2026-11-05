@@ -6,6 +6,7 @@ import { FacebookIcon, InstagramIcon, WhatsAppIcon } from '../icons/SocialIcons'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
 import ContactForm from './ContactForm'
+import Section from '../ui/Section'
 
 const instagramHandle = `@${site.social.instagram.replace(/\/+$/, '').split('/').pop()}`
 
@@ -25,7 +26,7 @@ const channels = [
 
 export default function ContactChannels() {
   return (
-    <section id="escribinos" className="bg-luxe-cream scroll-mt-20 py-20 sm:py-28">
+    <Section id="escribinos" tone="cream" className="scroll-mt-20">
       <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <SectionTitle
@@ -47,13 +48,13 @@ export default function ContactChannels() {
                 >
                   <span
                     className={`flex size-11 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-                      featured ? 'bg-gold text-white' : 'border border-gold/40 text-gold-dark group-hover:bg-gold group-hover:text-white'
+                      featured ? 'bg-gold text-ink' : 'border border-gold/40 text-gold-dark group-hover:bg-gold group-hover:text-ink'
                     }`}
                   >
                     <Icon className="size-5" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className={`block text-[11px] tracking-[0.2em] uppercase ${featured ? 'text-gold-light' : 'text-muted'}`}>
+                    <span className={`block type-label ${featured ? 'text-gold-light' : 'text-muted'}`}>
                       {label}
                     </span>
                     <span className="block truncate font-display text-xl">{detail}</span>
@@ -86,6 +87,6 @@ export default function ContactChannels() {
           <ContactForm />
         </Reveal>
       </div>
-    </section>
+    </Section>
   )
 }

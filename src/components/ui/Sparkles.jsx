@@ -1,6 +1,9 @@
+import { useRef } from 'react'
+import { useInView } from 'motion/react'
+
 // Destellos dorados que suben flotando. Posiciones fijas (sin azar en cada render)
 // y animación solo con CSS, que es barata incluso en celulares. Los últimos se
-// ocultan en pantallas chicas.
+// ocultan en pantallas chicas. Solo se animan mientras la sección está en pantalla.
 const sparkles = [
   { left: 6, size: 5, delay: 0, time: 9, dx: 14, rise: 220 },
   { left: 14, size: 3, delay: 3.2, time: 8, dx: -10, rise: 180 },
@@ -17,9 +20,12 @@ const sparkles = [
 ]
 
 export default function Sparkles({ className = '', count = sparkles.length }) {
+  const ref = useRef(null)
+  const inView = useInView(ref)
+
   return (
-    <div aria-hidden="true" className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
-      {sparkles.slice(0, count).map(({ left, size, delay, time, dx, rise }, i) => (
+    <div ref={ref} aria-hidden="true" className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
+      {inView && sparkles.slice(0, count).map(({ left, size, delay, time, dx, rise }, i) => (
         <span
           key={i}
           className={`sparkle absolute bottom-0 rotate-45 rounded-[1px] bg-gold-light opacity-0 shadow-[0_0_10px_2px_rgb(227_203_143/0.7)] ${i > 6 ? 'hidden sm:block' : ''}`}
