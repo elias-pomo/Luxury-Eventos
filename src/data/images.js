@@ -24,7 +24,7 @@ export const images = {
   },
   ballroom: {
     src: '/images/ballroom.webp',
-    alt: 'Mesa elegante con mantel negro, copas y sitiales dorados',
+    alt: 'Mesa redonda con mantel negro, copas, individuales tejidos y sillas enfundadas',
     position: 'center 55%',
   },
   table: {

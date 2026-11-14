@@ -1,5 +1,4 @@
 import { Baby, Balloon, Briefcase, Church, Crown, Droplets, Gem, Gift, Martini, PartyPopper } from 'lucide-react'
-import { images } from './images'
 import { photos } from './photos'
 
 // Tipos de evento del salón. Se usan en el Inicio, la Galería y el cotizador
@@ -90,7 +89,7 @@ export const eventTypes = [
   },
   {
     id: 'corporativos',
-    photo: images.table,
+    photo: photos.corporativoReunion,
     name: 'Eventos Corporativos',
     icon: Briefcase,
     short: 'Cenas de fin de año, lanzamientos y celebraciones de empresa con un servicio impecable.',

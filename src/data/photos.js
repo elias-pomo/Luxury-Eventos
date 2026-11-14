@@ -81,14 +81,6 @@ export const photos = {
   comunionRosaBienvenida: photo('comunion19.webp', 'Cartel de bienvenida con tul durazno, flores y hiedra en un atril', 'center 40%'),
   comunionSouvenir: photo('baby6.webp', 'Souvenirs de frascos con angelitos de porcelana fría', 'center 40%'),
 
-  // Cumpleaños y fiestas de adultos
-  adultosMesa: photo('mayores.webp', 'Mesa dulce de cumpleaños ochentoso con bola de boliche, discos de vinilo, globos plateados y neón "Happy Birthday"', 'center 50%'),
-  adultosCumpleanero: photo('mayores4.webp', 'El cumpleañero con los pulgares arriba frente a la mesa dulce de los 80', 'center 45%'),
-  adultosTorta: photo('mayores3.webp', 'Torta "Mis 50 Alejandro" con bolitas espejadas y la silueta de un bailarín de fondo', 'center 60%'),
-  adultosDetalle: photo('mayores2.webp', 'Torta sobre mantel de lentejuelas plateadas con bola de boliche y masas finas', 'center 40%'),
-  adultosLunch: photo('mayores5.webp', 'Mesa de lunch con pan, salsas y carne asada', 'center 55%'),
-  adultosLiving: photo('soltero1.webp', 'Living de puff blancos con luces violetas y verdes', 'center 55%'),
-
   // Corporativos (fiesta de fin de año con sorteos)
   corporativoPremios: photo('corporativo1.webp', 'Mesa de premios para el sorteo con electrodomésticos bajo un arco de globos plateados y violetas', 'center 55%'),
   corporativoFiesta: photo('corporativo2.webp', 'Compañeros festejando en el salón con luces verdes', 'center 40%'),
@@ -101,6 +93,9 @@ export const photos = {
   corporativoRecepcion: photo('corporativo8.webp', 'Los asistentes llegando a la jornada entre las mesas redondas', 'center 50%'),
   corporativoMesa: photo('corporativo9.webp', 'Mesa redonda con mantel blanco, cartel de mesa y copas lista para la jornada', 'center 45%'),
   corporativoJornada: photo('corporativo10.webp', 'Asistentes reunidos en las mesas durante la jornada', 'center 35%'),
+
+  // Despedidas
+  despedidaLiving: photo('soltero1.webp', 'Living de puff blancos con luces violetas y verdes', 'center 55%'),
 
   // Candy bar
   candySafariMesa: photo('candy2.webp', 'Mesa dulce safari con alfajores, trufas y tarta', 'center 50%'),
@@ -125,4 +120,7 @@ export const photos = {
   // TODO: fotos de muestra (ilustraciones) hasta tener fotos reales para estos lugares.
   muestraQuince1: photo('muestra/quince-1.svg', 'Foto de muestra: mesa principal de 15 años'),
   muestraQuince2: photo('muestra/quince-2.svg', 'Foto de muestra: el vals de 15 años'),
+  muestraDespedidas1: photo('muestra/despedidas-1.svg', 'Foto de muestra: la pista en una despedida'),
+  muestraDespedidas2: photo('muestra/despedidas-2.svg', 'Foto de muestra: el brindis en una despedida'),
+  muestraDespedidas3: photo('muestra/despedidas-3.svg', 'Foto de muestra: living con luces en una despedida'),
 }

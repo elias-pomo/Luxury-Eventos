@@ -35,8 +35,8 @@ export const gallerySections = [
     eyebrow: 'Noches de gala',
     title: 'Fiestas para recordar toda la vida',
     subtitle:
-      'Quince, dieciocho, casamientos, cumpleaños de adultos y fiestas de empresa: luces, pista y una puesta elegante para las noches más importantes.',
-    events: ['quince', 'dieciocho', 'casamientos', 'adultos', 'corporativos'],
+      'Quince, dieciocho, casamientos, despedidas y fiestas de empresa: luces, pista y una puesta elegante para las noches más importantes.',
+    events: ['quince', 'dieciocho', 'casamientos', 'despedidas', 'corporativos'],
     dark: true,
     intro: {
       title: 'Noches que se viven a pleno',
