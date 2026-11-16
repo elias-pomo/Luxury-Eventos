@@ -1,5 +1,6 @@
 import { site } from '../config/site'
 import { candyBars } from '../data/candybar'
+import { guestServices } from '../data/pricing'
 import { findCategory } from './quote'
 import { todayISO } from './format'
 
@@ -18,12 +19,15 @@ export const emptySelection = {
   aire: false,
   dj: false,
   candyId: '',
+  merienda: '', // '' · 'salon' · 'afuera'
 }
 
 // Deja solo valores válidos: sirve para lo guardado y para lo que llega por URL,
 // que puede estar desactualizado (fecha pasada, plan que ya no existe) o editado a mano.
 export function sanitize(raw = {}) {
   const out = {}
+  // Revelación de género se unificó con Baby Shower (links y presupuestos viejos).
+  if (raw.eventId === 'revelacion') raw = { ...raw, eventId: 'baby-shower' }
   const category = findCategory(raw.eventId)
   if (category) {
     out.eventId = raw.eventId
@@ -38,6 +42,7 @@ export function sanitize(raw = {}) {
   if (raw.aire === true) out.aire = true
   if (raw.dj === true) out.dj = true
   if (candyBars.some((c) => c.id === raw.candyId)) out.candyId = raw.candyId
+  if (Object.hasOwn(guestServices.merienda.options, raw.merienda)) out.merienda = raw.merienda
   return out
 }
 
@@ -53,6 +58,7 @@ export function selectionToParams(s) {
   if (s.aire) p.set('aire', '1')
   if (s.dj) p.set('dj', '1')
   if (s.candyId) p.set('candy', s.candyId)
+  if (s.merienda) p.set('merienda', s.merienda)
   if (s.theme.trim()) p.set('tema', s.theme.trim())
   return p
 }
@@ -67,6 +73,7 @@ export function paramsToSelection(p) {
     aire: p.get('aire') === '1',
     dj: p.get('dj') === '1',
     candyId: p.get('candy'),
+    merienda: p.get('merienda'),
     theme: p.get('tema') ?? '',
   })
 }

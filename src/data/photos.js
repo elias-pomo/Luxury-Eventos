@@ -50,9 +50,6 @@ export const photos = {
   babyMasitas: photo('catering2.webp', 'Bandejas con tartitas, lemon pie, brownies y alfajores de maicena', 'center 50%'),
   babyProfiteroles: photo('catering1.webp', 'Profiteroles en bandeja de flor y tartitas de frutos rojos', 'center 45%'),
 
-  // Revelación
-  revelacionMesa: photo('revelacion1.webp', 'Mesa dulce en azul con cortinas, luces y tortas decoradas', 'center 40%'),
-
   // Bautismos
   bautismoBeige: photo('bautismo1.webp', 'Arco de globos beige y dorado con el cartel "Mi Bautizo"', 'center 45%'),
   bautismoElefante: photo('bautismo2.webp', 'Bautismo en rosa y blanco con elefantito y cubos con el nombre', 'center 45%'),

@@ -1,6 +1,7 @@
 import { candyBars } from '../data/candybar'
 import { eventTypes } from '../data/events'
-import { candyBarPrices, categories, extras, staff } from '../data/pricing'
+import { formatPrice } from './format'
+import { candyBarPrices, categories, extras, guestServices, staff } from '../data/pricing'
 
 export const findEvent = (eventId) => eventTypes.find((event) => event.id === eventId)
 export const findCategory = (eventId) => categories.find((category) => category.events.includes(eventId))
@@ -8,13 +9,16 @@ export const findCategory = (eventId) => categories.find((category) => category.
 // Mozos según invitados: 1 de base y uno más por cada umbral alcanzado.
 export const waitersFor = (guests) => 1 + staff.waiter.thresholds.filter((min) => guests >= min).length
 
+// Caminos de mesa: uno cada 10 invitados (redondeado hacia arriba), hasta el máximo de mesas del salón.
+export const runnersFor = (guests) => Math.min(guestServices.caminos.max, Math.ceil(guests / guestServices.caminos.perTable))
+
 // Precio más bajo de cada evento, para mostrar "desde $..." al elegirlo.
 export const startingPrice = (eventId) => Math.min(...findCategory(eventId).plans.map((plan) => plan.price))
 
 // Arma el presupuesto a partir de lo elegido en el cotizador. Devuelve null si
 // todavía no hay evento. Los extras que el plan no admite se ignoran.
 // `kind` de cada línea: 'venue' (salón) · 'staff' (obligatorio) · 'extra' (opcional).
-export function buildQuote({ eventId, planId, guests, aire, dj, candyId }) {
+export function buildQuote({ eventId, planId, guests, aire, dj, candyId, merienda }) {
   const category = findCategory(eventId)
   if (!category) return null
   const plan = category.plans.find((p) => p.id === planId) ?? category.plans[0]
@@ -32,6 +36,17 @@ export function buildQuote({ eventId, planId, guests, aire, dj, candyId }) {
 
   if (allows('aire') && aire) lines.push({ kind: 'extra', label: extras.aire.name, amount: extras.aire.price })
   if (allows('dj') && dj) lines.push({ kind: 'extra', label: extras.dj.name, amount: extras.dj.price })
+
+  // Cubresillas y caminos de mesa van siempre, según los invitados.
+  const { cubresillas, caminos } = guestServices
+  lines.push({ kind: 'staff', label: `Cubresillas (${guests} × ${formatPrice(cubresillas.price)})`, amount: guests * cubresillas.price })
+  const runners = runnersFor(guests)
+  lines.push({ kind: 'staff', label: `Caminos de mesa (${runners} × ${formatPrice(caminos.price)})`, amount: runners * caminos.price })
+
+  const snack = allows('merienda') && guestServices.merienda.options[merienda]
+  if (snack) {
+    lines.push({ kind: 'extra', label: `Merienda ${snack.name.toLowerCase()} (${guests} × ${formatPrice(snack.price)})`, amount: guests * snack.price })
+  }
 
   const candy = allows('candy') && candyBars.find((c) => c.id === candyId)
   if (candy) lines.push({ kind: 'extra', label: `Candy bar ${candy.name}`, amount: candyBarPrices[candy.id] })

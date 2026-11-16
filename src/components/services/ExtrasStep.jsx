@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { AirVent, ArrowRight, Check, Disc3, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { candyBars } from '../../data/candybar'
-import { candyBarPrices, extras } from '../../data/pricing'
+import { candyBarPrices, extras, guestServices } from '../../data/pricing'
 import { formatPrice } from '../../utils/format'
 import ActiveFrame, { inViewOnce, staggerGroup, staggerItem } from './ActiveFrame'
 import { Radio } from './EventStep'
@@ -20,6 +20,7 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
     return <p className="text-sm text-muted">Elegí un tipo de evento para ver los extras disponibles.</p>
   }
 
+  const guests = values.guests
   const toggles = ['aire', 'dj'].filter((id) => plan.extras.includes(id))
   const luxury = category.plans.find((p) => p.id === 'luxury')
   // Con DJ en el plan Premium, el Paquete Luxury cuesta lo mismo e incluye más.
@@ -114,6 +115,59 @@ export default function ExtrasStep({ plan, category, values, onChange }) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {plan.extras.includes('merienda') && (
+        <fieldset>
+          <legend className="mb-1 font-display text-2xl">Merienda</legend>
+          <p className="mb-4 text-xs text-muted">{guestServices.merienda.note}</p>
+          <motion.div
+            role="radiogroup"
+            aria-label="Merienda"
+            variants={staggerGroup}
+            initial="hidden"
+            whileInView="show"
+            viewport={inViewOnce}
+            className="grid gap-3 sm:grid-cols-3"
+          >
+            {[
+              { id: '', name: 'Sin merienda', detail: 'Lo podés sumar más adelante' },
+              ...Object.entries(guestServices.merienda.options).map(([id, { name, price }]) => ({
+                id,
+                name,
+                detail: `${formatPrice(price)} por invitado`,
+                total: guests * price,
+              })),
+            ].map(({ id, name, detail, total }) => {
+              const active = values.merienda === id
+              return (
+                <motion.button
+                  key={id || 'none'}
+                  type="button"
+                  role="radio"
+                  aria-checked={active}
+                  onClick={() => onChange({ merienda: id })}
+                  variants={staggerItem}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="relative flex items-start gap-3 card-luxe card-luxe-sm px-4 py-3.5 text-left"
+                >
+                  {active && <ActiveFrame layoutId="merienda-frame" />}
+                  <span className="relative mt-1">
+                    <Radio active={active} />
+                  </span>
+                  <span className="relative min-w-0 flex-1">
+                    <span className="flex items-baseline justify-between gap-2">
+                      <span className="font-display text-xl">{name}</span>
+                      {total && <span className="shrink-0 text-sm font-semibold text-gold-dark">{formatPrice(total)}</span>}
+                    </span>
+                    <span className="block text-xs text-muted">{detail}</span>
+                  </span>
+                </motion.button>
+              )
+            })}
+          </motion.div>
+        </fieldset>
+      )}
 
       {plan.extras.includes('candy') && (
         <fieldset>

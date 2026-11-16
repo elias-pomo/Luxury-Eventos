@@ -16,7 +16,7 @@ export const gallerySections = [
     title: 'Momentos tiernos y llenos de color',
     subtitle:
       'Cumpleaños infantiles, bautismos, comuniones y los primeros festejos del bebé: ambientaciones cálidas para compartir con los que más querés.',
-    events: ['infantiles', 'bautismos', 'comuniones', 'baby-shower', 'revelacion'],
+    events: ['infantiles', 'bautismos', 'comuniones', 'baby-shower'],
     dark: false,
     intro: {
       title: 'Festejos para compartir en familia',
@@ -68,12 +68,8 @@ export const galleryEventDetails = {
     points: ['Ambientación delicada', 'Mesa principal decorada', 'Almuerzo o merienda en familia'],
   },
   'baby-shower': {
-    text: 'Un encuentro tierno para recibir al bebé: colores pastel, un rincón para las fotos y todo listo para los juegos y los regalos.',
-    points: ['Ambientación en tonos pastel', 'Rincón para las fotos', 'Mesa dulce temática'],
-  },
-  revelacion: {
-    text: 'Preparamos todo para el gran momento: decoración en rosa y celeste y una puesta pensada para que la sorpresa se viva, se emocione y se filme.',
-    points: ['Decoración en rosa y celeste', 'El momento sorpresa preparado', 'Ideal para compartir en familia'],
+    text: 'Un encuentro tierno para recibir al bebé o para vivir la revelación de género: colores pastel o rosa y celeste, un rincón para las fotos y todo listo para los juegos, los regalos y el momento sorpresa.',
+    points: ['Ambientación a tu gusto', 'Rincón para las fotos', 'El momento sorpresa preparado'],
   },
   quince: {
     text: 'La noche soñada. Recepción, entrada, vals y pista: ambientamos el salón con luces, flores y la temática que elijas para que sea una fiesta de película.',
@@ -107,7 +103,6 @@ export const galleryPhotos = [
   { image: photos.comunionVerdeFamilia, event: 'comuniones', caption: 'Verde, dorado y crema' },
   { image: photos.bautismoBeige, event: 'bautismos', caption: 'Beige y dorado' },
   { image: photos.candyKpop, event: 'infantiles', caption: 'K-pop' },
-  { image: photos.revelacionMesa, event: 'revelacion', caption: 'Mesa dulce en azul' },
   { image: photos.comunionCaliz, event: 'comuniones', caption: 'Dorado y blanco' },
   { image: photos.babySafari, event: 'baby-shower', caption: 'Safari' },
   { image: photos.infantilPocoyo, event: 'infantiles', caption: 'Pocoyó' },

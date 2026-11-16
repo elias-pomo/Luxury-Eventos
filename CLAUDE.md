@@ -14,12 +14,60 @@ El proyecto se trabaja desde **dos computadoras** con la misma cuenta de git. Es
 - Precios en ARS con `src/utils/format.js`; links de WhatsApp con `src/utils/whatsapp.js`.
 - **Mobile first, prioridad máxima:** el sitio se va a ver casi siempre desde el celular. Diseñar y revisar primero a 360–414 px (sin scroll horizontal, textos que no se corten, botones a lo ancho, objetivos táctiles de ~44 px, nada que dependa del hover) y después escritorio. Verificar con capturas emulando celular antes de dar algo por terminado.
 
+## Qué es y estado
+
+Sitio web de un salón de eventos real, primer pedido de un cliente real (freelance). Es una **SPA sin backend**: el cotizador y el formulario de Contacto arman un mensaje y abren WhatsApp. Estado (2026-11-12): **publicado en Vercel** (https://luxury-eventos.vercel.app), con las cuatro páginas terminadas; faltan datos reales del salón (reseñas, fechas reservadas, algunas fotos y textos a confirmar) y dominio propio (ver Pendientes).
+
+## Stack
+
+React 19.3, Vite 8.3, Tailwind CSS 4.3 (tokens en `@theme` de `src/index.css`), React Router 7.18 (`react-router-dom`, páginas con `lazy()`), Motion 14 (`motion/react`), Lucide, `sharp` 0.35 (solo para imágenes, en build). JavaScript (sin TypeScript). Node 20 o superior (se usa 24 en la compu actual). Sin tests automatizados.
+
+## Comandos
+
+| Comando | Qué hace |
+|---|---|
+| `npm install` | Instala dependencias. |
+| `npm run dev` | Servidor en `http://localhost:5173` (`.claude/launch.json` lo define como `vite`). Antes corre `predev`. |
+| `npm run build` | Build en `dist/`. Antes corre `prebuild`. |
+| `npm run preview` | Sirve `dist/`. |
+| `npm run images` | Pasa .jpg/.png nuevos de `public/images` a .webp (máx. 1920 px) y deja el original en `fotos-originales/`. Saltea `fondo*`. |
+
+`predev` y `prebuild` ejecutan `scripts/make-variants.mjs`: genera `public/images/w/<foto>-480.webp` y `-800.webp` (carpeta ignorada por git, solo rehace lo que cambió) y escribe `src/data/imageWidths.json` (**este sí va en git**; una foto que no figura se muestra con su `src` común).
+
+## Estructura y archivos clave
+
+- `src/config/site.js`: datos del salón (contacto, redes, turnos, dirección, estadísticas, `url`, `analytics`). `src/data/`: textos, precios, fotos y eventos (`pricing.js`, `events.js`, `gallery.js`, `candybar.js`, `photos.js`, `images.js`, `faq.js`, `contact.js`, `highlights.js`, `reviews.js`, `availability.js`, `imageWidths.json`).
+- `src/pages/` (Home, Gallery, Services, Contact, NotFound), `src/components/` (`layout`, `ui`, `home`, `gallery`, `services`, `contact`, `icons`), `src/utils/` (`quote.js`, `quoteState.js`, `whatsapp.js`, `format.js`, `img.js`, `motion.js`, `availability.js`, `analytics.js`, `usePageTitle.js`).
+- `vite.config.js`: plugins propios que inyectan `%SITE_URL%` en `index.html` (imagen para compartir), JSON-LD y analítica, y generan `robots.txt` y `sitemap.xml` (este solo si `site.url` está completo).
+- `public/`: `images/` (fotos .webp), `logo/` (SVG/PNG, todavía sin usar en el sitio), `og-share.jpg` (imagen de WhatsApp, 1200×630), `favicon.svg`. `fotos-originales/` queda fuera de `public` (no se publica).
+- `.impeccable/config.json` y `.claude/` son herramientas de diseño locales (el ignore de `gradient-text` en `src/index.css` es a propósito).
+
+## Deploy
+
+Corre en **Vercel**, proyecto conectado al repo `github.com/elias-pomo/Luxury-Eventos`, rama **`main`**. **Un push a `main` despliega a producción** (en ~1–2 min). `vercel.json`: `buildCommand: npm run build` (necesario para generar las fotos chicas), rewrite de todas las rutas a `/index.html` (sin eso `/galeria`, `/servicios` y `/contacto` dan 404 al recargar), caché de 1 año inmutable para `/assets` y de 1 día + `stale-while-revalidate` de 7 para `/images` y `/logo`. Dominio propio: no hay todavía.
+
+## Variables de entorno
+
+Ninguna: no hay `.env` ni `.env.example`, y el código no lee `import.meta.env` ni `process.env`. La analítica se configura en `site.analytics` (vacía = no carga nada).
+
+## Trampas técnicas conocidas
+
+- **`site.url` tiene que ser absoluto**: de él salen `og:image`, `og:url`, sitemap y JSON-LD. WhatsApp guarda la vista previa por link; para probar un cambio usar un link nuevo (`/?v=2`) o el depurador de Facebook.
+- Una foto nueva que no corrió por `make-variants` funciona, pero sin versiones chicas. Reemplazar una foto con el mismo nombre puede mostrar la vieja hasta 24 h por el caché.
+- `npm run images` no se debe usar sobre `hero.jpg`, `fondo1/2.jpg` y otras que el código referencia como .jpg (el script ya saltea `fondo*`).
+- `card-luxe` no fija `position`: el elemento tiene que llevar `relative`/`absolute`. Las secciones con fondo nuevo se suman a las reglas de "Fundido entre secciones" de `index.css`.
+- En `useInView`/`viewport` usar margen solo abajo (`'0px 0px -40px 0px'`); un margen negativo a los costados deja sin animar lo que toca el borde en celular. Con el panel del navegador oculto los `useInView` no disparan: revisar con el panel visible.
+- El mosaico de la Galería necesita `overflow-x-clip` (no `overflow-hidden`) para que el `sticky` funcione.
+- Ojo con el ID de WhatsApp: formato internacional sin `+` (`54` + `9` + área + número).
+- Trabajando desde dos compus: hacer `git pull` al empezar; ya hubo conflictos en este archivo y en `index.css`.
+
 ## Estado actual
 
 - ✅ Inicio completo (Hero, About, Highlights, ServicesPreview, GalleryPreview, Testimonials, CtaBanner), layout, botón de WhatsApp.
 - ✅ **Fundido entre secciones** (bloque "Fundido entre secciones" en `src/index.css`): las secciones hijas directas de `<main>` se funden con la vecina en los bordes. El color sale de la clase de fondo (`bg-luxe*` define `--tone`; las secciones con foto llevan `bg-ink`). Una sección nueva con otro fondo tiene que sumarse a las reglas de vecinas.
 - ✅ **Servicios / cotizador** (`src/pages/Services.jsx`, piezas en `src/components/services/`): 1) tipo de evento (+ plan Premium/Luxury en 15, 18, casamientos y corporativos), 2) fecha, turno según régimen e invitados (mozos automáticos), 3) temática (texto libre, se detalla por WhatsApp con Fernanda), 4) extras (aire, DJ, candy bar), 5) presupuesto con total animado y envío por WhatsApp. Barra fija con el total en celular; resumen fijo al costado en escritorio. Acepta `?tipo=<id>` (links del Inicio).
   - **Precios reales en `src/data/pricing.js`** (única fuente): categorías → eventos, planes, qué incluye, extras, mozos (1 hasta 34 invitados, 2 desde 35, 3 desde 72; máx. 3) y ayudante. Cálculo puro en `src/utils/quote.js` (`buildQuote`), mensaje en `quoteMessage()` de `utils/whatsapp.js`. **Depósito de garantía** (`deposit` en `pricing.js`, $35.000 fijo para todos los eventos): va **aparte del total** (recuadro bajo el total, mensaje de WhatsApp y preguntas frecuentes); se reintegra en efectivo o transferencia si no se rompió ni perdió nada.
+  - **Servicios por invitado** (`guestServices` en `pricing.js`, pedido de Fernanda del 2026-11-15): **cubresillas $750 por invitado y caminos de mesa $1.500 (uno cada 10 invitados, redondeado hacia arriba, máx. 9) van siempre** en todos los presupuestos (líneas fijas en `buildQuote`), y la **merienda es opcional** ($2.000 por invitado en el salón, $3.500 fuera; elegible en el paso 4 con cualquier plan, `guestExtras`). Precios confirmados por Fernanda.
   - Turnos: `site.shiftSchedules` con dos regímenes (`standard` 12–17 / 17–22 y `premium` 12–19 / 17–23).
 - ✅ **Galería** (`src/pages/Gallery.jsx`, rediseñada el 2026-10-23): encabezado → **explorador** en fondo crema (`gallery/EventExplorer.jsx`: selector "En familia / Noches de gala", fichas por evento, **mosaico de minicarruseles** `gallery/EventMosaic.jsx`: una foto grande y hasta 4 abajo, cada lugar rota las fotos que le tocan, con pausa y visor, y tarjeta con el detalle del evento y "Cotizá este evento"; en escritorio filtros y tarjeta quedan fijos a la izquierda) → **candy bar** en marfil (`gallery/CandyBarShowcase.jsx`, ancla `#candy-bar`: pasos en una línea y cada estilo como **boleto de feria**, utilidades `ticket` / `ticket-perf-x` / `ticket-perf-y` en `index.css`) → cierre. Datos en `src/data/gallery.js` y `src/data/candybar.js`. Candy bar en **4 tamaños reales** (Pequeño 75.000, Mediano 125.000, Grande 150.000, Completo 200.000; ids `pequeno/mediano/grande/completo`).
 - ✅ **Contacto** (`src/pages/Contact.jsx`, piezas en `src/components/contact/`): Nosotros breve con cifras animadas, Escribinos (tarjetas de WhatsApp/redes/email + formulario breve: nombre, fecha y mensaje, que abre WhatsApp sin backend; el detalle del evento queda para el cotizador) y Cómo llegar (mapa embebido de `site.address.mapsEmbedUrl`, pasos y 3 fotos de la fachada con visor). Textos en `src/data/contact.js`.
@@ -30,7 +78,13 @@ El proyecto se trabaja desde **dos computadoras** con la misma cuenta de git. Es
 - Candy bar: confirmar con la clienta el reparto de fotos por tamaño (propuesta del 2026-10-27 según lo que se ve en cada armado: Pequeño mesas dulces, Mediano "Oh Baby!" + Monsters, Grande conejita del primer añito, Completo K-pop) y si el Pequeño lleva "3" de algo (la clienta escribió "globos 3 y bandejas").
 - Actualizar `pricesUpdatedAt` en `pricing.js` cada vez que cambien los precios.
 - Galería: Revelación tiene una sola foto.
-- Dominio y redirecciones SPA en el hosting (ver README).
+- Dominio propio (hoy se usa el de Vercel). Las redirecciones SPA ya están resueltas en `vercel.json`.
+- Fechas reservadas reales en `src/data/availability.js` (`bookedDates`, hoy vacía: las tiene que pasar Fernanda).
+- Completar `site.analytics` (Plausible o GA4) si se quiere medir; hoy no carga nada. Confirmar también el email de `site.email`.
+- Preguntas frecuentes: sumar seña, cancelaciones y horario de armado cuando el salón los defina (`src/data/faq.js`).
+- Portada: faltan fotos originales grandes, idealmente verticales (el mosaico recortado se descartó por borroso).
+- Crear el perfil de Google Business (fuera del código) y usar el logo de `public/logo/` en Navbar, Footer y favicon (hoy no se usa).
+- Revisar el sitio en escritorio después de los últimos cambios visuales.
 - Cuando haya dominio propio, cambiar `site.url` en `src/config/site.js` (hoy `https://luxury-eventos.vercel.app`; de ahí salen la imagen para compartir, el sitemap y el JSON-LD).
 - **Fotos de muestra** (`public/images/muestra/*.svg`, ilustraciones con la leyenda "Foto de muestra"): quedan 2 en 15 años (las de infantiles y comuniones ya se reemplazaron y sus SVG se movieron a `fotos-originales/sin-usar`; las de despedidas se borraron). Reemplazarlas por fotos reales en `data/photos.js` (entradas `muestra*`). Se dejaron afuera a pedido 15a2/15a4, infantiles6, soltero2/3/4 y comunion6; las `fachada*.png` de Street View ya no se usan.
 - Confirmar con el salón los textos de Contacto (`src/data/contact.js`).
@@ -88,3 +142,8 @@ El proyecto se trabaja desde **dos computadoras** con la misma cuenta de git. Es
 - **2026-11-03** — En las tarjetas de evento (Baby Shower, Revelación, Bautismos, Comuniones) "Decoración a medida" pasa a "Candy bar a elección"; en los planes Premium/Luxury "3 mozos y ayudante de cocina" pasa a "Servicio de mozos incluido" (sin fijar cantidad), y lo mismo en la línea del presupuesto y el aviso del paso 2. Sin commit todavía.
 - **2026-11-04** — Pull con conflictos resuelto a mano: se combinaron "Cumpleaños y Fiestas" (`adultos`) y el fundido entre secciones (de esta compu) con la reorganización de `index.css`, Corporativos y las fotos nuevas (de la otra). El fundido quedó adaptado a los fondos actuales: `--tone` también en `bg-luxe-art` y `bg-luxe-dark-art`, sin `bg-luxe-center`. `infantiles7.webp` volvió a ser la biblioteca de souvenirs (la versión de esta compu, la conejita, ya estaba en la Galería y no coincidía con el texto). Falta el commit del merge.
 - **2026-11-04** — Control del merge: el pull fallaba porque el merge con `origin/main` (`4cf18f0`) seguía abierto, con los archivos sin marcar como resueltos. Verificado: sin marcadores de conflicto, build OK, todas las rutas de fotos de `src` existen y no quedan ids viejos. `imageWidths.json` regenerado (suma `mayores*`). Conflictos marcados como resueltos con `git add`. Falta el commit del merge.
+- **2026-11-12** — CLAUDE.md reordenado como fuente técnica: nuevas secciones "Qué es y estado", "Stack", "Comandos", "Estructura y archivos clave", "Deploy", "Variables de entorno" (no hay), "Trampas técnicas conocidas" y "Segundo cerebro"; pendientes actualizados (las redirecciones SPA ya estaban en `vercel.json`). Corrección: las dos entradas del 2026-11-04 dicen "Falta el commit del merge", pero ya está hecho (`f46b248`, `6b174cb`). No se tocó código. Sin commit.
+- **2026-11-15** — Pedido de la clienta. (1) **Baby Shower y Revelación de Género unificados** en un solo servicio (id `baby-shower`; se borró `revelacion` de eventos, precios y Galería; los links y presupuestos guardados con `?tipo=revelacion` se convierten solos en `baby-shower` en `sanitize`) y se sacó de la Galería la foto azul (`revelacion1.webp` pasó a `fotos-originales/sin-usar`). (2) **Cubresillas ($750 por invitado) y caminos de mesa ($1.500, uno cada 10 invitados, máx. 9) siempre incluidos en el presupuesto, y merienda opcional ($2.000 en el salón, $3.500 fuera, por invitado)**: `guestServices` en `pricing.js`, líneas en `buildQuote`, selector de merienda en el paso 4, campo `merienda` (`''`/`salon`/`afuera`) en el estado y en el link, y pregunta nueva en `faq.js`. Precios y reglas confirmados por Fernanda. Verificado con 85 invitados: $667.250 con merienda en el salón. Sin commit.
+## Segundo cerebro
+
+Este proyecto tiene nota en la bóveda de Obsidian: proyectos/Luxury Eventos.md (la ruta de la bóveda está en ~/.claude/CLAUDE.md). No la leas al empezar: este CLAUDE.md ya tiene el contexto técnico. Abrila solo si necesitás un dato que no está acá. Al terminar un trabajo que cambie el estado del proyecto (una feature, un deploy, una decisión, un pendiente resuelto o nuevo), actualizá en esa nota el estado, las decisiones y los pendientes. Cambios breves, sin reescribir la nota.

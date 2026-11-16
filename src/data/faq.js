@@ -1,5 +1,5 @@
 import { site } from '../config/site'
-import { deposit, extras, quoteNotes, staff } from './pricing'
+import { deposit, extras, guestServices, quoteNotes, staff } from './pricing'
 import { formatPrice } from '../utils/format'
 
 // Preguntas frecuentes de Contacto. Todo sale de datos reales del salón
@@ -38,6 +38,10 @@ export const faqs = [
   {
     question: '¿Puedo sumar DJ o candy bar?',
     answer: `Sí. El DJ cuesta ${formatPrice(extras.dj.price)} (viene incluido en el Paquete Luxury) y el candy bar viene en cuatro tamaños: pequeño, mediano, grande y completo. Los sumás directamente en el cotizador y ves el total al instante.`,
+  },
+  {
+    question: '¿Qué son los cubresillas y los caminos de mesa? ¿Y la merienda?',
+    answer: `Cubresillas (${formatPrice(guestServices.cubresillas.price)} cada una, una por invitado) y caminos de mesa (${formatPrice(guestServices.caminos.price)}, uno cada ${guestServices.caminos.perTable} invitados) van siempre en el presupuesto. La merienda es opcional y se cobra por invitado: ${formatPrice(guestServices.merienda.options.salon.price)} en el salón o ${formatPrice(guestServices.merienda.options.afuera.price)} fuera del salón.`,
   },
   {
     question: '¿Hay que dejar un depósito?',
