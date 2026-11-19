@@ -16,7 +16,7 @@ export default function Footer() {
     <footer className="bg-ink text-white/70">
       <div className="container-page grid gap-12 py-16 md:grid-cols-3">
         <div>
-          <p className="font-display text-3xl text-white">{site.name}</p>
+          <img src="/logo/logo-nav-blanco.svg" alt={site.name} width="870" height="415" className="h-24 w-auto" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed">{site.tagline}.</p>
           <div className="mt-6 flex gap-3">
             {socials.map(({ href, label, Icon }) => (
@@ -63,7 +63,7 @@ export default function Footer() {
             {site.email && (
               <li className="flex gap-3">
                 <Mail className="size-4 shrink-0 text-gold" />
-                <a href={`mailto:${site.email}`} className="hover:text-gold">{site.email}</a>
+                <a href={`mailto:${site.email}`} className="min-w-0 break-all hover:text-gold">{site.email}</a>
               </li>
             )}
             <li className="flex gap-3">

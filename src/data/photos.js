@@ -119,7 +119,4 @@ export const photos = {
   candyOhBabyTronco: photo('candy10.webp', 'Tronco, macetas y hongos rojos frente a la casita del bosque', 'center 50%'),
   candyOhBabyTorta: photo('candy9.webp', 'Torta con conejita sobre el hongo gigante y souvenirs tejidos', 'center 40%'),
 
-  // TODO: fotos de muestra (ilustraciones) hasta tener fotos reales para estos lugares.
-  muestraQuince1: photo('muestra/quince-1.svg', 'Foto de muestra: mesa principal de 15 años'),
-  muestraQuince2: photo('muestra/quince-2.svg', 'Foto de muestra: el vals de 15 años'),
 }

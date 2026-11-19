@@ -13,7 +13,7 @@ import { images } from '../data/images'
 import { track } from '../utils/analytics'
 import { isDayFull, isShiftBooked } from '../utils/availability'
 import { formatPrice } from '../utils/format'
-import { buildQuote, findCategory } from '../utils/quote'
+import { buildQuote, findCategory, waitersFor } from '../utils/quote'
 import { clearSaved, emptySelection, loadSaved, paramsToSelection, save, selectionToParams } from '../utils/quoteState'
 import { quoteMessage, whatsappLink } from '../utils/whatsapp'
 import Section from '../components/ui/Section'
@@ -76,6 +76,10 @@ export default function Services() {
 
   const onSend = () => {
     if (!quote) return setError('Elegí el tipo de evento para armar tu presupuesto.')
+    if (!selection.date || selection.shift === null) {
+      scrollToStep('paso-2')
+      return setError('Elegí la fecha y el turno para que podamos confirmarte la disponibilidad.')
+    }
     if (isDayFull(selection.date, schedule.shifts.length) || isShiftBooked(selection.date, selection.shift, schedule.shifts.length)) {
       return setError('Esa fecha y turno ya están reservados. Elegí otra opción o consultanos por WhatsApp.')
     }
@@ -146,7 +150,7 @@ export default function Services() {
                 guests={selection.guests}
                 schedule={schedule}
                 category={category}
-                waiters={quote?.waiters ?? 1}
+                waiters={quote?.waiters ?? waitersFor(selection.guests)}
                 onChange={update}
               />
             </Step>

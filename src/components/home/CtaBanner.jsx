@@ -2,7 +2,9 @@ import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { images } from '../../data/images'
 import { site } from '../../config/site'
-import { whatsappLink } from '../../utils/whatsapp'
+import { CalendarCheck } from 'lucide-react'
+import { track } from '../../utils/analytics'
+import { visitMessage, whatsappLink } from '../../utils/whatsapp'
 import { imgProps } from '../../utils/img'
 import { WhatsAppIcon } from '../icons/SocialIcons'
 import Button from '../ui/Button'
@@ -46,8 +48,11 @@ export default function CtaBanner() {
             </p>
           ))}
         </div>
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+        <div className="mt-10 flex w-full max-w-sm flex-col gap-4 sm:w-auto sm:max-w-none sm:flex-row">
           <Button to="/servicios">Cotizá online</Button>
+          <Button href={whatsappLink(visitMessage())} variant="light" onClick={() => track('visit_click', { origen: 'cierre' })}>
+            <CalendarCheck className="size-4" /> Coordiná una visita
+          </Button>
           <Button href={whatsappLink(`¡Hola ${site.name}! Quisiera consultar disponibilidad de fecha.`)} variant="light">
             <WhatsAppIcon className="size-4" /> Escribinos
           </Button>

@@ -1,7 +1,7 @@
 // Precios y condiciones del cotizador de Servicios (en pesos argentinos).
 // Única fuente de verdad: para actualizar un precio, cambiarlo solo acá.
 
-export const pricesUpdatedAt = 'octubre de 2026'
+export const pricesUpdatedAt = 'noviembre de 2026'
 
 // Personal del salón (se trabaja solo con personal propio).
 export const staff = {

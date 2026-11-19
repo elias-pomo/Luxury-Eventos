@@ -17,6 +17,10 @@ export const contactMessage = ({ name, date, message }) => {
   return lines.join('\n')
 }
 
+// Mensaje para pedir una visita al salón (botones de "Coordinar una visita").
+export const visitMessage = () =>
+  `¡Hola ${site.name}! Me gustaría coordinar una visita al salón. ¿Qué días y horarios tienen disponibles?`
+
 // Intl usa un espacio duro después del "$": en WhatsApp queda mejor uno común.
 const price = (value) => formatPrice(value).replace(/\s/g, ' ')
 
