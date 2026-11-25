@@ -1,7 +1,7 @@
-import { ArrowUpRight, Clock, Mail, Phone } from 'lucide-react'
+import { ArrowUpRight, CalendarCheck, Clock, Mail, Phone } from 'lucide-react'
 import { site } from '../../config/site'
 import { track } from '../../utils/analytics'
-import { whatsappLink } from '../../utils/whatsapp'
+import { visitMessage, whatsappLink } from '../../utils/whatsapp'
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from '../icons/SocialIcons'
 import Reveal from '../ui/Reveal'
 import SectionTitle from '../ui/SectionTitle'
@@ -18,6 +18,7 @@ const channels = [
     detail: site.phoneDisplay,
     featured: true,
   },
+  { href: whatsappLink(visitMessage()), Icon: CalendarCheck, label: 'Visitá el salón', detail: 'Coordiná una visita', visit: true },
   { href: site.phoneHref, Icon: Phone, label: 'Llamanos', detail: site.phoneDisplay, call: true },
   { href: site.social.instagram, Icon: InstagramIcon, label: 'Instagram', detail: instagramHandle },
   { href: site.social.facebook, Icon: FacebookIcon, label: 'Facebook', detail: site.name },
@@ -37,11 +38,13 @@ export default function ContactChannels() {
           />
 
           <ul className="mt-10 space-y-3">
-            {channels.map(({ href, Icon, label, detail, featured, call }, i) => (
+            {channels.map(({ href, Icon, label, detail, featured, call, visit }, i) => (
               <Reveal as="li" key={label} delay={0.08 * i} y={20}>
                 <a
                   href={href}
-                  {...(call ? { onClick: () => track('call_click', { origen: 'contacto' }) } : { target: '_blank', rel: 'noopener noreferrer' })}
+                  {...(call
+                    ? { onClick: () => track('call_click', { origen: 'contacto' }) }
+                    : { target: '_blank', rel: 'noopener noreferrer', ...(visit && { onClick: () => track('visit_click', { origen: 'contacto' }) }) })}
                   className={`group relative card-luxe card-luxe-sm flex min-h-16 items-center gap-4 px-4 py-3 hover:-translate-y-0.5 active:scale-[0.99] sm:px-5 ${
                     featured ? 'card-luxe-dark text-white' : ''
                   }`}

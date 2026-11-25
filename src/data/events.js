@@ -1,4 +1,4 @@
-import { Baby, Balloon, Briefcase, Church, Crown, Droplets, Gem, Gift, Martini, PartyPopper } from 'lucide-react'
+import { Baby, Balloon, Briefcase, Church, Crown, Droplets, Gem, Martini, PartyPopper } from 'lucide-react'
 import { photos } from './photos'
 
 // Tipos de evento del salón. Se usan en el Inicio, la Galería y el cotizador
@@ -45,19 +45,10 @@ export const eventTypes = [
   {
     id: 'baby-shower',
     photo: photos.babySafari,
-    name: 'Baby Shower',
+    name: 'Baby Shower y Revelación de Género',
     icon: Baby,
-    short: 'Un encuentro tierno y delicado para recibir al bebé con la familia y amigos.',
-    tagline: 'Tierno y delicado',
-    perks: ['Candy bar a elección', 'Mediodía o tarde'],
-  },
-  {
-    id: 'revelacion',
-    photo: photos.revelacionMesa,
-    name: 'Revelación de Género',
-    icon: Gift,
-    short: 'El momento más esperado, ambientado para que la sorpresa sea inolvidable.',
-    tagline: 'La gran sorpresa',
+    short: 'Un encuentro tierno para recibir al bebé o vivir el momento de la gran sorpresa, con la familia y amigos.',
+    tagline: 'Tierno y lleno de sorpresas',
     perks: ['Candy bar a elección', 'Mediodía o tarde'],
   },
   {

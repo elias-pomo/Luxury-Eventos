@@ -1,7 +1,7 @@
 // Precios y condiciones del cotizador de Servicios (en pesos argentinos).
 // Única fuente de verdad: para actualizar un precio, cambiarlo solo acá.
 
-export const pricesUpdatedAt = 'octubre de 2026'
+export const pricesUpdatedAt = 'noviembre de 2026'
 
 // Personal del salón (se trabaja solo con personal propio).
 export const staff = {
@@ -13,6 +13,9 @@ export const staff = {
 
 // Lo que tienen todos los eventos.
 const baseIncludes = ['Vajilla completa', 'Mantelería, mesas y sillas', 'Equipo de sonido', 'Cocina completa y asador', 'Patio para fumadores']
+
+// Extras opcionales que se cobran según los invitados (ver `guestServices`): los admiten todos los planes.
+const guestExtras = ['cubresillas', 'caminos', 'merienda']
 
 // Categorías de precio. `events`: ids de data/events.js que entran en cada una.
 // `schedule`: régimen de turnos de config/site.js (shiftSchedules).
@@ -30,30 +33,30 @@ export const categories = [
         name: 'Salón infantil',
         price: 250000,
         includes: [...baseIncludes, 'Pelotero inflable (castillo) y metegol'],
-        extras: ['aire', 'dj', 'candy'],
+        extras: ['aire', 'dj', 'candy', ...guestExtras],
       },
     ],
   },
   {
     id: 'familiar',
-    events: ['baby-shower', 'revelacion'],
+    events: ['baby-shower'],
     schedule: 'standard',
     staffIncluded: false,
-    plans: [{ id: 'salon', name: 'Salón', price: 300000, includes: baseIncludes, extras: ['aire', 'dj', 'candy'] }],
+    plans: [{ id: 'salon', name: 'Salón', price: 300000, includes: baseIncludes, extras: ['aire', 'dj', 'candy', ...guestExtras] }],
   },
   {
     id: 'religioso',
     events: ['bautismos', 'comuniones'],
     schedule: 'standard',
     staffIncluded: false,
-    plans: [{ id: 'salon', name: 'Salón', price: 350000, includes: baseIncludes, extras: ['aire', 'dj', 'candy'] }],
+    plans: [{ id: 'salon', name: 'Salón', price: 350000, includes: baseIncludes, extras: ['aire', 'dj', 'candy', ...guestExtras] }],
   },
   {
     id: 'adultos',
     events: ['adultos'],
     schedule: 'standard',
     staffIncluded: false,
-    plans: [{ id: 'salon', name: 'Salón', price: 350000, includes: baseIncludes, extras: ['aire', 'dj', 'candy'] }],
+    plans: [{ id: 'salon', name: 'Salón', price: 350000, includes: baseIncludes, extras: ['aire', 'dj', 'candy', ...guestExtras] }],
   },
   {
     id: 'premium',
@@ -71,7 +74,7 @@ export const categories = [
           'Aire acondicionado y ventiladores',
           ...baseIncludes.filter((item) => item !== 'Equipo de sonido'),
         ],
-        extras: ['dj', 'candy'],
+        extras: ['dj', 'candy', ...guestExtras],
       },
       {
         id: 'luxury',
@@ -82,7 +85,7 @@ export const categories = [
           'Todo lo del Plan Premium',
           'DJ del salón con equipamiento completo a tu disposición',
         ],
-        extras: ['candy'],
+        extras: ['candy', ...guestExtras],
       },
     ],
   },
@@ -93,6 +96,25 @@ export const categories = [
 export const extras = {
   aire: { name: 'Aire acondicionado', price: 25000, note: 'Opcional, según la época del año.' },
   dj: { name: 'DJ', price: 200000, note: 'Musicalización profesional durante todo el evento.' },
+}
+
+// Extras opcionales que dependen de los invitados (pedido de Fernanda, 2026-11-15).
+// Desde el 2026-11-25 los cubresillas y los caminos de mesa también son opcionales
+// (antes iban siempre): el cliente decide si los suma en el paso 4, como el aire.
+export const guestServices = {
+  // Uno por invitado.
+  cubresillas: { name: 'Cubresillas', price: 750, note: 'Uno por invitado' },
+  // Uno cada `perTable` invitados (redondeado hacia arriba) y nunca más de `max`: el salón arma hasta 9 mesas.
+  caminos: { name: 'Caminos de mesa', price: 1500, perTable: 10, max: 9, note: 'Uno por mesa (una cada 10 invitados)' },
+  // Por invitado. En el salón o con el servicio completo fuera del salón.
+  merienda: {
+    name: 'Merienda',
+    note: 'Se cobra por invitado.',
+    options: {
+      salon: { name: 'En el salón', price: 2000 },
+      afuera: { name: 'Fuera del salón', price: 3500 },
+    },
+  },
 }
 
 export const candyBarPrices = {

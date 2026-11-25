@@ -1,9 +1,18 @@
+import { useEffect } from 'react'
 import Button from '../components/ui/Button'
 import { usePageTitle } from '../utils/usePageTitle'
 import { pageTitles } from '../config/site'
 
 export default function NotFound() {
   usePageTitle(pageTitles.notFound)
+  // El hosting responde 200 en rutas que no existen (SPA): se le pide a los buscadores que no la indexen.
+  useEffect(() => {
+    const meta = document.createElement('meta')
+    meta.name = 'robots'
+    meta.content = 'noindex'
+    document.head.appendChild(meta)
+    return () => meta.remove()
+  }, [])
   return (
     <section className="flex min-h-dvh flex-col items-center justify-center px-4 text-center">
       <p className="font-display text-8xl text-gold-gradient">404</p>

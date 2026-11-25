@@ -27,8 +27,6 @@ export default function Navbar() {
     document.body.style.overflow = open ? 'hidden' : ''
   }, [open])
 
-  const [brand, ...rest] = site.name.split(' ')
-
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
@@ -36,11 +34,23 @@ export default function Navbar() {
       }`}
     >
       <nav className="container-page flex items-center justify-between">
-        <Link to="/" className="flex flex-col leading-none">
-          <span className={`font-display text-2xl tracking-wide sm:text-3xl ${transparent ? 'text-white' : 'text-ink'}`}>
-            {brand}
-          </span>
-          <span className="text-[10px] tracking-[0.5em] text-gold uppercase">{rest.join(' ')}</span>
+        {/* Dos versiones del logo (blanco sobre la foto de portada, oscuro sobre la barra): se funden al scrollear. */}
+        <Link to="/" aria-label={`${site.name}, ir al inicio`} className="relative block h-12 sm:h-14">
+          <img
+            src="/logo/logo-nav.svg"
+            alt={site.name}
+            width="870"
+            height="415"
+            className={`h-full w-auto transition-opacity duration-500 ${transparent ? 'opacity-0' : 'opacity-100'}`}
+          />
+          <img
+            src="/logo/logo-nav-blanco.svg"
+            alt=""
+            aria-hidden="true"
+            width="870"
+            height="415"
+            className={`absolute inset-0 h-full w-auto transition-opacity duration-500 ${transparent ? 'opacity-100' : 'opacity-0'}`}
+          />
         </Link>
 
         {/* Desktop */}
